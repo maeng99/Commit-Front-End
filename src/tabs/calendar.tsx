@@ -40,6 +40,14 @@ export default function Calendar() {
                                 22
                             </span>
                             2024년 7월
+                            <img
+                                src="../img/btn/edit.png"
+                                style={{
+                                    width: '25px',
+                                    cursor: 'pointer',
+                                    marginLeft: '130px',
+                                }}
+                            />
                         </div>
                         <hr
                             style={{

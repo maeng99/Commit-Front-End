@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
-import FeedbackPopup from '../tabs/feedbackPopup.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
+import FeedbackPopup from '../tabs/feedbackPopup.tsx';
 import '../App.css';
 
 export default function Plan() {
@@ -41,8 +41,9 @@ export default function Plan() {
                             <div
                                 style={{
                                     width: '280px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
+                                    color: '#0D2259',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -103,8 +104,9 @@ export default function Plan() {
                                 style={{
                                     width: '470px',
                                     margin: '0 auto',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
+                                    color: '#0D2259',
                                     padding: '15px 0',
                                     textAlign: 'left',
                                 }}
@@ -130,8 +132,9 @@ export default function Plan() {
                             <div
                                 style={{
                                     width: '310px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
+                                    color: '#0D2259',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -161,7 +164,15 @@ export default function Plan() {
                             <Button
                                 type="primary"
                                 size="medium"
-                                title="하루 마무리"
+                                title={
+                                    <>
+                                        하루 마무리&nbsp;&nbsp;
+                                        <img
+                                            src="../img/btn/check_enabled.png"
+                                            style={{ width: '18px', verticalAlign: 'middle' }}
+                                        />
+                                    </>
+                                }
                                 onClick={() => {
                                     window.location = '/plan';
                                 }}

@@ -165,8 +165,10 @@ const StyledDot = styled.div`
 
 const events = [
     { date: '2024-07-23', title: '오후 6시 싸이 흠뻑쇼' },
-    { date: '2024-07-27', title: '프로젝트 회의' },
-    { date: '2024-08-03', title: '몇사 12기 종강 해커톤' },
+    { date: '2024-07-23', title: '결혼식' },
+    { date: '2024-07-24', title: '여행' },
+    { date: '2024-07-29', title: '프로젝트 회의' },
+    { date: '2024-08-06', end: '2024-08-07', title: '멋사 12기 종강 해커톤' },
 ];
 
 export default function SmallCalendar() {
@@ -193,6 +195,7 @@ export default function SmallCalendar() {
                 formatYear={(locale, date) => moment(date).format('YYYY')}
                 formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')}
                 calendarType="gregory"
+                weekdayFormat="short"
                 showNeighboringMonth={true}
                 next2Label={null}
                 prev2Label={null}

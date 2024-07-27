@@ -2,13 +2,32 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
 import '../App.css';
 
+const events = [
+    { date: '2024-07-23', title: '오후 6시 싸이 흠뻑쇼' },
+    { date: '2024-07-23', title: '결혼식' },
+    { date: '2024-07-24', title: '여행' },
+    { date: '2024-07-29', title: '프로젝트 회의' },
+    { date: '2024-08-06', end: '2024-08-07', title: '멋사 12기 종강 해커톤' },
+];
+
+function getClosestEvents(events) {
+    const today = moment(); // Get today's date
+    const futureEvents = events.filter((event) => moment(event.date) >= today); // Filter future events
+    futureEvents.sort((a, b) => moment(a.date) - moment(b.date)); // Sort events by date
+    return futureEvents.slice(0, 3); // Get the closest 3 events
+}
+
 export default function Main() {
+    const closestEvents = getClosestEvents(events);
+    console.log(closestEvents);
+
     return (
         <div className="background">
             <Nav type="main" />
@@ -48,7 +67,14 @@ export default function Main() {
                                     }}
                                 ></div>
                             </div>
-                            <div style={{ fontFamily: 'Pretendard-ExtraBold', fontSize: '14px', width: '10%' }}>
+                            <div
+                                style={{
+                                    fontFamily: 'Pretendard-ExtraBold',
+                                    fontSize: '14px',
+                                    color: '#0D2259',
+                                    width: '10%',
+                                }}
+                            >
                                 <span>40</span>%
                             </div>
                         </div>
@@ -57,8 +83,9 @@ export default function Main() {
                                 style={{
                                     width: '470px',
                                     margin: '0 auto',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
+                                    color: '#0D2259',
                                     padding: '15px 0',
                                     textAlign: 'left',
                                 }}
@@ -82,8 +109,9 @@ export default function Main() {
                             <div
                                 style={{
                                     width: '310px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
+                                    color: '#0D2259',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -148,8 +176,9 @@ export default function Main() {
                             <div
                                 style={{
                                     width: '280px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontFamily: 'Pretendard-SemiBold',
+                                    fontSize: '20px',
+                                    color: '#0D2259',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -162,10 +191,67 @@ export default function Main() {
                                     width: '280px',
                                     height: '210px',
                                     margin: '0 auto',
-                                    backgroundColor: '#eee',
-                                    borderRadius: '20px',
                                 }}
-                            ></div>
+                            >
+                                {closestEvents.length > 0 ? (
+                                    closestEvents.map((event, index) => (
+                                        <div
+                                            style={{
+                                                width: '260px',
+                                                height: '40px',
+                                                fontFamily: 'Pretendard-SemiBold',
+                                                fontSize: '16px',
+                                                color: '#0D2259',
+                                                border: '1px #eee solid',
+                                                borderRadius: '10px',
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                justifyContent: 'left',
+                                                padding: '10px',
+                                                marginBottom: '10px',
+                                            }}
+                                        >
+                                            <div
+                                                style={{
+                                                    width: '40px',
+                                                    height: '40px',
+                                                    fontFamily: 'Pretendard-SemiBold',
+                                                    fontSize: '16px',
+                                                    color: '#0D2259',
+                                                    backgroundColor: '#C9D9FD',
+                                                    borderRadius: '10px',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    marginRight: '20px',
+                                                }}
+                                            >
+                                                {moment(event.date).format('D')}
+                                            </div>
+                                            {event.title}
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div
+                                        style={{
+                                            width: '260px',
+                                            height: '40px',
+                                            fontFamily: 'Pretendard-SemiBold',
+                                            fontSize: '16px',
+                                            color: '#0D2259',
+                                            border: '1px #eee solid',
+                                            borderRadius: '10px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'left',
+                                            padding: '10px',
+                                            marginBottom: '10px',
+                                        }}
+                                    >
+                                        예정된 일정이 없습니다.
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>

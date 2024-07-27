@@ -12,8 +12,6 @@ export default function Login() {
         formState: { errors },
     } = useForm();
 
-    const [hover, setHover] = useState(false);
-
     const onValid = (e) => {
         console.log(e, 'onValid');
         alert('반갑습니다.');
@@ -26,7 +24,9 @@ export default function Login() {
     };
 
     return (
-        <div className="background">
+        <div
+            style={{ width: '600px', height: '630px', margin: '0 auto', backgroundColor: '#fff', borderRadius: '25px' }}
+        >
             <div style={{ marginTop: '50px', marginBottom: '50px' }}>
                 <img src="..\img\small_logo.png" style={{ width: '280px' }} />
                 <br />

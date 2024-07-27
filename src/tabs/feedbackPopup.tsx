@@ -189,14 +189,7 @@ export default function FeedbackPopup({ onClose }) {
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'space-between' }}>
-                                    <Button
-                                        type="secondary"
-                                        size="medium"
-                                        title="적용 안함"
-                                        onClick={() => {
-                                            window.location = '/addplan';
-                                        }}
-                                    />
+                                    <Button type="secondary" size="medium" title="적용 안함" onClick={onClose} />
                                     <Button
                                         type="primary"
                                         size="medium"
@@ -209,9 +202,7 @@ export default function FeedbackPopup({ onClose }) {
                                                 />
                                             </>
                                         }
-                                        onClick={() => {
-                                            window.location = '/plan';
-                                        }}
+                                        onClick={onClose}
                                     />
                                 </div>
                             </div>

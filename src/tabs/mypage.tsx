@@ -190,6 +190,15 @@ export default function Mypage() {
                             }}
                         >
                             나만의 일정표 커스텀 규칙
+                            <img
+                                src="../img/btn/edit.png"
+                                style={{
+                                    width: '25px',
+                                    cursor: 'pointer',
+                                    marginLeft: '445px',
+                                    verticalAlign: 'middle',
+                                }}
+                            />
                         </div>
                         <div
                             style={{
