@@ -1,0 +1,76 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-SemiBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-ExtraBold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-ExtraBold.woff')
+        format('woff');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@keyframes huerotator {
+    0% {
+        filter: hue-rotate(-35deg);
+    }
+    100% {
+        filter: hue-rotate(35deg);
+    }
+}
+
+.App {
+    text-align: center;
+}
+
+body {
+    position: relative;
+    text-align: center;
+    background-color: #edf0f5;
+}
+
+input {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    border: 1px #000 solid;
+    border-radius: 10px;
+}
+
+.nav {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 100px;
+    overflow: auto;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.nav_img {
+    display: block;
+    width: 25px;
+    margin: 20px auto;
+    padding: 20px 33px;
+}
+.nav_img:hover {
+    width: 30px;
+}
+
+.main_contents_div {
+    padding-left: 160px;
+    padding-right: 60px;
+    width: 1300px;
+    padding-top: 50px;
+}

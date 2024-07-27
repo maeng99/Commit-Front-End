@@ -1,0 +1,11 @@
+1. 리액트 캘린더 제작
+- https://velog.io/@hyerani/React-%EC%BA%98%EB%A6%B0%EB%8D%94-%EB%A7%8C%EB%93%A4%EA%B8%B0-react-calendar
+- https://velog.io/@rachel28/React-%EC%BA%98%EB%A6%B0%EB%8D%94%EB%A5%BC-%EA%B5%AC%ED%98%84%ED%95%B4%EB%B3%B4%EC%9E%90-feat.-date-fns
+- https://sennieworld.tistory.com/61
+
+2. 폰트 적용
+- https://mamm.tistory.com/97
+
+3. 그라데이션 애니메이션
+- https://hoyashu.tistory.com/35
+
