@@ -126,7 +126,7 @@ export default function Plan() {
                     </div>
 
                     <div style={{ width: '350px' }}>
-                        <div style={{ width: '100%', height: '540px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                        <div style={{ width: '100%', height: '545px', backgroundColor: '#fff', borderRadius: '20px' }}>
                             <div
                                 style={{
                                     width: '310px',
@@ -142,7 +142,7 @@ export default function Plan() {
                             <div
                                 style={{
                                     width: '310px',
-                                    height: '470px',
+                                    height: '475px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',

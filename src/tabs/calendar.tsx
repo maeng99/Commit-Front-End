@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import BigCalendar from '../components/bigCalendar.tsx';
 import '../App.css';
 
 export default function Calendar() {
@@ -11,14 +12,22 @@ export default function Calendar() {
             <div className="main_contents_div">
                 <Date />
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '870px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
-                        Calendar 영역
+                    <div
+                        style={{
+                            width: '900px',
+                            height: '605px',
+                            backgroundColor: '#fff',
+                            borderRadius: '20px',
+                            overflow: 'auto',
+                        }}
+                    >
+                        <BigCalendar />
                     </div>
 
-                    <div style={{ width: '350px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '320px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
-                                width: '310px',
+                                width: '280px',
                                 fontFamily: 'Pretendard-Regular',
                                 fontSize: '13px',
                                 margin: '0 auto',
@@ -43,7 +52,7 @@ export default function Calendar() {
                         />
                         <div
                             style={{
-                                width: '310px',
+                                width: '280px',
                                 height: '490px',
                                 margin: '0 auto',
                                 backgroundColor: '#eee',

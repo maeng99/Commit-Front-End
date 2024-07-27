@@ -4,9 +4,6 @@ import Button from '../components/button.tsx';
 import '../App.css';
 
 type NavType = 'main' | 'plan' | 'analysis' | 'calender' | 'mypage';
-type NavProps = {
-    type?: NavType;
-};
 
 export default function Nav(props: NavProps) {
     const { type } = props;

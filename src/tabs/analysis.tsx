@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import WeekRange from '../components/weekRange.tsx';
 import '../App.css';
 
 export default function Analysis() {
@@ -24,8 +25,13 @@ export default function Analysis() {
                                 borderRadius: '20px',
                                 marginBottom: '20px',
                                 backgroundColor: '#fff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
                             }}
-                        ></div>
+                        >
+                            <WeekRange />
+                        </div>
                         <div
                             style={{
                                 width: '100%',

@@ -7,7 +7,13 @@
 @font-face {
     font-family: 'Pretendard-SemiBold';
     src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-SemiBold.woff') format('woff');
-    font-weight: 800;
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Pretendard-Bold';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Bold.woff') format('woff');
+    font-weight: 700;
     font-style: normal;
 }
 @font-face {
@@ -40,10 +46,12 @@ body {
 input {
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 10px;
     margin-bottom: 5px;
     font-size: 15px;
-    border: 1px #000 solid;
-    border-radius: 10px;
+    border: none;
+    background-color: #eee;
+    border-radius: 20px;
 }
 
 .nav {
@@ -86,14 +94,14 @@ input {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    overflow-x: auto;
 }
 
 .popup-content {
     width: 1300px;
-    height: 600px;
+    height: 650px;
     background: white;
     border-radius: 10px;
-    padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
@@ -104,6 +112,6 @@ input {
     right: 10px;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 30px;
     cursor: pointer;
 }

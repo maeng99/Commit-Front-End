@@ -110,7 +110,10 @@ export default function Main() {
                                 title={
                                     <>
                                         오늘 하루 마무리하러 가기&emsp;&emsp;
-                                        <img src="../img/check_enabled.png" style={{ width: '18px' }} />
+                                        <img
+                                            src="../img/btn/check_enabled.png"
+                                            style={{ width: '22px', verticalAlign: 'middle' }}
+                                        />
                                     </>
                                 }
                                 onClick={() => {

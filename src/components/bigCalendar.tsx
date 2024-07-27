@@ -16,14 +16,14 @@ const StyledCalendarWrapper = styled.div`
     .react-calendar {
         width: 100%;
         border: none;
-        padding: 10px 18px;
+        padding: 20px 30px;
         background-color: none;
     }
 
     /* 전체 폰트 컬러 */
     .react-calendar__month-view {
         abbr {
-            font-size: 15px;
+            font-size: 18px;
         }
     }
 
@@ -35,8 +35,9 @@ const StyledCalendarWrapper = styled.div`
     /* 네비게이션 폰트 설정 */
     .react-calendar__navigation button {
         font-family: Pretendard-ExtraBold;
-        font-size: 20px;
+        font-size: 30px;
         color: #0d2259;
+        border-radius: 10px;
     }
 
     /* 네비게이션 버튼 컬러 */
@@ -55,10 +56,18 @@ const StyledCalendarWrapper = styled.div`
         flex-grow: 0 !important;
     }
 
+    /* 요일 간격 */
+    .react-calendar__month-view__weekdays {
+        padding: 13px 0;
+        border-top: 2px #a4bcfd solid;
+        border-bottom: 2px #eee solid;
+    }
+
     /* 요일 밑줄 제거 */
     .react-calendar__month-view__weekdays abbr {
         font-family: Pretendard-ExtraBold;
-        font-size: 16px;
+        font-size: 20px;
+        color: #0d2259;
         text-decoration: none;
     }
 
@@ -83,9 +92,11 @@ const StyledCalendarWrapper = styled.div`
 
     /* 일 날짜 간격 */
     .react-calendar__tile {
-        font-family: Pretendard-Regular;
-        padding: 5px 0px 17px;
+        font-family: Pretendard-SemiBold;
+        padding: 5px 5px 60px;
         position: relative;
+        border-bottom: 2px #eee solid;
+        text-align: left;
     }
 
     /* 네비게이션 월 스타일 적용 */
@@ -110,9 +121,10 @@ const StyledCalendarWrapper = styled.div`
     }
     .react-calendar__tile:enabled:focus,
     .react-calendar__tile--active {
-        background-color: #4470f3;
+        border: 2px #4470f3 solid;
+        background-color: #fff;
         border-radius: 10px;
-        color: #fff;
+        color: #4470f3;
     }
 `;
 
@@ -151,7 +163,7 @@ const StyledToday = styled.div`
 `;
  */
 
-/* 이벤트 날짜에 점 표시 스타일 */
+/* 출석한 날짜에 점 표시 스타일 */
 const StyledDot = styled.div`
     background-color: red;
     border-radius: 50%;
