@@ -27,7 +27,7 @@ const ButtonContainer = styled.div<{
         props.type === 'primary'
             ? '#4470F3'
             : props.type === 'secondary'
-            ? '#bbb'
+            ? '#A4BCFD'
             : props.type === 'destructive'
             ? '#FFF6F6'
             : '#FFF'};
@@ -52,12 +52,12 @@ const ButtonContainer = styled.div<{
     ${(props) =>
         props.size === 'medium' &&
         css`
-            height: 45px;
+            height: 40px;
             font-size: 18px;
             width: 165px;
             text-align: center;
         `}
-  ${(props) =>
+    ${(props) =>
         props.size === 'small' &&
         css`
             height: 18px;
@@ -65,10 +65,10 @@ const ButtonContainer = styled.div<{
             width: 60px;
             text-align: center;
         `}
-  &:hover {
+    &:hover {
         background-color: ${(props) =>
             props.type === 'primary'
-                ? '#4470F3'
+                ? '#5a89fe'
                 : props.type === 'secondary'
                 ? '#C9D9FD'
                 : props.type === 'destructive'

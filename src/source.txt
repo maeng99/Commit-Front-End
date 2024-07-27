@@ -9,3 +9,5 @@
 3. 그라데이션 애니메이션
 - https://hoyashu.tistory.com/35
 
+4. text overflow 시 ...처리
+- https://nh0404.tistory.com/43

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import WeekRange from '../components/weekRange.tsx';
 import '../App.css';
 
 export default function Analysis() {
@@ -9,7 +10,7 @@ export default function Analysis() {
         <div className="background">
             <Nav type="analysis" />
             <div className="main_contents_div">
-                <div style={{ textAlign: 'left', marginBottom: '10px', fontWeight: '600' }}>
+                <div style={{ textAlign: 'left', marginBottom: '10px', fontFamily: 'Pretendard-SemiBold' }}>
                     <span style={{ fontFamily: 'Pretendard-ExtraBold', fontSize: '28px', color: '#0D2259' }}>
                         주간 생활 분석 및 피드백
                     </span>
@@ -24,8 +25,13 @@ export default function Analysis() {
                                 borderRadius: '20px',
                                 marginBottom: '20px',
                                 backgroundColor: '#fff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
                             }}
-                        ></div>
+                        >
+                            <WeekRange />
+                        </div>
                         <div
                             style={{
                                 width: '100%',
@@ -37,8 +43,8 @@ export default function Analysis() {
                             <div
                                 style={{
                                     width: '360px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -71,8 +77,8 @@ export default function Analysis() {
                             <div
                                 style={{
                                     width: '800px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -102,8 +108,8 @@ export default function Analysis() {
                                 <div
                                     style={{
                                         width: '370px',
-                                        fontSize: '18px',
-                                        fontWeight: '600',
+                                        fontSize: '20px',
+                                        fontFamily: 'Pretendard-SemiBold',
                                         margin: '0 auto',
                                         padding: '15px 0',
                                         textAlign: 'left',
@@ -125,8 +131,8 @@ export default function Analysis() {
                                 <div
                                     style={{
                                         width: '370px',
-                                        fontSize: '18px',
-                                        fontWeight: '600',
+                                        fontSize: '20px',
+                                        fontFamily: 'Pretendard-SemiBold',
                                         margin: '0 auto',
                                         padding: '15px 0',
                                         textAlign: 'left',

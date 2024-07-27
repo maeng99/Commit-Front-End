@@ -17,8 +17,8 @@ export default function Addplan() {
                         <div
                             style={{
                                 width: '310px',
-                                fontSize: '18px',
-                                fontWeight: '600',
+                                fontSize: '20px',
+                                fontFamily: 'Pretendard-SemiBold',
                                 margin: '0 auto',
                                 padding: '15px 0',
                                 textAlign: 'left',
@@ -42,8 +42,8 @@ export default function Addplan() {
                             style={{
                                 width: '470px',
                                 margin: '0 auto',
-                                fontSize: '18px',
-                                fontWeight: '600',
+                                fontSize: '20px',
+                                fontFamily: 'Pretendard-SemiBold',
                                 padding: '15px 0',
                                 textAlign: 'left',
                             }}
@@ -66,8 +66,8 @@ export default function Addplan() {
                             <div
                                 style={{
                                     width: '280px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
