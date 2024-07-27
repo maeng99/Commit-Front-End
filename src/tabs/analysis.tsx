@@ -29,14 +29,14 @@ export default function Analysis() {
                         <div
                             style={{
                                 width: '100%',
-                                height: '515px',
+                                height: '535px',
                                 backgroundColor: '#fff',
                                 borderRadius: '20px',
                             }}
                         >
                             <div
                                 style={{
-                                    width: '370px',
+                                    width: '360px',
                                     fontSize: '18px',
                                     fontWeight: '600',
                                     margin: '0 auto',
@@ -48,8 +48,8 @@ export default function Analysis() {
                             </div>
                             <div
                                 style={{
-                                    width: '370px',
-                                    height: '445px',
+                                    width: '360px',
+                                    height: '465px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -58,11 +58,11 @@ export default function Analysis() {
                         </div>
                     </div>
 
-                    <div style={{ width: '880px', height: '585px', borderRadius: '20px' }}>
+                    <div style={{ width: '840px', height: '585px', borderRadius: '20px' }}>
                         <div
                             style={{
                                 width: '100%',
-                                height: '205px',
+                                height: '215px',
                                 backgroundColor: '#fff',
                                 marginBottom: '20px',
                                 borderRadius: '20px',
@@ -70,7 +70,7 @@ export default function Analysis() {
                         >
                             <div
                                 style={{
-                                    width: '850px',
+                                    width: '800px',
                                     fontSize: '18px',
                                     fontWeight: '600',
                                     margin: '0 auto',
@@ -82,8 +82,8 @@ export default function Analysis() {
                             </div>
                             <div
                                 style={{
-                                    width: '850px',
-                                    height: '135px',
+                                    width: '800px',
+                                    height: '145px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -93,15 +93,15 @@ export default function Analysis() {
                         <div
                             style={{
                                 width: '100%',
-                                height: '360px',
+                                height: '370px',
                                 display: 'flex',
                                 justifyContent: 'space-between',
                             }}
                         >
-                            <div style={{ width: '430px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                            <div style={{ width: '410px', backgroundColor: '#fff', borderRadius: '20px' }}>
                                 <div
                                     style={{
-                                        width: '400px',
+                                        width: '370px',
                                         fontSize: '18px',
                                         fontWeight: '600',
                                         margin: '0 auto',
@@ -113,18 +113,18 @@ export default function Analysis() {
                                 </div>
                                 <div
                                     style={{
-                                        width: '400px',
-                                        height: '290px',
+                                        width: '370px',
+                                        height: '300px',
                                         margin: '0 auto',
                                         backgroundColor: '#eee',
                                         borderRadius: '20px',
                                     }}
                                 ></div>
                             </div>
-                            <div style={{ width: '430px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                            <div style={{ width: '410px', backgroundColor: '#fff', borderRadius: '20px' }}>
                                 <div
                                     style={{
-                                        width: '400px',
+                                        width: '370px',
                                         fontSize: '18px',
                                         fontWeight: '600',
                                         margin: '0 auto',
@@ -136,8 +136,8 @@ export default function Analysis() {
                                 </div>
                                 <div
                                     style={{
-                                        width: '400px',
-                                        height: '290px',
+                                        width: '370px',
+                                        height: '300px',
                                         margin: '0 auto',
                                         backgroundColor: '#eee',
                                         borderRadius: '20px',

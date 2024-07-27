@@ -11,10 +11,10 @@ export default function Mypage() {
             <div className="main_contents_div">
                 <Date />
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '480px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '470px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
-                                width: '440px',
+                                width: '420px',
                                 fontFamily: 'Pretendard-ExtraBold',
                                 fontSize: '20px',
                                 color: '#4470F3',
@@ -27,8 +27,8 @@ export default function Mypage() {
                         </div>
                         <div
                             style={{
-                                width: '440px',
-                                height: '500px',
+                                width: '420px',
+                                height: '520px',
                                 margin: '0 auto',
                                 backgroundColor: '#eee',
                                 borderRadius: '20px',
@@ -36,10 +36,10 @@ export default function Mypage() {
                         ></div>
                     </div>
 
-                    <div style={{ width: '770px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '750px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
-                                width: '710px',
+                                width: '700px',
                                 fontFamily: 'Pretendard-ExtraBold',
                                 fontSize: '20px',
                                 color: '#4470F3',
@@ -52,8 +52,8 @@ export default function Mypage() {
                         </div>
                         <div
                             style={{
-                                width: '710px',
-                                height: '500px',
+                                width: '700px',
+                                height: '520px',
                                 margin: '0 auto',
                                 backgroundColor: '#eee',
                                 borderRadius: '20px',

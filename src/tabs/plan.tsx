@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import FeedbackPopup from '../tabs/feedbackPopup.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
 import '../App.css';
 
 export default function Plan() {
+    const [isPopupVisible, setPopupVisible] = useState(true);
+
+    const closePopup = () => {
+        setPopupVisible(false);
+    };
+
+    useEffect(() => {
+        // 컴포넌트가 로드될 때 팝업을 표시
+        setPopupVisible(true);
+    }, []);
+
     return (
         <div className="background">
             <Nav type="plan" />
             <div className="main_contents_div">
                 <Date />
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '360px' }}>
+                    <div style={{ width: '320px' }}>
                         <div
                             style={{
                                 width: '100%',
@@ -25,10 +37,10 @@ export default function Plan() {
                         >
                             <SmallCalendar />
                         </div>
-                        <div style={{ width: '100%', height: '245px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                        <div style={{ width: '100%', height: '265px', backgroundColor: '#fff', borderRadius: '20px' }}>
                             <div
                                 style={{
-                                    width: '330px',
+                                    width: '280px',
                                     fontSize: '18px',
                                     fontWeight: '600',
                                     margin: '0 auto',
@@ -40,8 +52,8 @@ export default function Plan() {
                             </div>
                             <div
                                 style={{
-                                    width: '330px',
-                                    height: '175px',
+                                    width: '280px',
+                                    height: '195px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -50,7 +62,7 @@ export default function Plan() {
                         </div>
                     </div>
 
-                    <div style={{ width: '480px' }}>
+                    <div style={{ width: '510px' }}>
                         <div
                             className="progress_bar"
                             style={{
@@ -86,10 +98,10 @@ export default function Plan() {
                                 <span>100</span>%
                             </div>
                         </div>
-                        <div style={{ width: '100%', height: '530px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                        <div style={{ width: '100%', height: '550px', backgroundColor: '#fff', borderRadius: '20px' }}>
                             <div
                                 style={{
-                                    width: '450px',
+                                    width: '470px',
                                     margin: '0 auto',
                                     fontSize: '18px',
                                     fontWeight: '600',
@@ -101,8 +113,8 @@ export default function Plan() {
                             </div>
                             <div
                                 style={{
-                                    width: '450px',
-                                    height: '460px',
+                                    width: '470px',
+                                    height: '480px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -113,11 +125,11 @@ export default function Plan() {
                         </div>
                     </div>
 
-                    <div style={{ width: '360px' }}>
-                        <div style={{ width: '100%', height: '520px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '350px' }}>
+                        <div style={{ width: '100%', height: '540px', backgroundColor: '#fff', borderRadius: '20px' }}>
                             <div
                                 style={{
-                                    width: '330px',
+                                    width: '310px',
                                     fontSize: '18px',
                                     fontWeight: '600',
                                     margin: '0 auto',
@@ -129,8 +141,8 @@ export default function Plan() {
                             </div>
                             <div
                                 style={{
-                                    width: '330px',
-                                    height: '450px',
+                                    width: '310px',
+                                    height: '470px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -158,6 +170,7 @@ export default function Plan() {
                     </div>
                 </div>
             </div>
+            {isPopupVisible && <FeedbackPopup onClose={closePopup} />}
         </div>
     );
 }

@@ -16,7 +16,7 @@ export default function Main() {
             <div className="main_contents_div">
                 <Date />
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '480px' }}>
+                    <div style={{ width: '510px' }}>
                         <div
                             className="progress_bar"
                             style={{
@@ -52,10 +52,10 @@ export default function Main() {
                                 <span>40</span>%
                             </div>
                         </div>
-                        <div style={{ width: '100%', height: '530px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                        <div style={{ width: '100%', height: '550px', backgroundColor: '#fff', borderRadius: '20px' }}>
                             <div
                                 style={{
-                                    width: '450px',
+                                    width: '470px',
                                     margin: '0 auto',
                                     fontSize: '18px',
                                     fontWeight: '600',
@@ -67,8 +67,8 @@ export default function Main() {
                             </div>
                             <div
                                 style={{
-                                    width: '450px',
-                                    height: '460px',
+                                    width: '470px',
+                                    height: '480px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -77,11 +77,11 @@ export default function Main() {
                         </div>
                     </div>
 
-                    <div style={{ width: '360px' }}>
-                        <div style={{ width: '100%', height: '520px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '350px' }}>
+                        <div style={{ width: '100%', height: '540px', backgroundColor: '#fff', borderRadius: '20px' }}>
                             <div
                                 style={{
-                                    width: '330px',
+                                    width: '310px',
                                     fontSize: '18px',
                                     fontWeight: '600',
                                     margin: '0 auto',
@@ -93,8 +93,8 @@ export default function Main() {
                             </div>
                             <div
                                 style={{
-                                    width: '330px',
-                                    height: '450px',
+                                    width: '310px',
+                                    height: '470px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -120,7 +120,7 @@ export default function Main() {
                         </div>
                     </div>
 
-                    <div style={{ width: '360px', background: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '320px', background: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
                                 width: '100%',
@@ -134,7 +134,7 @@ export default function Main() {
                         </div>
                         <hr
                             style={{
-                                width: '330px',
+                                width: '280px',
                                 margin: '0 auto',
                                 border: 'none',
                                 height: '1px',
@@ -144,7 +144,7 @@ export default function Main() {
                         <div>
                             <div
                                 style={{
-                                    width: '330px',
+                                    width: '280px',
                                     fontSize: '18px',
                                     fontWeight: '600',
                                     margin: '0 auto',
@@ -156,8 +156,8 @@ export default function Main() {
                             </div>
                             <div
                                 style={{
-                                    width: '330px',
-                                    height: '190px',
+                                    width: '280px',
+                                    height: '210px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',

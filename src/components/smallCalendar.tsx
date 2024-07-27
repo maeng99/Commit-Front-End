@@ -34,8 +34,8 @@ const StyledCalendarWrapper = styled.div`
 
     /* 네비게이션 폰트 설정 */
     .react-calendar__navigation button {
-        font-weight: 800;
-        font-size: 18px;
+        font-family: Pretendard-ExtraBold;
+        font-size: 20px;
         color: #0d2259;
     }
 
@@ -57,8 +57,9 @@ const StyledCalendarWrapper = styled.div`
 
     /* 요일 밑줄 제거 */
     .react-calendar__month-view__weekdays abbr {
+        font-family: Pretendard-ExtraBold;
+        font-size: 16px;
         text-decoration: none;
-        font-weight: 800;
     }
 
     /* 오늘 날짜 폰트 컬러 */
@@ -83,6 +84,7 @@ const StyledCalendarWrapper = styled.div`
 
     /* 일 날짜 간격 */
     .react-calendar__tile {
+        font-family: Pretendard-Regular;
         padding: 5px 0px 17px;
         position: relative;
     }
@@ -120,17 +122,17 @@ const StyledCalendar = styled(Calendar)``;
 /* 오늘 버튼 스타일 */
 const StyledDate = styled.div`
     position: absolute;
-    right: 30px;
-    top: 30px;
+    right: 28px;
+    top: 26px;
     background-color: #c9d9fd;
     color: #000;
-    width: 13%;
+    width: 35px;
     min-width: fit-content;
-    height: 18px;
+    height: 16px;
     text-align: center;
     margin: 0 auto;
     border-radius: 15px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 600;
     cursor: pointer;
 `;
@@ -188,7 +190,7 @@ export default function SmallCalendar() {
                 formatYear={(locale, date) => moment(date).format('YYYY')}
                 formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')}
                 calendarType="gregory"
-                showNeighboringMonth={false}
+                showNeighboringMonth={true}
                 next2Label={null}
                 prev2Label={null}
                 minDetail="year"

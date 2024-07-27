@@ -11,14 +11,14 @@ export default function Calendar() {
             <div className="main_contents_div">
                 <Date />
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '890px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '870px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         Calendar 영역
                     </div>
 
-                    <div style={{ width: '360px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '350px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
-                                width: '330px',
+                                width: '310px',
                                 fontFamily: 'Pretendard-Regular',
                                 fontSize: '13px',
                                 margin: '0 auto',
@@ -43,8 +43,8 @@ export default function Calendar() {
                         />
                         <div
                             style={{
-                                width: '330px',
-                                height: '465px',
+                                width: '310px',
+                                height: '490px',
                                 margin: '0 auto',
                                 backgroundColor: '#eee',
                                 borderRadius: '20px',
