@@ -129,6 +129,57 @@ export default function Main() {
                                 }}
                             >
                                 {/*세빈이 작업 공간*/}
+                                 <div style={{ display: "flex", alignItems: "center" }}>
+                  <div
+                    style={{
+                      marginTop: "10px",
+                      color: "#0D2259",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      fontSize: "12px",
+                      marginLeft: "3px",
+                      marginRight: "16px",
+                    }}
+                  >
+                    <span style={{ lineHeight: "1" }}>00:00</span>
+                    <span>-</span>
+                    <span style={{ lineHeight: "1" }}>07:00</span>
+                  </div>
+
+                  <span
+                    style={{
+                      width: "240px",
+                      height: "52px",
+                      backgroundColor: "white",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginTop: "11px",
+                      marginRight: "5px",
+                      borderTopRightRadius: "18px",
+                      borderBottomRightRadius: "18px",
+                      border: "1px solid #A4BCFD",
+                      borderLeft: "none",
+                      paddingRight:"10px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: "10px",
+                 
+                        backgroundColor: "#CACACA",
+                      }}
+                    ></span>
+
+                    <span style={{ color: "#0D2259",paddingTop:"13px",paddingRight:"125px"}}>수면시간</span>
+                    <img
+                      src="../img/btn/edit_disabled.png"
+                      style={{ width: "22px", height: "21px" ,paddingTop:"13px"}}
+                    />
+                  </span>
+                </div>
+
+                                {/*세빈작업}
                             </div>
                         </div>
                         <div style={{ marginTop: '20px' }}>
