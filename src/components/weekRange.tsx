@@ -10,7 +10,8 @@ function getWeekRange(date) {
 }
 
 export default function WeekRange() {
-    const [currentDate, setCurrentDate] = useState(new Date());
+    const defaultDate = moment().subtract(1, 'week').toDate();
+    const [currentDate, setCurrentDate] = useState(defaultDate);
 
     const handlePrevWeek = () => {
         setCurrentDate(moment(currentDate).subtract(1, 'week').toDate());

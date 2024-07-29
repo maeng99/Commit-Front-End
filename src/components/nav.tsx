@@ -10,7 +10,7 @@ export default function Nav(props: NavProps) {
     return (
         <div className="nav">
             <Link to="/main">
-                <img src="../img/small_logo.png" style={{ width: '60px', marginTop: '20px', marginBottom: '40px' }} />
+                <img src="../img/nav_logo.png" style={{ width: '120px', marginBottom: '35px' }} />
             </Link>
             <Link to="/main" style={{ textDecoration: 'none' }}>
                 <img

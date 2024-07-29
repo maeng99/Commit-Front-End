@@ -26,7 +26,9 @@ export default function Signup() {
     };
 
     return (
-        <div className="background">
+        <div
+            style={{ width: '600px', height: '630px', margin: '0 auto', backgroundColor: '#fff', borderRadius: '25px' }}
+        >
             <div style={{ display: 'flex', justifyContent: 'right', marginRight: '20px', marginTop: '20px' }}>
                 <Button
                     type="logout"
