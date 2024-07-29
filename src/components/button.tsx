@@ -27,7 +27,7 @@ const ButtonContainer = styled.div<{
         props.type === 'primary'
             ? '#4470F3'
             : props.type === 'secondary'
-            ? '#A4BCFD'
+            ? '#C9D9FD'
             : props.type === 'destructive'
             ? '#FFF6F6'
             : '#FFF'};
@@ -35,7 +35,7 @@ const ButtonContainer = styled.div<{
         props.type === 'primary'
             ? '#fff'
             : props.type === 'secondary'
-            ? '#fff'
+            ? '#4470F3'
             : props.type === 'destructive'
             ? '#FF3E3E'
             : '#000'};
@@ -54,7 +54,15 @@ const ButtonContainer = styled.div<{
         css`
             height: 40px;
             font-size: 18px;
-            width: 165px;
+            width: 190px;
+            text-align: center;
+        `}
+    ${(props) =>
+        props.size === 'sub' &&
+        css`
+            height: 40px;
+            font-size: 18px;
+            width: 130px;
             text-align: center;
         `}
     ${(props) =>
@@ -66,14 +74,7 @@ const ButtonContainer = styled.div<{
             text-align: center;
         `}
     &:hover {
-        background-color: ${(props) =>
-            props.type === 'primary'
-                ? '#5a89fe'
-                : props.type === 'secondary'
-                ? '#C9D9FD'
-                : props.type === 'destructive'
-                ? '#FFDFDF'
-                : '#FFF'};
+        opacity: 0.8;
         & p {
             font-family: Pretendard-SemiBold;
         }

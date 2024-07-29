@@ -193,7 +193,7 @@ export default function FeedbackPopup({ onClose }) {
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'space-between' }}>
-                                    <Button type="secondary" size="medium" title="적용 안함" onClick={onClose} />
+                                    <Button type="secondary" size="sub" title="적용 안함" onClick={onClose} />
                                     <Button
                                         type="primary"
                                         size="medium"

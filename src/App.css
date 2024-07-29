@@ -54,6 +54,25 @@ input {
     border-radius: 20px;
 }
 
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.main_contents_div {
+    padding-left: 190px;
+    padding-right: 70px;
+    width: 1260px;
+    position: absolute;
+}
+
 .nav {
     position: fixed;
     left: 0;
@@ -74,13 +93,6 @@ input {
 }
 .nav_img:hover {
     width: 30px;
-}
-
-.main_contents_div {
-    padding-left: 190px;
-    padding-right: 70px;
-    width: 1260px;
-    padding-top: 30px;
 }
 
 .popup-background {

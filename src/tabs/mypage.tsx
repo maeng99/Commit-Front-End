@@ -28,187 +28,265 @@ export default function Mypage() {
     };
 
     return (
-        <div className="background">
+        <div>
             <Nav type="mypage" />
-            <div className="main_contents_div">
-                <Date />
-                <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '470px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
+            <div className="background">
+                <div className="main_contents_div">
+                    <Date />
+                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
                         <div
                             style={{
-                                width: '420px',
-                                fontFamily: 'Pretendard-ExtraBold',
-                                fontSize: '22px',
-                                color: '#4470F3',
-                                margin: '0 auto',
-                                padding: '20px 0',
-                                textAlign: 'left',
-                            }}
-                        >
-                            내 계정
-                        </div>
-                        <div style={{ width: '420px', height: '520px', margin: '0 auto', textAlign: 'left' }}>
-                            <div
-                                style={{
-                                    fontFamily: 'Pretendard-Regular',
-                                    fontSize: '12px',
-                                    color: '#555',
-                                    marginBottom: '15px',
-                                }}
-                            >
-                                사용자 이름
-                                <br />
-                                <span style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '22px' }}>맹의현</span>
-                            </div>
-                            <div
-                                style={{
-                                    fontFamily: 'Pretendard-Regular',
-                                    fontSize: '12px',
-                                    color: '#555',
-                                    marginBottom: '50px',
-                                }}
-                            >
-                                이메일
-                                <br />
-                                <span style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '22px' }}>
-                                    202011111@sangmyung.kr
-                                </span>
-                            </div>
-                            {isFormVisible ? (
-                                <form style={{ width: '420px', height: '400px', margin: '0 auto', textAlign: 'left' }}>
-                                    <div>
-                                        <input
-                                            type="password"
-                                            {...register('ID', {
-                                                required: '현재 비밀번호를 입력해주세요.',
-                                            })}
-                                            placeholder="현재 비밀번호"
-                                            style={{ width: '340px', height: '20px' }}
-                                        />
-                                        {errors.ID && (
-                                            <span
-                                                style={{
-                                                    display: 'block',
-                                                    color: 'red',
-                                                    fontSize: '12px',
-                                                    textAlign: 'left',
-                                                }}
-                                            >
-                                                * {errors.ID.message}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="password"
-                                            {...register('Password', {
-                                                required: '새 비밀번호를 입력해주세요.',
-                                            })}
-                                            placeholder="새 비밀번호"
-                                            style={{ width: '340px', height: '20px', marginTop: '10px' }}
-                                        />
-                                        {errors.Password && (
-                                            <span
-                                                style={{
-                                                    display: 'block',
-                                                    color: 'red',
-                                                    fontSize: '12px',
-                                                    textAlign: 'left',
-                                                }}
-                                            >
-                                                * {errors.Password.message}
-                                            </span>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <input
-                                            type="password"
-                                            {...register('RePassword', {
-                                                required: '새 비밀번호를 확인해주세요.',
-                                            })}
-                                            placeholder="새 비밀번호 확인"
-                                            style={{ width: '340px', height: '20px', marginTop: '10px' }}
-                                        />
-                                        {errors.RePassword && (
-                                            <span
-                                                style={{
-                                                    display: 'block',
-                                                    color: 'red',
-                                                    fontSize: '12px',
-                                                    textAlign: 'left',
-                                                }}
-                                            >
-                                                * {errors.RePassword.message}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    <div
-                                        style={{
-                                            width: '350px',
-                                            marginTop: '20px',
-                                            paddingBottom: '20px',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                        }}
-                                    >
-                                        <Button
-                                            type="secondary"
-                                            size="medium"
-                                            title="취소"
-                                            onClick={() => setIsFormVisible(false)}
-                                        />
-                                        <Button
-                                            type="primary"
-                                            size="medium"
-                                            title="변경사항 저장"
-                                            onClick={handleSubmit(onValid, onInvalid)}
-                                        />
-                                    </div>
-                                </form>
-                            ) : (
-                                <Button
-                                    type="primary"
-                                    size="medium"
-                                    title="개인정보 변경"
-                                    onClick={() => setIsFormVisible(true)}
-                                />
-                            )}
-                        </div>
-                    </div>
-
-                    <div style={{ width: '750px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
-                        <div
-                            style={{
-                                width: '700px',
-                                fontFamily: 'Pretendard-ExtraBold',
-                                fontSize: '22px',
-                                color: '#4470F3',
-                                margin: '0 auto',
-                                padding: '20px 0',
-                                textAlign: 'left',
-                            }}
-                        >
-                            나만의 일정표 커스텀 규칙
-                            <img
-                                src="../img/btn/edit_disabled.png"
-                                style={{
-                                    width: '25px',
-                                    cursor: 'pointer',
-                                    marginLeft: '445px',
-                                    verticalAlign: 'middle',
-                                }}
-                            />
-                        </div>
-                        <div
-                            style={{
-                                width: '700px',
-                                height: '520px',
-                                margin: '0 auto',
-                                backgroundColor: '#eee',
+                                width: '470px',
+                                height: '605px',
+                                backgroundColor: '#fff',
+                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                 borderRadius: '20px',
                             }}
-                        ></div>
+                        >
+                            <div
+                                style={{
+                                    width: '420px',
+                                    fontFamily: 'Pretendard-ExtraBold',
+                                    fontSize: '22px',
+                                    color: '#4470F3',
+                                    margin: '0 auto',
+                                    padding: '20px 0',
+                                    textAlign: 'left',
+                                }}
+                            >
+                                내 계정
+                            </div>
+                            <div style={{ width: '420px', height: '520px', margin: '0 auto', textAlign: 'left' }}>
+                                <div
+                                    style={{
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '12px',
+                                        color: '#555',
+                                        marginBottom: '15px',
+                                    }}
+                                >
+                                    사용자 이름
+                                    <br />
+                                    <span style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '22px' }}>맹의현</span>
+                                </div>
+                                <div
+                                    style={{
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '12px',
+                                        color: '#555',
+                                        marginBottom: '50px',
+                                    }}
+                                >
+                                    이메일
+                                    <br />
+                                    <span style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '22px' }}>
+                                        202011111@sangmyung.kr
+                                    </span>
+                                </div>
+                                {isFormVisible ? (
+                                    <form
+                                        style={{ width: '420px', height: '400px', margin: '0 auto', textAlign: 'left' }}
+                                    >
+                                        <div>
+                                            <input
+                                                type="password"
+                                                {...register('ID', {
+                                                    required: '현재 비밀번호를 입력해주세요.',
+                                                })}
+                                                placeholder="현재 비밀번호"
+                                                style={{ width: '340px', height: '20px' }}
+                                            />
+                                            {errors.ID && (
+                                                <span
+                                                    style={{
+                                                        display: 'block',
+                                                        color: 'red',
+                                                        fontSize: '12px',
+                                                        textAlign: 'left',
+                                                    }}
+                                                >
+                                                    * {errors.ID.message}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="password"
+                                                {...register('Password', {
+                                                    required: '새 비밀번호를 입력해주세요.',
+                                                })}
+                                                placeholder="새 비밀번호"
+                                                style={{ width: '340px', height: '20px', marginTop: '10px' }}
+                                            />
+                                            {errors.Password && (
+                                                <span
+                                                    style={{
+                                                        display: 'block',
+                                                        color: 'red',
+                                                        fontSize: '12px',
+                                                        textAlign: 'left',
+                                                    }}
+                                                >
+                                                    * {errors.Password.message}
+                                                </span>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <input
+                                                type="password"
+                                                {...register('RePassword', {
+                                                    required: '새 비밀번호를 확인해주세요.',
+                                                })}
+                                                placeholder="새 비밀번호 확인"
+                                                style={{ width: '340px', height: '20px', marginTop: '10px' }}
+                                            />
+                                            {errors.RePassword && (
+                                                <span
+                                                    style={{
+                                                        display: 'block',
+                                                        color: 'red',
+                                                        fontSize: '12px',
+                                                        textAlign: 'left',
+                                                    }}
+                                                >
+                                                    * {errors.RePassword.message}
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <div
+                                            style={{
+                                                width: '350px',
+                                                marginTop: '20px',
+                                                paddingBottom: '20px',
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}
+                                        >
+                                            <Button
+                                                type="secondary"
+                                                size="medium"
+                                                title="취소"
+                                                onClick={() => setIsFormVisible(false)}
+                                            />
+                                            <Button
+                                                type="primary"
+                                                size="medium"
+                                                title="변경사항 저장"
+                                                onClick={handleSubmit(onValid, onInvalid)}
+                                            />
+                                        </div>
+                                    </form>
+                                ) : (
+                                    <Button
+                                        type="primary"
+                                        size="medium"
+                                        title="개인정보 변경"
+                                        onClick={() => setIsFormVisible(true)}
+                                    />
+                                )}
+                            </div>
+                        </div>
+
+                        <div
+                            style={{
+                                width: '750px',
+                                height: '605px',
+                                backgroundColor: '#fff',
+                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                                borderRadius: '20px',
+                            }}
+                        >
+                            <div
+                                style={{
+                                    width: '700px',
+                                    fontFamily: 'Pretendard-ExtraBold',
+                                    fontSize: '22px',
+                                    color: '#4470F3',
+                                    margin: '0 auto',
+                                    padding: '20px 0',
+                                    textAlign: 'left',
+                                }}
+                            >
+                                나만의 일정표 커스텀 규칙
+                                <img
+                                    src="../img/btn/edit_disabled.png"
+                                    style={{
+                                        width: '25px',
+                                        cursor: 'pointer',
+                                        marginLeft: '445px',
+                                        verticalAlign: 'middle',
+                                    }}
+                                />
+                            </div>
+                            <div
+                                style={{
+                                    width: '700px',
+                                    height: '515px',
+                                    margin: '0 auto',
+                                    border: '2px #eee solid',
+                                    borderRadius: '20px',
+                                    textAlign: 'left',
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '17px',
+                                        padding: '25px 25px 10px',
+                                    }}
+                                >
+                                    목표 <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>워라밸 : </span>
+                                </div>
+                                <div
+                                    style={{
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '17px',
+                                        padding: '20px 25px 10px',
+                                    }}
+                                >
+                                    하루 목표 <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>수면시간 : </span>
+                                </div>
+                                <div
+                                    style={{
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '17px',
+                                        padding: '20px 25px 10px',
+                                    }}
+                                >
+                                    하루 목표 <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>운동시간 : </span>
+                                </div>
+                                <div
+                                    style={{
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '17px',
+                                        padding: '20px 25px 10px',
+                                    }}
+                                >
+                                    그 외 세부 사항
+                                </div>
+                                <div
+                                    style={{
+                                        width: '650px',
+                                        height: '290px',
+                                        margin: '0 auto',
+                                        backgroundColor: '#eee',
+                                        borderRadius: '20px',
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '14px',
+                                        textAlign: 'left',
+                                    }}
+                                >
+                                    <div style={{ padding: '15px 20px 5px' }}>
+                                        • 주말을 제외한 주중 워라밸에 대한 피드백입니다.
+                                    </div>
+                                    <div style={{ padding: '15px 20px 5px' }}>
+                                        • 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸 비율이 5.7
+                                        : 4.3으로 매우 안정적입니다람쥐.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
