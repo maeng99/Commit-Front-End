@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
 import moment from 'moment';
+import PlanData from '../database/planData.tsx';
 import '../App.css';
 
 type ValuePiece = Date | null;
@@ -74,7 +75,8 @@ const StyledCalendarWrapper = styled.div`
     /* 오늘 날짜 폰트 컬러 */
     .react-calendar__tile--now {
         border-radius: 10px;
-        background-color: #c9d9fd;
+        background-color: #fff;
+        color: #4470f3;
     }
 
     /* 네비게이션 현재 월 스타일 적용*/
@@ -91,7 +93,7 @@ const StyledCalendarWrapper = styled.div`
     .react-calendar__month-view__days__day {
         border-bottom: 2px #eee solid;
         font-family: Pretendard-SemiBold;
-        padding: 5px 0px 60px;
+        padding: 5px 0px 62px;
         position: relative;
         text-align: left;
         abbr {
@@ -121,7 +123,7 @@ const StyledCalendarWrapper = styled.div`
     }
     .react-calendar__tile:enabled:focus,
     .react-calendar__tile--active {
-        border: 2px #4470f3 solid;
+        box-shadow: 0 0 0 2px #4470f3 inset;
         background-color: #fff;
         border-radius: 10px;
         color: #4470f3;
@@ -158,37 +160,41 @@ const StyledEvent = styled.div`
     color: #000;
     line-height: 20px;
     border-radius: 10px;
-    width: 100%;
+    width: 115.5px;
     height: 20px;
     padding: 0 5px;
     position: absolute;
+    left: 2px;
     top: ${(props) => props.top}px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 `;
 
-const events = [
-    { date: '2024-07-23', title: '오후 6시 싸이 흠뻑쇼' },
-    { date: '2024-07-23', title: '결혼식' },
-    { date: '2024-07-24', title: '여행' },
-    { date: '2024-07-29', title: '프로젝트 회의' },
-    { date: '2024-08-06', end: '2024-08-07', title: '멋사 12기 종강 해커톤' },
-];
+const events = PlanData();
 
-export default function SmallCalendar() {
+type DateSelectionHandler = (selectedDate: Date) => void;
+interface BigCalendarProps {
+    onDateSelect: DateSelectionHandler;
+}
+
+const BigCalendar: React.FC<BigCalendarProps> = ({ onDateSelect }) => {
     const today = new Date();
     const [date, setDate] = useState<Value>(today);
     const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
 
     const handleDateChange = (newDate: Value) => {
         setDate(newDate);
+        if (newDate instanceof Date) {
+            onDateSelect(newDate);
+        }
     };
 
     const handleTodayClick = () => {
         const today = new Date();
         setActiveStartDate(today);
         setDate(today);
+        onDateSelect(today);
     };
 
     return (
@@ -216,10 +222,10 @@ export default function SmallCalendar() {
                             <div>
                                 {eventsOnDate.slice(0, 2).map((event, index) => (
                                     <StyledEvent
-                                        key={index}
+                                        key={event.id}
                                         style={{
                                             backgroundColor: index === 0 ? '#e9effd' : '#C9D9FD',
-                                            top: index === 0 ? 30 : 55,
+                                            top: index === 0 ? 32 : 57,
                                         }}
                                     >
                                         {event.title}
@@ -234,4 +240,6 @@ export default function SmallCalendar() {
             <StyledTodayBtn onClick={handleTodayClick}>Today</StyledTodayBtn>
         </StyledCalendarWrapper>
     );
-}
+};
+
+export default BigCalendar;

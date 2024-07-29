@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import TimeTableDiv from '../components/timeTableDiv.tsx';
 import '../App.css';
 
 export default function Addplan() {
@@ -20,7 +21,7 @@ export default function Addplan() {
                                 fontSize: '20px',
                                 fontFamily: 'Pretendard-SemiBold',
                                 margin: '0 auto',
-                                padding: '15px 0',
+                                padding: '25px 0',
                                 textAlign: 'left',
                             }}
                         >
@@ -28,13 +29,14 @@ export default function Addplan() {
                         </div>
                         <div
                             style={{
-                                width: '310px',
-                                height: '535px',
+                                width: '350px',
+                                height: '515px',
                                 margin: '0 auto',
-                                backgroundColor: '#eee',
-                                borderRadius: '20px',
+                                overflow: 'auto',
                             }}
-                        ></div>
+                        >
+                            <TimeTableDiv />
+                        </div>
                     </div>
 
                     <div style={{ width: '510px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
