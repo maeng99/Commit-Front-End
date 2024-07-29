@@ -7,26 +7,23 @@ import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
+import TimeTableDiv from '../components/timeTableDiv.tsx';
+import PlanData from '../database/planData.tsx';
 import '../App.css';
 
-const events = [
-    { date: '2024-07-23', title: '오후 6시 싸이 흠뻑쇼' },
-    { date: '2024-07-23', title: '결혼식' },
-    { date: '2024-07-24', title: '여행' },
-    { date: '2024-07-29', title: '프로젝트 회의' },
-    { date: '2024-08-06', end: '2024-08-07', title: '멋사 12기 종강 해커톤' },
-];
+const events = PlanData();
 
 function getClosestEvents(events) {
     const today = moment(); // Get today's date
-    const futureEvents = events.filter((event) => moment(event.date) >= today); // Filter future events
-    futureEvents.sort((a, b) => moment(a.date) - moment(b.date)); // Sort events by date
-    return futureEvents.slice(0, 3); // Get the closest 3 events
+    const closestEvents = events.filter(
+        (event) => moment(event.date) >= today || moment(event.date).isSame(today, 'day')
+    ); // Filter future events
+    closestEvents.sort((a, b) => moment(a.date) - moment(b.date)); // Sort events by date
+    return closestEvents.slice(0, 3); // Get the closest 3 events
 }
 
 export default function Main() {
     const closestEvents = getClosestEvents(events);
-    console.log(closestEvents);
 
     return (
         <div className="background">
@@ -45,6 +42,7 @@ export default function Main() {
                                 marginBottom: '20px',
                                 padding: '5px 5px',
                                 backgroundColor: '#fff',
+                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                 borderRadius: '20px',
                             }}
                         >
@@ -78,7 +76,15 @@ export default function Main() {
                                 <span>40</span>%
                             </div>
                         </div>
-                        <div style={{ width: '100%', height: '550px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                        <div
+                            style={{
+                                width: '100%',
+                                height: '550px',
+                                backgroundColor: '#fff',
+                                borderRadius: '20px',
+                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                            }}
+                        >
                             <div
                                 style={{
                                     width: '470px',
@@ -86,7 +92,7 @@ export default function Main() {
                                     fontSize: '20px',
                                     fontFamily: 'Pretendard-SemiBold',
                                     color: '#0D2259',
-                                    padding: '15px 0',
+                                    padding: '20px 0',
                                     textAlign: 'left',
                                 }}
                             >
@@ -95,17 +101,26 @@ export default function Main() {
                             <div
                                 style={{
                                     width: '470px',
-                                    height: '480px',
+                                    height: '470px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
+                                    overflow: 'auto',
                                 }}
                             ></div>
                         </div>
                     </div>
 
                     <div style={{ width: '350px' }}>
-                        <div style={{ width: '100%', height: '540px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                        <div
+                            style={{
+                                width: '100%',
+                                height: '540px',
+                                backgroundColor: '#fff',
+                                borderRadius: '20px',
+                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                            }}
+                        >
                             <div
                                 style={{
                                     width: '310px',
@@ -113,7 +128,7 @@ export default function Main() {
                                     fontFamily: 'Pretendard-SemiBold',
                                     color: '#0D2259',
                                     margin: '0 auto',
-                                    padding: '15px 0',
+                                    padding: '25px 0',
                                     textAlign: 'left',
                                 }}
                             >
@@ -121,14 +136,13 @@ export default function Main() {
                             </div>
                             <div
                                 style={{
-                                    width: '310px',
-                                    height: '470px',
+                                    width: '350px',
+                                    height: '450px',
+                                    overflow: 'auto',
                                     margin: '0 auto',
-                                    backgroundColor: '#eee',
-                                    borderRadius: '20px',
                                 }}
                             >
-                                {/*세빈이 작업 공간*/}
+                                <TimeTableDiv />
                             </div>
                         </div>
                         <div style={{ marginTop: '20px' }}>
@@ -151,7 +165,14 @@ export default function Main() {
                         </div>
                     </div>
 
-                    <div style={{ width: '320px', background: '#fff', borderRadius: '20px' }}>
+                    <div
+                        style={{
+                            width: '320px',
+                            background: '#fff',
+                            borderRadius: '20px',
+                            boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                        }}
+                    >
                         <div
                             style={{
                                 width: '100%',
@@ -194,8 +215,9 @@ export default function Main() {
                                 }}
                             >
                                 {closestEvents.length > 0 ? (
-                                    closestEvents.map((event, index) => (
+                                    closestEvents.map((event) => (
                                         <div
+                                            key={event.id}
                                             style={{
                                                 width: '260px',
                                                 height: '40px',

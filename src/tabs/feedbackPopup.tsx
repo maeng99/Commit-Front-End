@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../components/button.tsx';
+import TimeTableDiv from '../components/timeTableDiv.tsx';
 import '../App.css';
 
 export default function FeedbackPopup({ onClose }) {
@@ -69,7 +70,7 @@ export default function FeedbackPopup({ onClose }) {
                                         fontSize: '18px',
                                         color: '#0D2259',
                                         margin: '0 auto',
-                                        padding: '15px 0',
+                                        padding: '25px 0',
                                         textAlign: 'left',
                                     }}
                                 >
@@ -77,13 +78,14 @@ export default function FeedbackPopup({ onClose }) {
                                 </div>
                                 <div
                                     style={{
-                                        width: '310px',
-                                        height: '395px',
+                                        width: '350px',
+                                        height: '375px',
+                                        overflow: 'auto',
                                         margin: '0 auto',
-                                        backgroundColor: '#eee',
-                                        borderRadius: '20px',
                                     }}
-                                ></div>
+                                >
+                                    <TimeTableDiv />
+                                </div>
                             </div>
                         </div>
                         <div
@@ -133,6 +135,7 @@ export default function FeedbackPopup({ onClose }) {
                                             margin: '0 auto',
                                             backgroundColor: '#eee',
                                             borderRadius: '20px',
+                                            overflow: 'auto',
                                         }}
                                     ></div>
                                 </div>
@@ -184,6 +187,7 @@ export default function FeedbackPopup({ onClose }) {
                                                 margin: '0 auto',
                                                 backgroundColor: '#eee',
                                                 borderRadius: '20px',
+                                                overflow: 'auto',
                                             }}
                                         ></div>
                                     </div>

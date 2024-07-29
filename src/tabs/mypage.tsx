@@ -191,7 +191,7 @@ export default function Mypage() {
                         >
                             나만의 일정표 커스텀 규칙
                             <img
-                                src="../img/btn/edit.png"
+                                src="../img/btn/edit_disabled.png"
                                 style={{
                                     width: '25px',
                                     cursor: 'pointer',

@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
 import moment from 'moment';
+import PlanData from '../database/planData.tsx';
 import '../App.css';
 
 type ValuePiece = Date | null;
@@ -163,13 +164,7 @@ const StyledDot = styled.div`
     transform: translateX(-50%);
 `;
 
-const events = [
-    { date: '2024-07-23', title: '오후 6시 싸이 흠뻑쇼' },
-    { date: '2024-07-23', title: '결혼식' },
-    { date: '2024-07-24', title: '여행' },
-    { date: '2024-07-29', title: '프로젝트 회의' },
-    { date: '2024-08-06', end: '2024-08-07', title: '멋사 12기 종강 해커톤' },
-];
+const events = PlanData();
 
 export default function SmallCalendar() {
     const today = new Date();

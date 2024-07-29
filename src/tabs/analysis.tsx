@@ -50,7 +50,7 @@ export default function Analysis() {
                                     textAlign: 'left',
                                 }}
                             >
-                                워라벨
+                                워라벨<span style={{ color: '#ccc' }}> Work-Life Balance</span>
                             </div>
                             <div
                                 style={{

@@ -4,6 +4,7 @@ import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
+import TimeTableDiv from '../components/timeTableDiv.tsx';
 import FeedbackPopup from '../tabs/feedbackPopup.tsx';
 import '../App.css';
 
@@ -107,7 +108,7 @@ export default function Plan() {
                                     fontSize: '20px',
                                     fontFamily: 'Pretendard-SemiBold',
                                     color: '#0D2259',
-                                    padding: '15px 0',
+                                    padding: '20px 0',
                                     textAlign: 'left',
                                 }}
                             >
@@ -116,7 +117,7 @@ export default function Plan() {
                             <div
                                 style={{
                                     width: '470px',
-                                    height: '480px',
+                                    height: '470px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -136,7 +137,7 @@ export default function Plan() {
                                     fontFamily: 'Pretendard-SemiBold',
                                     color: '#0D2259',
                                     margin: '0 auto',
-                                    padding: '15px 0',
+                                    padding: '25px 0',
                                     textAlign: 'left',
                                 }}
                             >
@@ -144,13 +145,14 @@ export default function Plan() {
                             </div>
                             <div
                                 style={{
-                                    width: '310px',
-                                    height: '475px',
+                                    width: '350px',
+                                    height: '455px',
+                                    overflow: 'auto',
                                     margin: '0 auto',
-                                    backgroundColor: '#eee',
-                                    borderRadius: '20px',
                                 }}
-                            ></div>
+                            >
+                                <TimeTableDiv />
+                            </div>
                         </div>
                         <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
                             <Button

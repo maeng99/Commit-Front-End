@@ -7,7 +7,7 @@ export default function ShowDate() {
 
     return (
         <div style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '18px', textAlign: 'left', marginBottom: '10px' }}>
-            Date.&nbsp;
+            Today.&nbsp;
             <span style={{ fontFamily: 'Pretendard-ExtraBold', fontSize: '28px', color: '#0D2259' }}>
                 {formattedDate}
             </span>
