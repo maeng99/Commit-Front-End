@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import BigCalendar from '../components/bigCalendar.tsx';
 import '../App.css';
 
 export default function Calendar() {
@@ -11,14 +12,22 @@ export default function Calendar() {
             <div className="main_contents_div">
                 <Date />
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '890px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
-                        Calendar 영역
+                    <div
+                        style={{
+                            width: '900px',
+                            height: '605px',
+                            backgroundColor: '#fff',
+                            borderRadius: '20px',
+                            overflow: 'auto',
+                        }}
+                    >
+                        <BigCalendar />
                     </div>
 
-                    <div style={{ width: '360px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '320px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
-                                width: '330px',
+                                width: '280px',
                                 fontFamily: 'Pretendard-Regular',
                                 fontSize: '13px',
                                 margin: '0 auto',
@@ -31,6 +40,14 @@ export default function Calendar() {
                                 22
                             </span>
                             2024년 7월
+                            <img
+                                src="../img/btn/edit.png"
+                                style={{
+                                    width: '25px',
+                                    cursor: 'pointer',
+                                    marginLeft: '130px',
+                                }}
+                            />
                         </div>
                         <hr
                             style={{
@@ -43,8 +60,8 @@ export default function Calendar() {
                         />
                         <div
                             style={{
-                                width: '330px',
-                                height: '465px',
+                                width: '280px',
+                                height: '490px',
                                 margin: '0 auto',
                                 backgroundColor: '#eee',
                                 borderRadius: '20px',

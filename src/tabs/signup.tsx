@@ -40,7 +40,7 @@ export default function Signup() {
             <div style={{ marginTop: '45 px', marginBottom: '40px' }}>
                 <img src="..\img\small_logo.png" style={{ width: '200px' }} />
                 <br />
-                <div style={{ marginTop: '20px', fontSize: '18px', fontWeight: '600' }}>회원가입</div>
+                <div style={{ marginTop: '20px', fontSize: '18px', fontFamily: 'Pretendard-SemiBold' }}>회원가입</div>
             </div>
 
             <form onSubmit={handleSubmit(onValid, onInvalid)} style={{ textAlign: 'center' }}>

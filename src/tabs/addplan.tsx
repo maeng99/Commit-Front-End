@@ -13,12 +13,12 @@ export default function Addplan() {
             <div className="main_contents_div">
                 <Date />
                 <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-                    <div style={{ width: '360px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '350px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
-                                width: '330px',
-                                fontSize: '18px',
-                                fontWeight: '600',
+                                width: '310px',
+                                fontSize: '20px',
+                                fontFamily: 'Pretendard-SemiBold',
                                 margin: '0 auto',
                                 padding: '15px 0',
                                 textAlign: 'left',
@@ -28,8 +28,8 @@ export default function Addplan() {
                         </div>
                         <div
                             style={{
-                                width: '330px',
-                                height: '515px',
+                                width: '310px',
+                                height: '535px',
                                 margin: '0 auto',
                                 backgroundColor: '#eee',
                                 borderRadius: '20px',
@@ -37,13 +37,13 @@ export default function Addplan() {
                         ></div>
                     </div>
 
-                    <div style={{ width: '480px', height: '585px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '510px', height: '605px', backgroundColor: '#fff', borderRadius: '20px' }}>
                         <div
                             style={{
-                                width: '450px',
+                                width: '470px',
                                 margin: '0 auto',
-                                fontSize: '18px',
-                                fontWeight: '600',
+                                fontSize: '20px',
+                                fontFamily: 'Pretendard-SemiBold',
                                 padding: '15px 0',
                                 textAlign: 'left',
                             }}
@@ -52,8 +52,8 @@ export default function Addplan() {
                         </div>
                         <div
                             style={{
-                                width: '450px',
-                                height: '515px',
+                                width: '470px',
+                                height: '535px',
                                 margin: '0 auto',
                                 backgroundColor: '#eee',
                                 borderRadius: '20px',
@@ -61,13 +61,13 @@ export default function Addplan() {
                         ></div>
                     </div>
 
-                    <div style={{ width: '360px' }}>
-                        <div style={{ width: '100%', height: '520px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                    <div style={{ width: '320px' }}>
+                        <div style={{ width: '100%', height: '540px', backgroundColor: '#fff', borderRadius: '20px' }}>
                             <div
                                 style={{
-                                    width: '330px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    width: '280px',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -77,8 +77,8 @@ export default function Addplan() {
                             </div>
                             <div
                                 style={{
-                                    width: '330px',
-                                    height: '450px',
+                                    width: '280px',
+                                    height: '470px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',

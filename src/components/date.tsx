@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 
-export default function Button(props: ButtonProps) {
+export default function ShowDate() {
     const today = new Date();
     const formattedDate = `${today.getFullYear()}. ${today.getMonth() + 1}. ${today.getDate()}`;
 

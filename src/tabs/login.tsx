@@ -12,8 +12,6 @@ export default function Login() {
         formState: { errors },
     } = useForm();
 
-    const [hover, setHover] = useState(false);
-
     const onValid = (e) => {
         console.log(e, 'onValid');
         alert('반갑습니다.');
@@ -26,14 +24,16 @@ export default function Login() {
     };
 
     return (
-        <div className="background">
+        <div
+            style={{ width: '600px', height: '630px', margin: '0 auto', backgroundColor: '#fff', borderRadius: '25px' }}
+        >
             <div style={{ marginTop: '50px', marginBottom: '50px' }}>
                 <img src="..\img\small_logo.png" style={{ width: '280px' }} />
                 <br />
                 <img src="..\img\logo_text.png" style={{ width: '320px' }} />
             </div>
 
-            <form onSubmit={handleSubmit(onValid, onInvalid)} style={{ textAlign: 'center' }}>
+            <form style={{ textAlign: 'center' }}>
                 <div style={{ width: '400px', margin: '0 auto' }}>
                     <input
                         type="text"
@@ -64,25 +64,8 @@ export default function Login() {
                         </span>
                     )}
                 </div>
-                <div style={{ marginTop: '20px', paddingBottom: '20px' }}>
-                    <button
-                        type="submit"
-                        style={{
-                            fontSize: '20px',
-                            width: '400px',
-                            height: '45px',
-                            textAlign: 'center',
-                            backgroundColor: '#4470F3',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '8px',
-                            cursor: 'pointer',
-                        }}
-                        onMouseEnter={() => setHover(true)}
-                        onMouseLeave={() => setHover(false)}
-                    >
-                        로그인
-                    </button>
+                <div style={{ width: '350px', margin: '20px auto', textAlign: 'center' }}>
+                    <Button type="primary" size="large" title="로그인" onClick={handleSubmit(onValid, onInvalid)} />
                 </div>
             </form>
 

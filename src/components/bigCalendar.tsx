@@ -16,14 +16,14 @@ const StyledCalendarWrapper = styled.div`
     .react-calendar {
         width: 100%;
         border: none;
-        padding: 10px 18px;
+        padding: 20px 30px;
         background-color: none;
     }
 
     /* 전체 폰트 컬러 */
     .react-calendar__month-view {
         abbr {
-            font-size: 15px;
+            font-size: 18px;
         }
     }
 
@@ -35,8 +35,9 @@ const StyledCalendarWrapper = styled.div`
     /* 네비게이션 폰트 설정 */
     .react-calendar__navigation button {
         font-family: Pretendard-ExtraBold;
-        font-size: 20px;
-        color: #0d2259;
+        font-size: 30px;
+        color: #4470f3;
+        border-radius: 10px;
     }
 
     /* 네비게이션 버튼 컬러 */
@@ -47,7 +48,7 @@ const StyledCalendarWrapper = styled.div`
     /* 네비게이션 비활성화 됐을때 스타일 */
     .react-calendar__navigation button:disabled {
         background-color: white;
-        color: #0d2259;
+        color: #4470f3;
     }
 
     /* 년/월 상단 네비게이션 칸 크기 줄이기 */
@@ -55,10 +56,18 @@ const StyledCalendarWrapper = styled.div`
         flex-grow: 0 !important;
     }
 
+    /* 요일 간격 */
+    .react-calendar__month-view__weekdays {
+        padding: 13px 0;
+        border-top: 2px #a4bcfd solid;
+        border-bottom: 2px #eee solid;
+    }
+
     /* 요일 밑줄 제거 */
     .react-calendar__month-view__weekdays abbr {
         font-family: Pretendard-ExtraBold;
-        font-size: 16px;
+        font-size: 20px;
+        color: #0d2259;
         text-decoration: none;
     }
 
@@ -68,24 +77,26 @@ const StyledCalendarWrapper = styled.div`
         background-color: #c9d9fd;
     }
 
-    /* 네비게이션 현재 월 스타일 적용 */
+    /* 네비게이션 현재 월 스타일 적용*/
     .react-calendar__tile--hasActive {
-        background-color: #4470f3;
+        border: 2px #4470f3 solid;
+        background-color: #fff;
+        border-radius: 10px;
         abbr {
-            color: #fff;
-        }
-        &:hover {
-            abbr {
-                color: #000;
-            }
+            color: #4470f3;
         }
     }
 
-    /* 일 날짜 간격 */
-    .react-calendar__tile {
-        font-family: Pretendard-Regular;
-        padding: 5px 0px 17px;
+    /* 일 날짜 스타일 적용 */
+    .react-calendar__month-view__days__day {
+        border-bottom: 2px #eee solid;
+        font-family: Pretendard-SemiBold;
+        padding: 5px 0px 60px;
         position: relative;
+        text-align: left;
+        abbr {
+            padding-left: 5px;
+        }
     }
 
     /* 네비게이션 월 스타일 적용 */
@@ -96,7 +107,7 @@ const StyledCalendarWrapper = styled.div`
         margin-inline-start: 5px !important;
         margin-inline-end: 5px !important;
         margin-block-end: 10px;
-        padding: 15px 6.6667px;
+        padding: 30px 6.6667px;
         font-family: Pretendard-ExtraBold;
         font-size: 14px;
         color: #000;
@@ -110,9 +121,10 @@ const StyledCalendarWrapper = styled.div`
     }
     .react-calendar__tile:enabled:focus,
     .react-calendar__tile--active {
-        background-color: #4470f3;
+        border: 2px #4470f3 solid;
+        background-color: #fff;
         border-radius: 10px;
-        color: #fff;
+        color: #4470f3;
     }
 `;
 
@@ -121,46 +133,39 @@ const StyledCalendar = styled(Calendar)``;
 /* 오늘 버튼 스타일 */
 const StyledTodayBtn = styled.div`
     position: absolute;
-    right: 28px;
-    top: 26px;
+    right: 30px;
+    top: 35px;
     background-color: #c9d9fd;
     color: #000;
-    width: 35px;
+    width: 60px;
     min-width: fit-content;
-    height: 15px;
+    height: 20px;
     text-align: center;
     margin: 0 auto;
     border-radius: 15px;
     font-family: Pretendard-Regular;
-    font-size: 10px;
+    font-size: 15px;
     cursor: pointer;
     &:hover {
         font-family: Pretendard-SemiBold;
     }
 `;
 
-/* 오늘 날짜에 텍스트 삽입 스타일
-const StyledToday = styled.div`
-    font-size: x-small;
-    color: #c9d9fd;
-    font-weight: 600;
+/* 이벤트 출력 칸 */
+const StyledEvent = styled.div`
+    font-family: Pretendard-Regular;
+    font-size: 13px;
+    color: #000;
+    line-height: 20px;
+    border-radius: 10px;
+    width: 100%;
+    height: 20px;
+    padding: 0 5px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-`;
- */
-
-/* 이벤트 날짜에 점 표시 스타일 */
-const StyledDot = styled.div`
-    background-color: red;
-    border-radius: 50%;
-    width: 5px;
-    height: 5px;
-    position: absolute;
-    top: 28px;
-    left: 50%;
-    transform: translateX(-50%);
+    top: ${(props) => props.top}px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 
 const events = [
@@ -195,7 +200,7 @@ export default function SmallCalendar() {
                 formatYear={(locale, date) => moment(date).format('YYYY')}
                 formatMonthYear={(locale, date) => moment(date).format('YYYY. MM')}
                 calendarType="gregory"
-                weekdayFormat="short"
+                locale="en-US"
                 showNeighboringMonth={true}
                 next2Label={null}
                 prev2Label={null}
@@ -205,18 +210,25 @@ export default function SmallCalendar() {
                 onActiveStartDateChange={({ activeStartDate }) => setActiveStartDate(activeStartDate)}
                 // 오늘 날짜에 'Today' 텍스트 삽입하고 출석한 날짜에 점 표시를 위한 설정
                 tileContent={({ date, view }) => {
-                    let html = [];
-                    /*if (
-                        view === 'month' &&
-                        date.getMonth() === today.getMonth() &&
-                        date.getDate() === today.getDate()
-                    ) {
-                        html.push(<StyledToday key={'today'}>Today</StyledToday>);
-                    }*/
-                    if (events.find((event) => event.date === moment(date).format('YYYY-MM-DD'))) {
-                        html.push(<StyledDot key={moment(date).format('YYYY-MM-DD')} />);
+                    const eventsOnDate = events.filter((event) => event.date === moment(date).format('YYYY-MM-DD'));
+                    if (eventsOnDate.length > 0) {
+                        return (
+                            <div>
+                                {eventsOnDate.slice(0, 2).map((event, index) => (
+                                    <StyledEvent
+                                        key={index}
+                                        style={{
+                                            backgroundColor: index === 0 ? '#e9effd' : '#C9D9FD',
+                                            top: index === 0 ? 30 : 55,
+                                        }}
+                                    >
+                                        {event.title}
+                                    </StyledEvent>
+                                ))}
+                            </div>
+                        );
                     }
-                    return <>{html}</>;
+                    return null;
                 }}
             />
             <StyledTodayBtn onClick={handleTodayClick}>Today</StyledTodayBtn>

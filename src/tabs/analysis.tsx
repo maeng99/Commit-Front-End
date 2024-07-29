@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import WeekRange from '../components/weekRange.tsx';
 import '../App.css';
 
 export default function Analysis() {
@@ -9,7 +10,7 @@ export default function Analysis() {
         <div className="background">
             <Nav type="analysis" />
             <div className="main_contents_div">
-                <div style={{ textAlign: 'left', marginBottom: '10px', fontWeight: '600' }}>
+                <div style={{ textAlign: 'left', marginBottom: '10px', fontFamily: 'Pretendard-SemiBold' }}>
                     <span style={{ fontFamily: 'Pretendard-ExtraBold', fontSize: '28px', color: '#0D2259' }}>
                         주간 생활 분석 및 피드백
                     </span>
@@ -24,21 +25,26 @@ export default function Analysis() {
                                 borderRadius: '20px',
                                 marginBottom: '20px',
                                 backgroundColor: '#fff',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
                             }}
-                        ></div>
+                        >
+                            <WeekRange />
+                        </div>
                         <div
                             style={{
                                 width: '100%',
-                                height: '515px',
+                                height: '535px',
                                 backgroundColor: '#fff',
                                 borderRadius: '20px',
                             }}
                         >
                             <div
                                 style={{
-                                    width: '370px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    width: '360px',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -48,8 +54,8 @@ export default function Analysis() {
                             </div>
                             <div
                                 style={{
-                                    width: '370px',
-                                    height: '445px',
+                                    width: '360px',
+                                    height: '465px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -58,11 +64,11 @@ export default function Analysis() {
                         </div>
                     </div>
 
-                    <div style={{ width: '880px', height: '585px', borderRadius: '20px' }}>
+                    <div style={{ width: '840px', height: '585px', borderRadius: '20px' }}>
                         <div
                             style={{
                                 width: '100%',
-                                height: '205px',
+                                height: '215px',
                                 backgroundColor: '#fff',
                                 marginBottom: '20px',
                                 borderRadius: '20px',
@@ -70,9 +76,9 @@ export default function Analysis() {
                         >
                             <div
                                 style={{
-                                    width: '850px',
-                                    fontSize: '18px',
-                                    fontWeight: '600',
+                                    width: '800px',
+                                    fontSize: '20px',
+                                    fontFamily: 'Pretendard-SemiBold',
                                     margin: '0 auto',
                                     padding: '15px 0',
                                     textAlign: 'left',
@@ -82,8 +88,8 @@ export default function Analysis() {
                             </div>
                             <div
                                 style={{
-                                    width: '850px',
-                                    height: '135px',
+                                    width: '800px',
+                                    height: '145px',
                                     margin: '0 auto',
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
@@ -93,17 +99,17 @@ export default function Analysis() {
                         <div
                             style={{
                                 width: '100%',
-                                height: '360px',
+                                height: '370px',
                                 display: 'flex',
                                 justifyContent: 'space-between',
                             }}
                         >
-                            <div style={{ width: '430px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                            <div style={{ width: '410px', backgroundColor: '#fff', borderRadius: '20px' }}>
                                 <div
                                     style={{
-                                        width: '400px',
-                                        fontSize: '18px',
-                                        fontWeight: '600',
+                                        width: '370px',
+                                        fontSize: '20px',
+                                        fontFamily: 'Pretendard-SemiBold',
                                         margin: '0 auto',
                                         padding: '15px 0',
                                         textAlign: 'left',
@@ -113,20 +119,20 @@ export default function Analysis() {
                                 </div>
                                 <div
                                     style={{
-                                        width: '400px',
-                                        height: '290px',
+                                        width: '370px',
+                                        height: '300px',
                                         margin: '0 auto',
                                         backgroundColor: '#eee',
                                         borderRadius: '20px',
                                     }}
                                 ></div>
                             </div>
-                            <div style={{ width: '430px', backgroundColor: '#fff', borderRadius: '20px' }}>
+                            <div style={{ width: '410px', backgroundColor: '#fff', borderRadius: '20px' }}>
                                 <div
                                     style={{
-                                        width: '400px',
-                                        fontSize: '18px',
-                                        fontWeight: '600',
+                                        width: '370px',
+                                        fontSize: '20px',
+                                        fontFamily: 'Pretendard-SemiBold',
                                         margin: '0 auto',
                                         padding: '15px 0',
                                         textAlign: 'left',
@@ -136,8 +142,8 @@ export default function Analysis() {
                                 </div>
                                 <div
                                     style={{
-                                        width: '400px',
-                                        height: '290px',
+                                        width: '370px',
+                                        height: '300px',
                                         margin: '0 auto',
                                         backgroundColor: '#eee',
                                         borderRadius: '20px',
