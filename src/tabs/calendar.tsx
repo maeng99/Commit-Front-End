@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import BigCalendar from '../components/bigCalendar.tsx';
@@ -12,6 +13,7 @@ const events = PlanData();
 export default function Calendar() {
     const today = new Date();
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const [showAddPopup, setShowAddPopup] = useState(false);
 
     const handleDateSelect = (selectedDate: Date) => {
         setSelectedDate(selectedDate); // Update the selected date in the state
@@ -24,6 +26,13 @@ export default function Calendar() {
         const yearMonth = `${year}년 ${month}월`;
         const yearMonthDay: Date = `${year}-${month}-${day}`;
         return { yearMonthDay, yearMonth, day };
+    };
+
+    const handleCancel = () => {
+        if (window.confirm('정말 취소하시겠습니까?')) {
+            window.location = '/calendar';
+            setShowAddPopup(false);
+        }
     };
 
     return (
@@ -90,6 +99,9 @@ export default function Calendar() {
                                             width: '30px',
                                             cursor: 'pointer',
                                         }}
+                                        onClick={() => {
+                                            setShowAddPopup(true);
+                                        }}
                                     />
                                 </div>
                             </div>
@@ -102,6 +114,79 @@ export default function Calendar() {
                                     backgroundColor: '#C9D9FD',
                                 }}
                             />
+                            {showAddPopup ? (
+                                <div
+                                    style={{
+                                        width: '320px',
+                                        height: '220px',
+                                        backgroundColor: '#eee',
+                                        position: 'absolute',
+                                        top: '133px',
+                                        borderBottomRightRadius: '20px',
+                                        borderBottomLeftRadius: '20px',
+                                        boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            width: '280px',
+                                            height: '35px',
+                                            margin: '12px auto',
+                                            backgroundColor: '#fff',
+                                            borderRadius: '10px',
+                                        }}
+                                    ></div>
+                                    <div
+                                        style={{
+                                            width: '280px',
+                                            height: '70px',
+                                            margin: '12px auto',
+                                            backgroundColor: '#fff',
+                                            borderRadius: '10px',
+                                        }}
+                                    ></div>
+                                    <div
+                                        style={{
+                                            width: '280px',
+                                            height: '35px',
+                                            margin: '12px auto',
+                                            backgroundColor: '#fff',
+                                            borderRadius: '10px',
+                                        }}
+                                    ></div>
+                                    <div
+                                        style={{
+                                            width: '280px',
+                                            margin: '0 auto',
+                                            display: 'flex',
+                                            justifyContent: 'right',
+                                        }}
+                                    >
+                                        <span>
+                                            <Button
+                                                type="secondary"
+                                                size="small"
+                                                title="취소"
+                                                onClick={() => {
+                                                    handleCancel();
+                                                }}
+                                            />
+                                        </span>
+                                        <span style={{ marginLeft: '10px' }}>
+                                            <Button
+                                                type="primary"
+                                                size="small"
+                                                title="추가"
+                                                onClick={() => {
+                                                    window.location = '/calendar';
+                                                }}
+                                            />
+                                        </span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <></>
+                            )}
                             <div style={{ width: '320px', height: '490px', overflow: 'auto' }}>
                                 {/*일정이 없을 때*/}
                                 {!selectedDate
