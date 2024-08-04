@@ -149,6 +149,7 @@ const StyledTodayBtn = styled.div`
     font-size: 15px;
     cursor: pointer;
     &:hover {
+        opacity: 0.8;
         font-family: Pretendard-SemiBold;
     }
 `;
@@ -160,7 +161,7 @@ const StyledEvent = styled.div`
     color: #000;
     line-height: 20px;
     border-radius: 10px;
-    width: 115.5px;
+    width: ${115.5}px;
     height: 20px;
     padding: 0 5px;
     position: absolute;

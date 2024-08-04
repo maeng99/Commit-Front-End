@@ -7,7 +7,7 @@ import '../App.css';
 export default function FeedbackPopup({ onClose }) {
     return (
         <div className="popup-background">
-            <div style={{ width: '100%', paddingLeft: '170px', paddingRight: '60px' }}>
+            <div style={{ width: '100%', marginLeft: '170px', marginRight: '60px' }}>
                 <div className="popup-content">
                     <button className="close-button" onClick={onClose}>
                         &times;
@@ -43,6 +43,7 @@ export default function FeedbackPopup({ onClose }) {
                                 height: '465px',
                                 backgroundColor: '#E9EFFD',
                                 borderRadius: '20px',
+                                border: '1px #ddd solid',
                             }}
                         >
                             <div
@@ -56,6 +57,7 @@ export default function FeedbackPopup({ onClose }) {
                             </div>
                             <div
                                 style={{
+                                    position: 'relative',
                                     width: '100%',
                                     height: '465px',
                                     backgroundColor: '#fff',
@@ -84,7 +86,7 @@ export default function FeedbackPopup({ onClose }) {
                                         margin: '0 auto',
                                     }}
                                 >
-                                    <TimeTableDiv />
+                                    <TimeTableDiv type="before" />
                                 </div>
                             </div>
                         </div>
@@ -106,6 +108,7 @@ export default function FeedbackPopup({ onClose }) {
                                     backgroundColor: '#eee',
                                     borderRadius: '20px',
                                     zIndex: '2',
+                                    border: '1px #ddd solid',
                                 }}
                             >
                                 <div
@@ -133,11 +136,38 @@ export default function FeedbackPopup({ onClose }) {
                                             width: '310px',
                                             height: '430px',
                                             margin: '0 auto',
-                                            backgroundColor: '#eee',
-                                            borderRadius: '20px',
+                                            textAlign: 'left',
+                                            fontFamily: 'Pretendard-Regular',
+                                            fontSize: '14px',
                                             overflow: 'auto',
                                         }}
-                                    ></div>
+                                    >
+                                        <div style={{ padding: '10px 10px 5px' }}>
+                                            <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 워라밸</span>
+                                            <br />: 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸
+                                            비율이 5.7 : 4.3으로 매우 안정적입니다.
+                                        </div>
+                                        <div style={{ padding: '10px 10px 5px' }}>
+                                            <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 수면</span>
+                                            <br />: 수면 시간은 7시간으로 적절합니다. 더 나은 건강을 위해 8시간으로
+                                            늘리는 것을 고려해보세요.
+                                        </div>
+                                        <div style={{ padding: '10px 10px 5px' }}>
+                                            <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 운동</span>
+                                            <br />: 아침에 40분 동안 조깅을 하고 있습니다. 꾸준한 운동 습관을 유지하되,
+                                            주 1회 휴식을 추천합니다.
+                                        </div>
+                                        <div style={{ padding: '10px 10px 5px' }}>
+                                            <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 식사</span>
+                                            <br />: 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸
+                                            비율이 5.7 : 4.3으로 매우 안정적입니다.
+                                        </div>
+                                        <div style={{ padding: '10px 10px 5px' }}>
+                                            <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 여가생활</span>
+                                            <br />: 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸
+                                            비율이 5.7 : 4.3으로 매우 안정적입니다.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <img
@@ -156,6 +186,7 @@ export default function FeedbackPopup({ onClose }) {
                                         height: '410px',
                                         backgroundColor: '#4470F3',
                                         borderRadius: '20px',
+                                        border: '1px #ddd solid',
                                     }}
                                 >
                                     <div
@@ -171,6 +202,7 @@ export default function FeedbackPopup({ onClose }) {
                                     </div>
                                     <div
                                         style={{
+                                            position: 'relative',
                                             width: '100%',
                                             height: '410px',
                                             backgroundColor: '#fff',
@@ -182,14 +214,14 @@ export default function FeedbackPopup({ onClose }) {
                                     >
                                         <div
                                             style={{
-                                                width: '310px',
+                                                width: '350px',
                                                 height: '370px',
-                                                margin: '0 auto',
-                                                backgroundColor: '#eee',
-                                                borderRadius: '20px',
                                                 overflow: 'auto',
+                                                margin: '0 auto',
                                             }}
-                                        ></div>
+                                        >
+                                            <TimeTableDiv type="before" />
+                                        </div>
                                     </div>
                                 </div>
                                 <div style={{ marginTop: '60px', display: 'flex', justifyContent: 'space-between' }}>
