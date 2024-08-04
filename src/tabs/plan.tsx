@@ -1,100 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
 import TimeTableDiv from '../components/timeTableDiv.tsx';
+import TodayPlanDiv from '../components/todayPlanDiv.tsx';
 import FeedbackPopup from '../tabs/feedbackPopup.tsx';
 import '../App.css';
 
 export default function Plan() {
-    // 색상 매핑 객체
-    const colors = {
-        A: { box: '#1F48BB', text: '#1F48BB' },
-        B: { box: '#4470F3', text: '#4470F3' },
-        C: { box: '#A4BCFD', text: '#A4BCFD' },
-        D: { box: '#B0B0B0', text: '#B0B0B0' },
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+    const handleDateSelect = (selectedDate: Date) => {
+        setSelectedDate(selectedDate); // Update the selected date in the state
     };
 
-    // 스케줄 아이템을 렌더링하는 함수
-    const renderScheduleItem = (text, letter) => (
-        <div
-            key={letter} // key 속성을 추가
-            style={{
-                display: 'flex',
-                width: '320px',
-                height: '60px',
-                alignItems: 'center',
-                gap: '30px',
-                borderRadius: '0px 20px 20px 0px',
-                backgroundColor: 'var(--blue5, #E9EFFD)',
-                position: 'relative',
-                paddingLeft: '20px',
-                marginBottom: '10px', // Add margin-bottom to create space between items
-            }}
-        >
-            <div
-                style={{
-                    width: '10px',
-                    height: '60px',
-                    flexShrink: 0,
-                    borderRadius: '0px 3px 3px 0px',
-                    backgroundColor: colors[letter].box,
-                    position: 'absolute',
-                    left: '0px',
-                }}
-            />
-            <div
-                style={{
-                    width: '236px',
-                    flexShrink: 0,
-                    color: 'var(--blue70, #0D2259)',
-                    fontFamily: 'Pretendard',
-                    fontSize: '20px',
-                    fontStyle: 'normal',
-                    fontWeight: '400',
-                    lineHeight: 'normal',
-                    textAlign: 'left',
-                    paddingLeft: '13px',
-                }}
-            >
-                {text}
-            </div>
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '41px',
-                    height: '41px',
-                    flexShrink: 0,
-                    borderRadius: '20px',
-                    backgroundColor: 'var(--blue10, #C9D9FD)',
-                    color: colors[letter].text,
-                    textAlign: 'center',
-                    fontFamily: 'Pretendard',
-                    fontSize: '24px',
-                    fontStyle: 'normal',
-                    fontWeight: '700',
-                    lineHeight: 'normal',
-                    marginLeft: '-10px',
-                }}
-            >
-                {letter}
-            </div>
-        </div>
-    );
-
-    const [isPopupVisible, setPopupVisible] = useState(true);
+    const [isPopupVisible, setPopupVisible] = useState(false);
 
     const closePopup = () => {
         setPopupVisible(false);
+        localStorage.setItem('lastPopupDate', moment().format('YYYY-MM-DD'));
     };
 
     useEffect(() => {
-        // 컴포넌트가 로드될 때 팝업을 표시
-        setPopupVisible(true);
+        // localStorage.clear();
+        // Get the last date the popup was shown
+        const lastPopupDate = localStorage.getItem('lastPopupDate');
+        const todayDate = moment().format('YYYY-MM-DD');
+
+        // Check if the popup has already been shown today
+        if (lastPopupDate !== todayDate) {
+            setPopupVisible(true);
+        }
     }, []);
 
     return (
@@ -110,21 +49,21 @@ export default function Plan() {
                                     width: '100%',
                                     height: '320px',
                                     backgroundColor: '#fff',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                     borderRadius: '20px',
                                     marginBottom: '20px',
                                     overflow: 'auto',
+                                    border: '1px #ddd solid',
                                 }}
                             >
-                                <SmallCalendar />
+                                <SmallCalendar onDateSelect={handleDateSelect} />
                             </div>
                             <div
                                 style={{
                                     width: '100%',
                                     height: '265px',
                                     backgroundColor: '#fff',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                     borderRadius: '20px',
+                                    border: '1px #ddd solid',
                                 }}
                             >
                                 <div
@@ -162,8 +101,8 @@ export default function Plan() {
                                     marginBottom: '20px',
                                     padding: '5px 5px',
                                     backgroundColor: '#fff',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                     borderRadius: '20px',
+                                    border: '1px #ddd solid',
                                 }}
                             >
                                 <div
@@ -194,8 +133,8 @@ export default function Plan() {
                                     width: '100%',
                                     height: '550px',
                                     backgroundColor: '#fff',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                     borderRadius: '20px',
+                                    border: '1px #ddd solid',
                                 }}
                             >
                                 <div
@@ -213,18 +152,14 @@ export default function Plan() {
                                 </div>
                                 <div
                                     style={{
-                                        width: '470px',
+                                        width: '510px',
                                         height: '470px',
                                         margin: '0 auto',
                                         backgroundColor: '#eee',
                                         borderRadius: '20px',
                                     }}
                                 >
-                                    {/* 이런 식으로 요소 추가하면 됨, 내용이랑 중요도 */}
-                                    {renderScheduleItem('은행 업무 보기', 'A')}
-                                    {renderScheduleItem('미팅', 'B')}
-                                    {renderScheduleItem('점심 약속', 'C')}
-                                    {renderScheduleItem('운동', 'D')}
+                                    <TodayPlanDiv />
                                 </div>
                             </div>
                         </div>
@@ -232,11 +167,12 @@ export default function Plan() {
                         <div style={{ width: '350px' }}>
                             <div
                                 style={{
+                                    position: 'relative',
                                     width: '100%',
                                     height: '545px',
                                     backgroundColor: '#fff',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                     borderRadius: '20px',
+                                    border: '1px #ddd solid',
                                 }}
                             >
                                 <div
@@ -260,7 +196,7 @@ export default function Plan() {
                                         margin: '0 auto',
                                     }}
                                 >
-                                    <TimeTableDiv />
+                                    <TimeTableDiv type="after" />
                                 </div>
                             </div>
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>

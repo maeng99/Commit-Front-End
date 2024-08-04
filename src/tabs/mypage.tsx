@@ -37,10 +37,10 @@ export default function Mypage() {
                         <div
                             style={{
                                 width: '470px',
-                                height: '605px',
+                                height: '606px',
                                 backgroundColor: '#fff',
-                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                 borderRadius: '20px',
+                                border: '1px #ddd solid',
                             }}
                         >
                             <div
@@ -50,7 +50,7 @@ export default function Mypage() {
                                     fontSize: '22px',
                                     color: '#4470F3',
                                     margin: '0 auto',
-                                    padding: '20px 0',
+                                    padding: '20px 0 40px',
                                     textAlign: 'left',
                                 }}
                             >
@@ -85,7 +85,7 @@ export default function Mypage() {
                                 </div>
                                 {isFormVisible ? (
                                     <form
-                                        style={{ width: '420px', height: '400px', margin: '0 auto', textAlign: 'left' }}
+                                        style={{ width: '420px', height: '360px', margin: '0 auto', textAlign: 'left' }}
                                     >
                                         <div>
                                             <input
@@ -94,7 +94,7 @@ export default function Mypage() {
                                                     required: '현재 비밀번호를 입력해주세요.',
                                                 })}
                                                 placeholder="현재 비밀번호"
-                                                style={{ width: '340px', height: '20px' }}
+                                                style={{ width: '330px', height: '20px' }}
                                             />
                                             {errors.ID && (
                                                 <span
@@ -116,7 +116,7 @@ export default function Mypage() {
                                                     required: '새 비밀번호를 입력해주세요.',
                                                 })}
                                                 placeholder="새 비밀번호"
-                                                style={{ width: '340px', height: '20px', marginTop: '10px' }}
+                                                style={{ width: '330px', height: '20px', marginTop: '10px' }}
                                             />
                                             {errors.Password && (
                                                 <span
@@ -138,7 +138,7 @@ export default function Mypage() {
                                                     required: '새 비밀번호를 확인해주세요.',
                                                 })}
                                                 placeholder="새 비밀번호 확인"
-                                                style={{ width: '340px', height: '20px', marginTop: '10px' }}
+                                                style={{ width: '330px', height: '20px', marginTop: '10px' }}
                                             />
                                             {errors.RePassword && (
                                                 <span
@@ -165,7 +165,7 @@ export default function Mypage() {
                                         >
                                             <Button
                                                 type="secondary"
-                                                size="medium"
+                                                size="sub"
                                                 title="취소"
                                                 onClick={() => setIsFormVisible(false)}
                                             />
@@ -191,10 +191,10 @@ export default function Mypage() {
                         <div
                             style={{
                                 width: '750px',
-                                height: '605px',
+                                height: '606px',
                                 backgroundColor: '#fff',
-                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                 borderRadius: '20px',
+                                border: '1px #ddd solid',
                             }}
                         >
                             <div
@@ -208,7 +208,7 @@ export default function Mypage() {
                                     textAlign: 'left',
                                 }}
                             >
-                                나만의 일정표 커스텀 규칙
+                                나만의 플래너 작성 규칙
                                 <img
                                     src="../img/btn/edit_disabled.png"
                                     style={{

@@ -17,7 +17,7 @@ const ButtonContainer = styled.div<{
     type: 'primary' | 'secondary' | 'destructive' | 'logout';
     size: 'small' | 'medium' | 'large';
 }>`
-    border: ${(props) => (props.type === 'logout' ? '1px #000 solid' : 'none')};
+    border: ${(props) => (props.type === 'logout' ? '1px #000 solid' : '1px #ddd solid')};
     border-radius: 20px;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,7 @@ const ButtonContainer = styled.div<{
         css`
             height: 40px;
             font-size: 18px;
-            width: 190px;
+            width: 200px;
             text-align: center;
         `}
     ${(props) =>
@@ -76,13 +76,13 @@ const ButtonContainer = styled.div<{
     &:hover {
         opacity: 0.8;
         & p {
-            font-family: Pretendard-SemiBold;
+            font-family: Pretendard-ExtraBold;
         }
     }
 `;
 
 const ButtonTitle = styled.p`
-    font-family: Pretendard-Regular;
+    font-family: Pretendard-SemiBold;
 `;
 
 export default function Button(props: ButtonProps) {

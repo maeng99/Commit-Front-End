@@ -36,11 +36,11 @@ export default function Calendar() {
                         <div
                             style={{
                                 width: '900px',
-                                height: '605px',
+                                height: '606px',
                                 backgroundColor: '#fff',
-                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                 borderRadius: '20px',
                                 overflow: 'auto',
+                                border: '1px #ddd solid',
                             }}
                         >
                             <BigCalendar onDateSelect={handleDateSelect} />
@@ -49,10 +49,10 @@ export default function Calendar() {
                         <div
                             style={{
                                 width: '320px',
-                                height: '605px',
+                                height: '606px',
                                 backgroundColor: '#fff',
-                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                 borderRadius: '20px',
+                                border: '1px #ddd solid',
                             }}
                         >
                             <div

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
@@ -136,6 +136,7 @@ const StyledTodayBtn = styled.div`
     font-size: 10px;
     cursor: pointer;
     &:hover {
+        opacity: 0.8;
         font-family: Pretendard-SemiBold;
     }
 `;
@@ -166,7 +167,12 @@ const StyledDot = styled.div`
 
 const events = PlanData();
 
-export default function SmallCalendar() {
+type DateSelectionHandler = (selectedDate: Date) => void;
+interface SmallCalendarProps {
+    onDateSelect: DateSelectionHandler;
+}
+
+const SmallCalendar: React.FC<WeekRangeProps> = ({ onDateSelect }) => {
     const today = new Date();
     const [date, setDate] = useState<Value>(today);
     const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
@@ -180,6 +186,10 @@ export default function SmallCalendar() {
         setActiveStartDate(today);
         setDate(today);
     };
+
+    useEffect(() => {
+        onDateSelect(date);
+    }, [date]);
 
     return (
         <StyledCalendarWrapper>
@@ -217,4 +227,5 @@ export default function SmallCalendar() {
             <StyledTodayBtn onClick={handleTodayClick}>Today</StyledTodayBtn>
         </StyledCalendarWrapper>
     );
-}
+};
+export default SmallCalendar;

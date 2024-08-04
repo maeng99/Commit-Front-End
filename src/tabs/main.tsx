@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,7 @@ import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
 import TimeTableDiv from '../components/timeTableDiv.tsx';
+import TodayPlanDiv from '../components/todayPlanDiv.tsx';
 import PlanData from '../database/planData.tsx';
 import '../App.css';
 
@@ -23,7 +24,20 @@ function getClosestEvents(events) {
 }
 
 export default function Main() {
+    const today = new Date();
     const closestEvents = getClosestEvents(events);
+    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+    const handleDateSelect = (selectedDate: Date) => {
+        setSelectedDate(selectedDate);
+    };
+
+    useEffect(() => {
+        if (selectedDate !== null && moment(selectedDate).format('YYYY-MM-DD') !== moment(today).format('YYYY-MM-DD')) {
+            console.log(selectedDate);
+            window.location = '/plan';
+        }
+    }, [selectedDate]);
 
     return (
         <div>
@@ -40,9 +54,9 @@ export default function Main() {
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
                                     marginBottom: '20px',
-                                    padding: '5px 5px',
+                                    padding: '5px',
                                     backgroundColor: '#fff',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                                    border: '1px #ddd solid',
                                     borderRadius: '20px',
                                 }}
                             >
@@ -82,7 +96,7 @@ export default function Main() {
                                     height: '550px',
                                     backgroundColor: '#fff',
                                     borderRadius: '20px',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                                    border: '1px #ddd solid',
                                 }}
                             >
                                 <div
@@ -100,25 +114,28 @@ export default function Main() {
                                 </div>
                                 <div
                                     style={{
-                                        width: '470px',
+                                        width: '510px',
                                         height: '470px',
                                         margin: '0 auto',
                                         backgroundColor: '#eee',
                                         borderRadius: '20px',
                                         overflow: 'auto',
                                     }}
-                                ></div>
+                                >
+                                    <TodayPlanDiv />
+                                </div>
                             </div>
                         </div>
 
                         <div style={{ width: '350px' }}>
                             <div
                                 style={{
+                                    position: 'relative',
                                     width: '100%',
                                     height: '540px',
                                     backgroundColor: '#fff',
                                     borderRadius: '20px',
-                                    boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                                    border: '1px #ddd solid',
                                 }}
                             >
                                 <div
@@ -142,7 +159,7 @@ export default function Main() {
                                         margin: '0 auto',
                                     }}
                                 >
-                                    <TimeTableDiv />
+                                    <TimeTableDiv type="after" />
                                 </div>
                             </div>
                             <div style={{ marginTop: '20px' }}>
@@ -170,7 +187,7 @@ export default function Main() {
                                 width: '320px',
                                 background: '#fff',
                                 borderRadius: '20px',
-                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                                border: '1px #ddd solid',
                             }}
                         >
                             <div
@@ -182,7 +199,7 @@ export default function Main() {
                                     overflow: 'auto',
                                 }}
                             >
-                                <SmallCalendar />
+                                <SmallCalendar onDateSelect={handleDateSelect} />
                             </div>
                             <hr
                                 style={{
@@ -203,9 +220,22 @@ export default function Main() {
                                         margin: '0 auto',
                                         padding: '15px 0',
                                         textAlign: 'left',
+                                        display: 'flex',
                                     }}
                                 >
                                     앞으로의 주요 일정
+                                    <img
+                                        src="../img/btn/next.png"
+                                        style={{
+                                            width: '24px',
+                                            marginLeft: '108px',
+                                            verticalAlign: 'middle',
+                                            cursor: 'pointer',
+                                        }}
+                                        onClick={() => {
+                                            window.location = '/calendar';
+                                        }}
+                                    />
                                 </div>
                                 <div
                                     style={{

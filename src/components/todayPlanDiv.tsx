@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 
@@ -9,6 +9,52 @@ export default function TimeTableDiv() {
         B: { box: '#4470F3', text: '#4470F3' },
         C: { box: '#A4BCFD', text: '#A4BCFD' },
         D: { box: '#B0B0B0', text: '#B0B0B0' },
+    };
+
+    // 클릭된 버튼을 관리하는 상태 변수
+    const [clickedButton, setClickedButton] = useState(null);
+
+    const [images, setImages] = useState({
+        check: '../img/btn/check_disabled.png',
+        putoff: '../img/btn/putoff_disabled.png',
+        delete: '../img/btn/delete_disabled.png',
+    });
+
+    // 이미지 경로 결정 함수
+    const getImageSrc = (btn) => {
+        return clickedButton === btn ? `../img/btn/${btn}_enabled.png` : `../img/btn/${btn}_disabled.png`;
+    };
+
+    // 버튼 마우스 오버 핸들러
+    const handleMouseOver = (btn) => {
+        if (clickedButton !== btn) {
+            setImages((prevImages) => ({
+                ...prevImages,
+                [btn]: `../img/btn/${btn}_enabled.png`,
+            }));
+        }
+    };
+
+    // 버튼 마우스 아웃 핸들러
+    const handleMouseOut = (btn) => {
+        if (clickedButton !== btn) {
+            setImages((prevImages) => ({
+                ...prevImages,
+                [btn]: `../img/btn/${btn}_disabled.png`,
+            }));
+        }
+    };
+
+    // 버튼 클릭 핸들러
+    const handleClick = (btn) => {
+        setClickedButton((prevButton) => {
+            const newButton = prevButton === btn ? null : btn;
+            setImages((prevImages) => ({
+                ...prevImages,
+                [btn]: `../img/btn/${btn}_${newButton === btn ? 'enabled' : 'disabled'}.png`,
+            }));
+            return newButton;
+        });
     };
 
     // 스케줄 아이템을 렌더링하는 함수
@@ -76,6 +122,52 @@ export default function TimeTableDiv() {
                 }}
             >
                 {letter}
+            </div>
+
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '14px',
+                    marginLeft: '-7px',
+                }}
+            >
+                <img
+                    src={images.check}
+                    alt="Button 1"
+                    style={{
+                        width: '24px',
+                        height: '24px',
+                        flexShrink: 0,
+                    }}
+                    onMouseOver={() => handleMouseOver('check')}
+                    onMouseOut={() => handleMouseOut('check')}
+                    onClick={() => handleClick('check')}
+                />
+                <img
+                    src={images.putoff}
+                    alt="Button 2"
+                    style={{
+                        width: '24px',
+                        height: '24px',
+                        flexShrink: 0,
+                    }}
+                    onMouseOver={() => handleMouseOver('putoff')}
+                    onMouseOut={() => handleMouseOut('putoff')}
+                    onClick={() => handleClick('putoff')}
+                />
+                <img
+                    src={images.delete}
+                    alt="Button 3"
+                    style={{
+                        width: '24px',
+                        height: '24px',
+                        flexShrink: 0,
+                    }}
+                    onMouseOver={() => handleMouseOver('delete')}
+                    onMouseOut={() => handleMouseOut('delete')}
+                    onClick={() => handleClick('delete')}
+                />
             </div>
         </div>
     );
