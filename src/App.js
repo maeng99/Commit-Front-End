@@ -9,6 +9,7 @@ import Analysis from './tabs/analysis.tsx';
 import Calendar from './tabs/calendar.tsx';
 import Mypage from './tabs/mypage.tsx';
 import './App.css';
+import Auth from './tabs/auth.tsx';
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/addplan" element={<Addplan />} />
                     <Route path="/analysis" element={<Analysis />} />
                     <Route path="/calendar" element={<Calendar />} />
+                    <Route path="/auth" element={<Auth/>}/>
                     <Route path="/mypage" element={<Mypage />} />
                 </Routes>
             </div>
