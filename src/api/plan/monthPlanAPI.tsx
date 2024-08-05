@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
-export default function UserAPI() {
-    const [userData, setUserData] = useState(null);
+export default function MonthPlanAPI({ yearMonth }) {
+    const [monthPlanData, setMonthPlanData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -13,15 +13,15 @@ export default function UserAPI() {
 
             if (accessToken) {
                 try {
-                    const data = await getUserInfo(accessToken);
-                    setUserData(data.result);
+                    const data = await getMonthPlanInfo(accessToken, yearMonth);
+                    setMonthPlanData(data.result);
                 } catch (error) {
                     console.error('Failed to fetch timetable:', error);
                     if (refreshToken) {
                         try {
                             const newAccessToken = await getAccessTokenWithRefreshToken(refreshToken);
-                            const data = await getUserInfo(newAccessToken);
-                            setUserData(data.result);
+                            const data = await getMonthPlanInfo(accessToken, yearMonth);
+                            setMonthPlanData(data.result);
                         } catch (error) {
                             console.error('Failed to refresh access token:', error);
                             window.location = '/'; // 로그인 페이지로 리디렉션
@@ -37,9 +37,9 @@ export default function UserAPI() {
         };
 
         fetchData();
-    }, []);
+    }, [yearMonth]);
 
-    return { userData, loading };
+    return { monthPlanData, loading };
 }
 
 function getCookie(name) {
@@ -78,8 +78,8 @@ function getAccessTokenWithRefreshToken(refreshToken) {
         });
 }
 
-function getUserInfo(accessToken) {
-    return fetch(API_SERVER_DOMAIN + `/api/user`, {
+function getMonthPlanInfo(accessToken, selectedMonth) {
+    return fetch(API_SERVER_DOMAIN + `/api/plan/month?yearMonth=${selectedMonth}`, {
         method: 'GET',
         headers: {
             Authorization: 'Bearer ' + accessToken,

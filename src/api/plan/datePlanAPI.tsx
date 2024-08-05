@@ -1,44 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
-// timeTable.tsx
-export default function DatePlanAPI(date) {
-    var accessToken = getCookie('accessToken');
-    var refreshToken = getCookie('refreshToken');
+export default function DatePlanAPI({ date }) {
+    const [datePlanData, setDatePlanData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    if (accessToken) {
-        getDatePlanInfo(accessToken, date)
-            .then((data) => {
-                const datePlanData = data.result;
-            })
-            .catch((error) => {
-                console.error('Failed to fetch timetable:', error);
-                if (refreshToken) {
-                    getAccessTokenWithRefreshToken(refreshToken)
-                        .then((newAccessToken) => {
-                            getDatePlanInfo(accessToken, date)
-                                .then((data) => {
-                                    const datePlanData = data.result;
-                                })
-                                .catch((error) => {
-                                    console.error('Failed to fetch timetable:', error);
-                                    window.location = '/';
-                                });
-                        })
-                        .catch((error) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            var accessToken = getCookie('accessToken');
+            var refreshToken = getCookie('refreshToken');
+
+            if (accessToken) {
+                try {
+                    const data = await getDatePlanInfo(accessToken, date);
+                    setDatePlanData(data.result);
+                } catch (error) {
+                    console.error('Failed to fetch timetable:', error);
+                    if (refreshToken) {
+                        try {
+                            const newAccessToken = await getAccessTokenWithRefreshToken(refreshToken);
+                            const data = await getDatePlanInfo(newAccessToken, date);
+                            setTimeTableData(data.result);
+                        } catch (error) {
                             console.error('Failed to refresh access token:', error);
-                            window.location = '/'; // Redirect to login page
-                        });
-                } else {
-                    window.location = '/'; // Redirect to login page
+                            window.location = '/'; // 로그인 페이지로 리디렉션
+                        }
+                    } else {
+                        window.location = '/'; // 로그인 페이지로 리디렉션
+                    }
                 }
-            });
-    } else {
-        window.location = '/'; // Redirect to login page
-    }
+            } else {
+                window.location = '/'; // 로그인 페이지로 리디렉션
+            }
+            setLoading(false);
+        };
 
-    return datePlanData;
+        fetchData();
+    }, [date]);
+
+    return { datePlanData, loading };
 }
 
 function getCookie(name) {
@@ -56,14 +57,13 @@ function getCookie(name) {
     return null;
 }
 
-function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
+function getAccessTokenWithRefreshToken(refreshToken) {
     return fetch(API_SERVER_DOMAIN + 'auth/reissue', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            accessToken: accessToken,
             refreshToken: refreshToken,
         }),
     })
@@ -78,19 +78,16 @@ function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
         });
 }
 
-function getDatePlanInfo(accessToken, date) {
-    return fetch(API_SERVER_DOMAIN + '/api/plan/date', {
+function getDatePlanInfo(accessToken, selectedDate) {
+    return fetch(API_SERVER_DOMAIN + `/api/plan/date?date=${selectedDate}`, {
         method: 'GET',
-        header: {
+        headers: {
             Authorization: 'Bearer ' + accessToken,
         },
-        body: JSON.stringify({
-            date: date,
-        }),
-    }).then((response) => {
-        if (!response.ok) {
+    }).then((res) => {
+        if (!res.ok) {
             throw new Error('Failed to fetch timetable');
         }
-        return response.json();
+        return res.json();
     });
 }

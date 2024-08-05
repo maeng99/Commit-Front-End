@@ -58,7 +58,8 @@ export default async function SignupAPI(email, password, name) {
         setCookie('refreshToken', refreshToken, 1);
 
         // 회원가입이 성공하면 다음 동작을 수행합니다.
-        window.location = '/';
+        alert('회원가입에 성공하였습니다.');
+        window.location = '/setrule';
     } catch (error) {
         alert('회원가입 중 오류가 발생했습니다.', error);
     }

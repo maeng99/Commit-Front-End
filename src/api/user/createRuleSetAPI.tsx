@@ -71,7 +71,7 @@ function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
 }
 
 function setRuleSetInfo(accessToken, WLBalance, sleepTime, exerciseTime, detail) {
-    return fetch(API_SERVER_DOMAIN + '/api/user/releSet/create', {
+    return fetch(API_SERVER_DOMAIN + '/api/user/ruleSet/create', {
         method: 'POST',
         header: {
             Authorization: 'Bearer ' + accessToken,

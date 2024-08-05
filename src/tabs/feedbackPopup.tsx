@@ -3,9 +3,18 @@ import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Button from '../components/button.tsx';
 import TimeTableDiv from '../components/timeTableDiv.tsx';
+import UserAPI from '../api/user/userAPI.tsx';
 import '../App.css';
 
 export default function FeedbackPopup({ onClose }) {
+    const { userData, loading } = UserAPI();
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!userData) {
+        return <div>No data available</div>;
+    }
+
     return (
         <div className="popup-background">
             <div style={{ width: '100%', marginLeft: '170px', marginRight: '60px' }}>
@@ -26,7 +35,7 @@ export default function FeedbackPopup({ onClose }) {
                                 color: '#0D2259',
                             }}
                         >
-                            OOO님 <span style={{ color: '#4470F3' }}>맞춤 AI 피드백</span>
+                            {userData.name}님 <span style={{ color: '#4470F3' }}>맞춤 AI 피드백</span>
                         </div>
                     </div>
 
@@ -221,7 +230,7 @@ export default function FeedbackPopup({ onClose }) {
                                                 margin: '0 auto',
                                             }}
                                         >
-                                            <TimeTableDiv type="before" />
+                                            <TimeTableDiv type="before" date={moment().format('YYYY-MM-DD')} />
                                         </div>
                                     </div>
                                 </div>

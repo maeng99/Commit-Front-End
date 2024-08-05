@@ -38,6 +38,63 @@ export default function Main() {
         }
     }, [selectedDate]);
 
+    const todayPlanList = [
+        {
+            planId: 1,
+            content: '학교가기',
+            priority: 'A',
+            type: 'WORK',
+            date: '2024-08-04',
+            startTime: {
+                hour: 8,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            endTime: {
+                hour: 13,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            createdAt: '2024-08-04T19:23:33.296Z',
+            updatedAt: '2024-08-04T19:23:33.296Z',
+            status: null,
+            childPlan: 0,
+            userId: 0,
+            complete: true,
+            delayed: true,
+        },
+        {
+            planId: 2,
+            content: 'PC방',
+            priority: 'C',
+            type: 'LIFE',
+            date: '2024-08-04',
+            startTime: {
+                hour: 17,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            endTime: {
+                hour: 19,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            createdAt: '2024-08-04T19:23:33.296Z',
+            updatedAt: '2024-08-04T19:23:33.296Z',
+            status: 'COMPLETE',
+            childPlan: 0,
+            userId: 0,
+            complete: true,
+            delayed: true,
+        },
+    ];
+
+    const calAchiev = (todayPlanList.filter((plan) => plan.status === 'COMPLETE').length / todayPlanList.length) * 100;
+
     return (
         <div>
             <Nav type="main" />
@@ -69,7 +126,7 @@ export default function Main() {
                                 >
                                     <div
                                         style={{
-                                            width: '40%',
+                                            width: `${calAchiev}%`,
                                             height: '25px',
                                             background: 'linear-gradient(90deg, #4470F3 0%, #02A9A1 100%)',
                                             borderRadius: 100,
@@ -86,11 +143,12 @@ export default function Main() {
                                         width: '10%',
                                     }}
                                 >
-                                    <span>40</span>%
+                                    {calAchiev}%
                                 </div>
                             </div>
                             <div
                                 style={{
+                                    position: 'relative',
                                     width: '100%',
                                     height: '550px',
                                     backgroundColor: '#fff',

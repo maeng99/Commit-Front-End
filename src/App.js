@@ -8,8 +8,9 @@ import Addplan from './tabs/addplan.tsx';
 import Analysis from './tabs/analysis.tsx';
 import Calendar from './tabs/calendar.tsx';
 import Mypage from './tabs/mypage.tsx';
-import './App.css';
 import Auth from './tabs/auth.tsx';
+import SetRule from './tabs/setRule.tsx';
+import './App.css';
 
 function App() {
     return (
@@ -23,8 +24,9 @@ function App() {
                     <Route path="/addplan" element={<Addplan />} />
                     <Route path="/analysis" element={<Analysis />} />
                     <Route path="/calendar" element={<Calendar />} />
-                    <Route path="/auth" element={<Auth/>}/>
+                    <Route path="/auth" element={<Auth />} />
                     <Route path="/mypage" element={<Mypage />} />
+                    <Route path="/setrule" element={<SetRule />} />
                 </Routes>
             </div>
         </BrowserRouter>

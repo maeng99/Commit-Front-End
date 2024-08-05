@@ -31,14 +31,13 @@ export default function Mypage() {
         alert('입력한 정보를 다시 확인해주세요.');
     };
 
-    /*
-    const userData = UserAPI();
-    */
-    const userData = {
-        userId: 1,
-        name: 'Maeng',
-        email: 'moh45@naver.com',
-    };
+    const { userData, loading } = UserAPI();
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!userData) {
+        return <div>No data available</div>;
+    }
 
     return (
         <div>
@@ -269,7 +268,9 @@ export default function Mypage() {
                                         >
                                             변경사항 저장
                                         </button>
-                                    ) : null}
+                                    ) : (
+                                        <></>
+                                    )}
                                     <img
                                         src="../img/btn/edit_disabled.png"
                                         onClick={() => {
@@ -347,8 +348,6 @@ export default function Mypage() {
                                             height: '150px',
                                         }}
                                     >
-                                        {/*#EDEDED*/}
-
                                         <input
                                             type="text"
                                             placeholder="목표 워라벨 비율을 입력해주세요"
