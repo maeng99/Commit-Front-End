@@ -96,11 +96,10 @@ export default function Nav(props: NavType) {
                     />
                 </Link>
             </div>
-            <div style={{ width: '60px', position: 'absolute', bottom: '15px', left: '50%', marginLeft: '-30px' }}>
-                <Button
-                    type="logout"
-                    size="small"
-                    title="로그아웃"
+            <div style={{ width: '60px', position: 'absolute', bottom: '20px', left: '50%', marginLeft: '-30px' }}>
+                <img
+                    src="../img/nav_img/nav_logout_disabled.png"
+                    style={{ width: '25px', cursor: 'pointer' }}
                     onClick={() => {
                         window.location = '/';
                     }}

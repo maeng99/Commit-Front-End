@@ -23,7 +23,7 @@ import '../App.css';
 const data = WeekData();
 
 export default function Analysis() {
-    const defaultDate = moment(moment().subtract(1, 'week').toDate()).startOf('week');
+    const defaultDate = moment(moment().subtract(1, 'week').toDate()).startOf('isoWeek');
     const [selectedDate, setSelectedDate] = useState(defaultDate);
 
     const handleDateSelect = (selectedDate: Date) => {
@@ -53,6 +53,7 @@ export default function Analysis() {
     };
 
     console.log(moment(selectedDate).format('YYYY-MM-DD'));
+
     return (
         <div>
             <Nav type="analysis" />

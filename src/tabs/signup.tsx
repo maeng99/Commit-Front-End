@@ -119,6 +119,7 @@ export default function Signup() {
                                     type="password"
                                     {...register('RePassword', {
                                         required: '비밀번호를 확인해주세요.',
+                                        
                                     })}
                                     style={{ width: '336px', height: '20px', marginTop: '3px' }}
                                 />

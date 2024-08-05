@@ -51,6 +51,9 @@ input {
     background-color: #eee;
     border-radius: 15px;
 }
+input::placeholder {
+    color: #bbb;
+}
 
 input[type='time']::-webkit-calendar-picker-indicator {
     position: absolute;
@@ -61,6 +64,10 @@ input[type='time']::-webkit-calendar-picker-indicator {
     background: transparent;
     color: transparent;
     cursor: pointer;
+}
+
+textarea::placeholder {
+    color: #bbb;
 }
 
 .background {

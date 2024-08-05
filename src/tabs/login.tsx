@@ -45,7 +45,7 @@ export default function Login() {
                     boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                 }}
             >
-                <div style={{ marginTop: '110px', marginBottom: '80px' }}>
+                <div style={{ marginTop: '80px', marginBottom: '60px' }}>
                     <img src="..\img\main_logo.png" style={{ width: '250px' }} />
                     <br />
                     {/*<img src="..\img\main_text.png" style={{ width: '250px' }} />*/}
@@ -53,7 +53,7 @@ export default function Login() {
 
                 <div style={{ width: '400px', margin: '0 auto' }}>
                     <form style={{ textAlign: 'left', width: '400px', margin: '0 auto' }}>
-                        <div style={{ height: '220px', margin: '0 auto', marginBottom: '10px', overflow: 'auto' }}>
+                        <div style={{ height: '200px', margin: '0 auto', marginBottom: '10px', overflow: 'auto' }}>
                             <div style={{ width: '360px', margin: '2px auto', marginBottom: '10px' }}>
                                 <label
                                     htmlFor="email"
@@ -117,6 +117,15 @@ export default function Login() {
                                 onClick={() => {
                                     window.location = '/signup';
                                 }}
+                            />
+                        </div>
+                        <div style={{ width: '350px', margin: '10px auto', textAlign: 'center' }}>
+                            <img src="../img/or.png" style={{ width: '350px', marginTop: '10px' }} />
+                        </div>
+                        <div style={{ width: '330px', margin: '10px auto', textAlign: 'center' }}>
+                            <img
+                                src="../img/btn/kakao_login.png"
+                                style={{ width: '330px', height: '50px', borderRadius: '20px', cursor: 'pointer' }}
                             />
                         </div>
                     </form>

@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
+import UserAPI from '../api/user/userAPI.tsx';
 import '../App.css';
 
 export default function Mypage() {
@@ -15,6 +16,9 @@ export default function Mypage() {
     } = useForm();
 
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const [isRevising, setIsRevising] = useState(false);
+    const [isSaveButtonVisible, setIsSaveButtonVisible] = useState(true); // 변경사항 저장 버튼 표시 여부
+    const [isLocked, setIsLocked] = useState(true); // 필드 잠금 상태 추가
 
     const onValid = (e) => {
         console.log(e, 'onValid');
@@ -25,6 +29,15 @@ export default function Mypage() {
     const onInvalid = (e) => {
         console.log(e, 'onInvalid');
         alert('입력한 정보를 다시 확인해주세요.');
+    };
+
+    /*
+    const userData = UserAPI();
+    */
+    const userData = {
+        userId: 1,
+        name: 'Maeng',
+        email: 'moh45@naver.com',
     };
 
     return (
@@ -67,7 +80,9 @@ export default function Mypage() {
                                 >
                                     사용자 이름
                                     <br />
-                                    <span style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '22px' }}>맹의현</span>
+                                    <span style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '22px' }}>
+                                        {userData.name}
+                                    </span>
                                 </div>
                                 <div
                                     style={{
@@ -80,12 +95,17 @@ export default function Mypage() {
                                     이메일
                                     <br />
                                     <span style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '22px' }}>
-                                        202011111@sangmyung.kr
+                                        {userData.email}
                                     </span>
                                 </div>
                                 {isFormVisible ? (
                                     <form
-                                        style={{ width: '420px', height: '360px', margin: '0 auto', textAlign: 'left' }}
+                                        style={{
+                                            width: '420px',
+                                            height: '360px',
+                                            margin: '0 auto',
+                                            textAlign: 'left',
+                                        }}
                                     >
                                         <div>
                                             <input
@@ -94,7 +114,12 @@ export default function Mypage() {
                                                     required: '현재 비밀번호를 입력해주세요.',
                                                 })}
                                                 placeholder="현재 비밀번호"
-                                                style={{ width: '330px', height: '20px' }}
+                                                style={{
+                                                    width: '330px',
+                                                    height: '20px',
+                                                    fontFamily: 'Pretendard-Regular',
+                                                    fontSize: '16px',
+                                                }}
                                             />
                                             {errors.ID && (
                                                 <span
@@ -116,7 +141,13 @@ export default function Mypage() {
                                                     required: '새 비밀번호를 입력해주세요.',
                                                 })}
                                                 placeholder="새 비밀번호"
-                                                style={{ width: '330px', height: '20px', marginTop: '10px' }}
+                                                style={{
+                                                    width: '330px',
+                                                    height: '20px',
+                                                    marginTop: '10px',
+                                                    fontFamily: 'Pretendard-Regular',
+                                                    fontSize: '16px',
+                                                }}
                                             />
                                             {errors.Password && (
                                                 <span
@@ -138,7 +169,13 @@ export default function Mypage() {
                                                     required: '새 비밀번호를 확인해주세요.',
                                                 })}
                                                 placeholder="새 비밀번호 확인"
-                                                style={{ width: '330px', height: '20px', marginTop: '10px' }}
+                                                style={{
+                                                    width: '330px',
+                                                    height: '20px',
+                                                    marginTop: '10px',
+                                                    fontFamily: 'Pretendard-Regular',
+                                                    fontSize: '16px',
+                                                }}
                                             />
                                             {errors.RePassword && (
                                                 <span
@@ -204,86 +241,184 @@ export default function Mypage() {
                                     fontSize: '22px',
                                     color: '#4470F3',
                                     margin: '0 auto',
-                                    padding: '20px 0',
+                                    padding: '10px 0',
                                     textAlign: 'left',
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    alignItems: 'center',
                                 }}
                             >
                                 나만의 플래너 작성 규칙
-                                <img
-                                    src="../img/btn/edit_disabled.png"
-                                    style={{
-                                        width: '25px',
-                                        cursor: 'pointer',
-                                        marginLeft: '445px',
-                                        verticalAlign: 'middle',
-                                    }}
-                                />
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    {isRevising ? (
+                                        <button
+                                            style={{
+                                                width: '180px',
+                                                height: '35px',
+                                                cursor: 'pointer',
+                                                backgroundColor: isLocked ? 'white' : '#4470F3',
+                                                color: '#fff',
+                                                border: 'none',
+                                                borderRadius: '20px',
+                                                fontSize: '17px',
+                                            }}
+                                            onClick={() => {
+                                                setIsLocked(true);
+                                                setIsRevising(false);
+                                            }} // 필드 잠금
+                                        >
+                                            변경사항 저장
+                                        </button>
+                                    ) : null}
+                                    <img
+                                        src="../img/btn/edit_disabled.png"
+                                        onClick={() => {
+                                            setIsRevising(true);
+                                            setIsLocked(false);
+                                        }}
+                                        style={{
+                                            width: '35px',
+                                            cursor: 'pointer',
+                                            marginLeft: '15px',
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div
                                 style={{
                                     width: '700px',
-                                    height: '515px',
+                                    height: '525px',
                                     margin: '0 auto',
-                                    border: '2px #eee solid',
+                                    backgroundColor: 'white',
                                     borderRadius: '20px',
-                                    textAlign: 'left',
+                                    fontFamily: 'Pretendard-Regular',
+                                    border: '1px solid #EDEDED',
                                 }}
                             >
-                                <div
-                                    style={{
-                                        fontFamily: 'Pretendard-Regular',
-                                        fontSize: '17px',
-                                        padding: '25px 25px 10px',
-                                    }}
-                                >
-                                    목표 <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>워라밸 : </span>
-                                </div>
-                                <div
-                                    style={{
-                                        fontFamily: 'Pretendard-Regular',
-                                        fontSize: '17px',
-                                        padding: '20px 25px 10px',
-                                    }}
-                                >
-                                    하루 목표 <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>수면시간 : </span>
-                                </div>
-                                <div
-                                    style={{
-                                        fontFamily: 'Pretendard-Regular',
-                                        fontSize: '17px',
-                                        padding: '20px 25px 10px',
-                                    }}
-                                >
-                                    하루 목표 <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>운동시간 : </span>
-                                </div>
-                                <div
-                                    style={{
-                                        fontFamily: 'Pretendard-Regular',
-                                        fontSize: '17px',
-                                        padding: '20px 25px 10px',
-                                    }}
-                                >
-                                    그 외 세부 사항
-                                </div>
-                                <div
-                                    style={{
-                                        width: '650px',
-                                        height: '290px',
-                                        margin: '0 auto',
-                                        backgroundColor: '#eee',
-                                        borderRadius: '20px',
-                                        fontFamily: 'Pretendard-Regular',
-                                        fontSize: '14px',
-                                        textAlign: 'left',
-                                    }}
-                                >
-                                    <div style={{ padding: '15px 20px 5px' }}>
-                                        • 주말을 제외한 주중 워라밸에 대한 피드백입니다.
+                                <div style={{ display: 'flex' }}>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            alignItems: 'flex-start',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '17px',
+                                                padding: '25px 25px 10px',
+                                            }}
+                                        >
+                                            목표 <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>워라밸 : </span>
+                                        </div>
+                                        <div
+                                            style={{
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '17px',
+                                                padding: '20px 25px 10px',
+                                            }}
+                                        >
+                                            하루 목표{' '}
+                                            <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>수면시간 : </span>
+                                        </div>
+                                        <div
+                                            style={{
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '17px',
+                                                padding: '20px 25px 10px',
+                                            }}
+                                        >
+                                            하루 목표{' '}
+                                            <span style={{ fontFamily: 'Pretendard-ExtraBold' }}>운동시간 : </span>
+                                        </div>
                                     </div>
-                                    <div style={{ padding: '15px 20px 5px' }}>
-                                        • 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸 비율이 5.7
-                                        : 4.3으로 매우 안정적입니다람쥐.
+
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            color: '#fff',
+                                            justifyContent: 'space-between',
+                                            marginLeft: '20px',
+                                            marginTop: '5px',
+                                            paddingTop: '6px',
+                                            width: '300px',
+                                            height: '150px',
+                                        }}
+                                    >
+                                        {/*#EDEDED*/}
+
+                                        <input
+                                            type="text"
+                                            placeholder="목표 워라벨 비율을 입력해주세요"
+                                            style={{
+                                                backgroundColor: isRevising ? '#EDEDED' : 'white',
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '16px',
+                                                height: '15px',
+                                            }}
+                                            disabled={isLocked} // 필드 잠금
+                                        ></input>
+                                        <input
+                                            type="text"
+                                            placeholder="목표 운동시간을 입력해주세요"
+                                            style={{
+                                                backgroundColor: isRevising ? '#EDEDED' : 'white',
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '16px',
+                                                height: '15px',
+                                            }}
+                                            disabled={isLocked} // 필드 잠금
+                                        ></input>
+                                        <input
+                                            type="text"
+                                            placeholder="목표 운동시간을 입력해주세요"
+                                            style={{
+                                                backgroundColor: isRevising ? '#EDEDED' : 'white',
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '16px',
+                                                height: '15px',
+                                            }}
+                                            disabled={isLocked} // 필드 잠금
+                                        ></input>
                                     </div>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'flex-start',
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            fontFamily: 'Pretendard-Regular',
+                                            fontSize: '17px',
+                                            padding: '20px 25px 10px',
+                                        }}
+                                    >
+                                        그 외 세부 사항
+                                    </div>
+                                    <textarea
+                                        placeholder="그 외 세부 사항을 입력해주세요."
+                                        style={{
+                                            width: '650px',
+                                            height: '295px',
+                                            margin: '0 auto',
+                                            color: 'black',
+                                            backgroundColor: isRevising ? '#EDEDED' : 'white',
+                                            resize: 'none',
+                                            border: 'none', // 기본 테두리 제거
+                                            borderRadius: '15px',
+                                            padding: '10px', // 여백 추가
+                                            boxSizing: 'border-box', // 패딩을 포함한 전체 크기 설정
+                                            fontFamily: 'Pretendard-Regular',
+                                            fontSize: '16px',
+                                        }}
+                                        disabled={isLocked} // 필드 잠금
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>

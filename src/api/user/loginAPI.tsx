@@ -29,8 +29,8 @@ export default function LoginAPI(email, password) {
             return response.json();
         })
         .then((data) => {
-            var accessToken = data.result.accessToken;
-            var refreshToken = data.result.refreshToken;
+            var accessToken = data.accessToken;
+            var refreshToken = data.refreshToken;
 
             setCookie('accessToken', accessToken, 1);
             setCookie('refreshToken', refreshToken, 1);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import Button from '../components/button.tsx';
 import TimeTableDiv from '../components/timeTableDiv.tsx';
 import '../App.css';
@@ -15,7 +16,7 @@ export default function FeedbackPopup({ onClose }) {
 
                     <div style={{ paddingTop: '40px', marginBottom: '20px' }}>
                         <div style={{ fontFamily: 'Pretendard-SemiBold', fontSize: '18px' }}>
-                            어제의 기록을 기반으로 한 오늘의 일정 추천
+                            오늘의 기록을 기반으로 한 내일의 일정 추천
                         </div>
                         <div
                             style={{
@@ -53,7 +54,7 @@ export default function FeedbackPopup({ onClose }) {
                                     margin: '10px auto',
                                 }}
                             >
-                                어제의 타임 테이블
+                                오늘의 타임 테이블
                             </div>
                             <div
                                 style={{
@@ -86,7 +87,7 @@ export default function FeedbackPopup({ onClose }) {
                                         margin: '0 auto',
                                     }}
                                 >
-                                    <TimeTableDiv type="before" />
+                                    <TimeTableDiv type="before" date={moment().format('YYYY-MM-DD')} />
                                 </div>
                             </div>
                         </div>
@@ -198,7 +199,7 @@ export default function FeedbackPopup({ onClose }) {
                                             padding: '10px 0',
                                         }}
                                     >
-                                        AI 추천 오늘의 고정테이블
+                                        AI 추천 내일의 고정테이블
                                     </div>
                                     <div
                                         style={{

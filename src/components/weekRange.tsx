@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 
 function getWeekRange(date) {
-    const startOfWeek = moment(date).startOf('week');
-    const endOfWeek = moment(date).endOf('week');
+    const startOfWeek = moment(date).startOf('isoWeek');
+    const endOfWeek = moment(date).endOf('isoWeek');
     const format = 'YYYY-MM-DD';
 
     return `${startOfWeek.format(format)} ~ ${endOfWeek.format(format)}`;
@@ -29,7 +29,7 @@ const WeekRange: React.FC<WeekRangeProps> = ({ onDateSelect }) => {
     const weekRange = getWeekRange(currentDate);
 
     useEffect(() => {
-        onDateSelect(moment(currentDate).startOf('week'));
+        onDateSelect(moment(currentDate).startOf('isoWeek'));
     }, [currentDate]);
 
     return (
