@@ -5,6 +5,13 @@ import Button from '../components/button.tsx';
 import LoginAPI from '../api/user/loginAPI.tsx';
 import '../App.css';
 
+const handleLogin = () => {
+    const clientId = '6aa6c76e0fecd5392cf38fb54fcf72b8';
+    const redirectUri = encodeURIComponent('https://api.lion-commit.shop/callback');
+    const authUrl = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}`;
+    window.location.href = authUrl;
+};
+
 export default function Login() {
     const {
         register,
@@ -122,11 +129,15 @@ export default function Login() {
                         <div style={{ width: '350px', margin: '10px auto', textAlign: 'center' }}>
                             <img src="../img/or.png" style={{ width: '350px', marginTop: '10px' }} />
                         </div>
+                        {/* 카카오 로그인 */}
                         <div style={{ width: '330px', margin: '10px auto', textAlign: 'center' }}>
-                            <img
-                                src="../img/btn/kakao_login.png"
-                                style={{ width: '330px', height: '50px', borderRadius: '20px', cursor: 'pointer' }}
-                            />
+                        <img
+                            src="../img/btn/kakao_login.png"
+                            style={{ width: '330px', height: '50px', borderRadius: '20px', cursor: 'pointer' }}
+                            alt="Kakao Login"
+                            onClick={handleLogin}
+                        />
+                        
                         </div>
                     </form>
                 </div>
