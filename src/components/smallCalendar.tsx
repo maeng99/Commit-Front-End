@@ -172,7 +172,7 @@ interface SmallCalendarProps {
     onDateSelect: DateSelectionHandler;
 }
 
-const SmallCalendar: React.FC<WeekRangeProps> = ({ onDateSelect }) => {
+const SmallCalendar: React.FC<SmallCalendarProps> = ({ onDateSelect }) => {
     const today = new Date();
     const [date, setDate] = useState<Value>(today);
     const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());

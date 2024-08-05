@@ -34,7 +34,6 @@ export default function Main() {
 
     useEffect(() => {
         if (selectedDate !== null && moment(selectedDate).format('YYYY-MM-DD') !== moment(today).format('YYYY-MM-DD')) {
-            console.log(selectedDate);
             window.location = '/plan';
         }
     }, [selectedDate]);
@@ -117,7 +116,6 @@ export default function Main() {
                                         width: '510px',
                                         height: '470px',
                                         margin: '0 auto',
-                                        backgroundColor: '#eee',
                                         borderRadius: '20px',
                                         overflow: 'auto',
                                     }}
@@ -159,7 +157,7 @@ export default function Main() {
                                         margin: '0 auto',
                                     }}
                                 >
-                                    <TimeTableDiv type="after" />
+                                    <TimeTableDiv type="after" date={moment(today).format('YYYY-MM-DD')} />
                                 </div>
                             </div>
                             <div style={{ marginTop: '20px' }}>

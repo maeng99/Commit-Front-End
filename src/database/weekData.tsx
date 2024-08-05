@@ -5,10 +5,10 @@ import '../App.css';
 export default function WeekData() {
     return [
         {
-            start_date: '2024-07-21',
-            end_date: '2024-07-27',
+            start_date: '2024-07-22',
+            end_date: '2024-07-28',
             week_day: [
-                { name: '월', Life: 4.5, Work: 5.5, Exercise: 30, Sleep: 9 }, // Add Exercise data
+                { name: '월', Life: 4.5, Work: 5.5, Exercise: 120, Sleep: 9 }, // Add Exercise data
                 { name: '화', Life: 3.5, Work: 6.5, Exercise: 40, Sleep: 9 },
                 { name: '수', Life: 4, Work: 6, Exercise: 0, Sleep: 5 },
                 { name: '목', Life: 5, Work: 5, Exercise: 40, Sleep: 8 },
@@ -18,8 +18,8 @@ export default function WeekData() {
             ],
         },
         {
-            start_date: '2024-07-14',
-            end_date: '2024-07-20',
+            start_date: '2024-07-15',
+            end_date: '2024-07-21',
             week_day: [
                 { name: '월', Life: 2, Work: 8, Exercise: 0, Sleep: 3 }, // Add Exercise data
                 { name: '화', Life: 3.5, Work: 6.5, Exercise: 0, Sleep: 3 },
@@ -31,8 +31,8 @@ export default function WeekData() {
             ],
         },
         {
-            start_date: '2024-07-07',
-            end_date: '2024-07-13',
+            start_date: '2024-07-08',
+            end_date: '2024-07-14',
             week_day: [
                 { name: '월', Life: 4.5, Work: 5.5, Exercise: 30, Sleep: 9 }, // Add Exercise data
                 { name: '화', Life: 3.5, Work: 6.5, Exercise: 40, Sleep: 9 },

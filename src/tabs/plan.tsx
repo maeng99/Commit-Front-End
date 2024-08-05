@@ -14,27 +14,16 @@ export default function Plan() {
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
     const handleDateSelect = (selectedDate: Date) => {
-        setSelectedDate(selectedDate); // Update the selected date in the state
+        setSelectedDate(selectedDate);
+        localStorage.setItem('smallDate', selectedDate);
     };
 
     const [isPopupVisible, setPopupVisible] = useState(false);
 
     const closePopup = () => {
         setPopupVisible(false);
-        localStorage.setItem('lastPopupDate', moment().format('YYYY-MM-DD'));
+        window.location = '/plan';
     };
-
-    useEffect(() => {
-        // localStorage.clear();
-        // Get the last date the popup was shown
-        const lastPopupDate = localStorage.getItem('lastPopupDate');
-        const todayDate = moment().format('YYYY-MM-DD');
-
-        // Check if the popup has already been shown today
-        if (lastPopupDate !== todayDate) {
-            setPopupVisible(true);
-        }
-    }, []);
 
     return (
         <div>
@@ -79,15 +68,23 @@ export default function Plan() {
                                 >
                                     이날의 기록사항
                                 </div>
-                                <div
+                                <textarea
+                                    placeholder="하루에 대한 짧은 감상이나 기록해야될 사항에 대해 작성해주세요."
                                     style={{
                                         width: '280px',
                                         height: '195px',
                                         margin: '0 auto',
-                                        backgroundColor: '#eee',
+                                        backgroundColor: '#EDF0F5',
                                         borderRadius: '20px',
+                                        resize: 'none',
+                                        border: 'none',
+                                        borderRadius: '20px',
+                                        padding: '15px', // 여백 추가
+                                        boxSizing: 'border-box', // 패딩을 포함한 전체 크기 설정
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '16px',
                                     }}
-                                ></div>
+                                ></textarea>
                             </div>
                         </div>
 
@@ -148,14 +145,17 @@ export default function Plan() {
                                         textAlign: 'left',
                                     }}
                                 >
-                                    오늘의 일정
+                                    {!selectedDate ||
+                                    moment(selectedDate).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD')
+                                        ? '오늘'
+                                        : moment(selectedDate).format('YY년 M월 D일')}
+                                    의 일정
                                 </div>
                                 <div
                                     style={{
                                         width: '510px',
                                         height: '470px',
                                         margin: '0 auto',
-                                        backgroundColor: '#eee',
                                         borderRadius: '20px',
                                     }}
                                 >
@@ -221,7 +221,18 @@ export default function Plan() {
                                         </>
                                     }
                                     onClick={() => {
-                                        window.location = '/plan';
+                                        localStorage.clear();
+                                        const completeDate = localStorage.getItem('completeDate');
+                                        const todayDate = moment().format('YYYY-MM-DD');
+
+                                        if (completeDate !== todayDate) {
+                                            if (window.confirm('정말 하루를 마무리하시겠습니까?')) {
+                                                setPopupVisible(true);
+                                                localStorage.setItem('completeDate', moment().format('YYYY-MM-DD'));
+                                            }
+                                        } else {
+                                            window.alert('이미 하루를 마무리하셨습니다.');
+                                        }
                                     }}
                                 />
                             </div>
