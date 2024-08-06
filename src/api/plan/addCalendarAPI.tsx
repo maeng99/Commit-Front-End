@@ -3,14 +3,14 @@ import React from 'react';
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
 // timeTable.tsx
-export default function AddCalendarAPI(startDate, endDate, content, type) {
+export default function AddCalendarAPI(StartDate, EndDate, Content, Type) {
     var accessToken = getCookie('accessToken');
     var refreshToken = getCookie('refreshToken');
 
-    var startDate = startDate;
-    var endDate = endDate;
-    var content = content;
-    var type = type;
+    const startDate = StartDate;
+    const endDate = EndDate;
+    const content = Content;
+    const type = Type === 'Life' ? 'LIFE' : Type === 'Work' ? 'WORK' : 'EXERCISE';
 
     if (accessToken) {
         addCalendarInfo(accessToken, startDate, endDate, content, type).catch((error) => {
@@ -18,7 +18,7 @@ export default function AddCalendarAPI(startDate, endDate, content, type) {
             if (refreshToken) {
                 getAccessTokenWithRefreshToken(refreshToken)
                     .then((newAccessToken) => {
-                        addCalendarInfo(accessToken, startDate, endDate, content, type).catch((error) => {
+                        addCalendarInfo(newAccessToken, startDate, endDate, content, type).catch((error) => {
                             console.error('Failed to fetch calendar:', error);
                             window.location = '/';
                         });
@@ -76,19 +76,24 @@ function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
 function addCalendarInfo(accessToken, startDate, endDate, content, type) {
     return fetch(API_SERVER_DOMAIN + '/api/plan/calendar/create', {
         method: 'POST',
-        header: {
+        headers: {
+            'Content-Type': 'application/json',
             Authorization: 'Bearer ' + accessToken,
         },
-        body: {
+        body: JSON.stringify({
             startDate: startDate,
             endDate: endDate,
             content: content,
             type: type,
-        },
-    }).then((response) => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch timetable');
-        }
-        return response.json();
-    });
+        }),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch timetable');
+            }
+            return response.json();
+        })
+        .then(() => {
+            window.location = '/calendar';
+        });
 }

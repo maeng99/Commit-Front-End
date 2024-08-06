@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
-export default function MonthPlanAPI({ yearMonth }) {
-    const [monthPlanData, setMonthPlanData] = useState(null);
+export default function DateFeedbackAPI({ date }) {
+    const [dateFeedbackData, setDateFeedbackData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -13,15 +13,15 @@ export default function MonthPlanAPI({ yearMonth }) {
 
             if (accessToken) {
                 try {
-                    const data = await getMonthPlanInfo(accessToken, yearMonth);
-                    setMonthPlanData(data.result);
+                    const data = await getDateFeedbackInfo(accessToken, date);
+                    setDateFeedbackData(data.result);
                 } catch (error) {
                     console.error('Failed to fetch timetable:', error);
                     if (refreshToken) {
                         try {
                             const newAccessToken = await getAccessTokenWithRefreshToken(refreshToken);
-                            const data = await getMonthPlanInfo(accessToken, yearMonth);
-                            setMonthPlanData(data.result);
+                            const data = await getDateFeedbackInfo(newAccessToken, date);
+                            setDateFeedbackData(data.result);
                         } catch (error) {
                             console.error('Failed to refresh access token:', error);
                             window.location = '/'; // 로그인 페이지로 리디렉션
@@ -37,9 +37,9 @@ export default function MonthPlanAPI({ yearMonth }) {
         };
 
         fetchData();
-    }, [yearMonth]);
+    }, [date]);
 
-    return { monthPlanData, loading };
+    return { dateFeedbackData, loading };
 }
 
 function getCookie(name) {
@@ -78,8 +78,8 @@ function getAccessTokenWithRefreshToken(refreshToken) {
         });
 }
 
-function getMonthPlanInfo(accessToken, selectedMonth) {
-    return fetch(API_SERVER_DOMAIN + `/api/plan/month?yearMonth=${selectedMonth}`, {
+function getDateFeedbackInfo(accessToken, selectedDate) {
+    return fetch(API_SERVER_DOMAIN + `/feedback?date=${selectedDate}`, {
         method: 'GET',
         headers: {
             Authorization: 'Bearer ' + accessToken,

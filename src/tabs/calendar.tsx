@@ -8,9 +8,8 @@ import Nav from '../components/nav.tsx';
 import BigCalendar from '../components/bigCalendar.tsx';
 import PlanData from '../database/planData.tsx';
 import AddCalendarAPI from '../api/plan/addCalendarAPI.tsx';
+import CalendarPlanAPI from '../api/plan/calendarPlanAPI.tsx';
 import '../App.css';
-
-const events = PlanData();
 
 export default function Calendar() {
     const {
@@ -23,6 +22,7 @@ export default function Calendar() {
     const today = new Date();
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [showAddPopup, setShowAddPopup] = useState(false);
+    const { calendarPlanList, loading } = CalendarPlanAPI();
 
     const handleDateSelect = (selectedDate: Date) => {
         setSelectedDate(selectedDate); // Update the selected date in the state
@@ -46,13 +46,19 @@ export default function Calendar() {
 
     const onValid = (e) => {
         AddCalendarAPI(e.StartDate, e.EndDate, e.Content, e.Category);
-        window.location = '/calendar';
     };
 
     const onInvalid = (e) => {
         console.log(e, 'onInvalid');
         alert('입력한 정보를 다시 확인해주세요.');
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!calendarPlanList) {
+        return <div>No data available</div>;
+    }
 
     return (
         <div>
@@ -329,8 +335,9 @@ export default function Calendar() {
                             <div style={{ width: '320px', height: '490px', overflow: 'auto' }}>
                                 {/*일정이 없을 때*/}
                                 {!selectedDate
-                                    ? events.filter((event) => event.startDate === moment(today).format('YYYY-MM-DD'))
-                                          .length === 0 && (
+                                    ? calendarPlanList.filter(
+                                          (event) => event.date === moment(today).format('YYYY-MM-DD')
+                                      ).length === 0 && (
                                           <div
                                               style={{
                                                   width: '280px',
@@ -363,8 +370,8 @@ export default function Calendar() {
                                           </div>
                                       )
                                     : formatDate(selectedDate).yearMonthDay >= moment(today).format('YYYY-MM-DD')
-                                    ? events.filter(
-                                          (event) => event.startDate === formatDate(selectedDate).yearMonthDay
+                                    ? calendarPlanList.filter(
+                                          (event) => event.date === formatDate(selectedDate).yearMonthDay
                                       ).length === 0 && (
                                           <div
                                               style={{
@@ -389,7 +396,7 @@ export default function Calendar() {
                                                       fontFamily: 'Pretendard-Regular',
                                                       fontSize: '13px',
                                                       color: '#888',
-                                                      marginTop: '5px',
+                                                      marginTop: '8px',
                                                   }}
                                               >
                                                   <div>오른쪽 상단의 버튼을 클릭하면</div>
@@ -397,8 +404,8 @@ export default function Calendar() {
                                               </div>
                                           </div>
                                       )
-                                    : events.filter(
-                                          (event) => event.startDate === formatDate(selectedDate).yearMonthDay
+                                    : calendarPlanList.filter(
+                                          (event) => event.date === formatDate(selectedDate).yearMonthDay
                                       ).length === 0 && (
                                           <div
                                               style={{
@@ -422,10 +429,10 @@ export default function Calendar() {
                                       )}
                                 {/*일정이 있을 때*/}
                                 {selectedDate
-                                    ? events.map((event) =>
+                                    ? calendarPlanList.map((event) =>
                                           // Use parentheses instead of curly braces for the ternary operator
                                           // Curly braces are used for block statements, which are not returned implicitly
-                                          event.startDate === formatDate(selectedDate).yearMonthDay ? (
+                                          event.date === formatDate(selectedDate).yearMonthDay ? (
                                               <div
                                                   key={event.id}
                                                   style={{
@@ -447,7 +454,7 @@ export default function Calendar() {
                                                               fontSize: '18px',
                                                           }}
                                                       >
-                                                          {event.title}
+                                                          {event.content}
                                                       </div>
                                                       <div
                                                           style={{
@@ -457,7 +464,7 @@ export default function Calendar() {
                                                               marginTop: '5px',
                                                           }}
                                                       >
-                                                          {event.startDate} ~ {event.endDate}
+                                                          {event.date}&emsp;{event.type}
                                                       </div>
                                                   </div>
                                               </div>
@@ -465,10 +472,10 @@ export default function Calendar() {
                                               <></>
                                           )
                                       )
-                                    : events.map((event) =>
+                                    : calendarPlanList.map((event) =>
                                           // Use parentheses instead of curly braces for the ternary operator
                                           // Curly braces are used for block statements, which are not returned implicitly
-                                          event.startDate === moment(today).format('YYYY-MM-DD') ? (
+                                          event.date === moment(today).format('YYYY-MM-DD') ? (
                                               <div
                                                   key={event.id}
                                                   style={{
@@ -490,7 +497,7 @@ export default function Calendar() {
                                                               fontSize: '18px',
                                                           }}
                                                       >
-                                                          {event.title}
+                                                          {event.content}
                                                       </div>
                                                       <div
                                                           style={{
@@ -500,7 +507,7 @@ export default function Calendar() {
                                                               marginTop: '5px',
                                                           }}
                                                       >
-                                                          {event.startDate} ~ {event.endDate}
+                                                          {event.date}&emsp;{event.type}
                                                       </div>
                                                   </div>
                                               </div>
