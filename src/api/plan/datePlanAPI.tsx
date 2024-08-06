@@ -21,7 +21,7 @@ export default function DatePlanAPI({ date }) {
                         try {
                             const newAccessToken = await getAccessTokenWithRefreshToken(refreshToken);
                             const data = await getDatePlanInfo(newAccessToken, date);
-                            setTimeTableData(data.result);
+                            setDatePlanData(data.result);
                         } catch (error) {
                             console.error('Failed to refresh access token:', error);
                             window.location = '/'; // 로그인 페이지로 리디렉션

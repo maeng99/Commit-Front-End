@@ -17,9 +17,9 @@ const events = PlanData();
 function getClosestEvents(events) {
     const today = moment(); // Get today's date
     const closestEvents = events.filter(
-        (event) => moment(event.date) >= today || moment(event.date).isSame(today, 'day')
+        (event) => moment(event.startDate) >= today || moment(event.startDate).isSame(today, 'day')
     ); // Filter future events
-    closestEvents.sort((a, b) => moment(a.date) - moment(b.date)); // Sort events by date
+    closestEvents.sort((a, b) => moment(a.startDate) - moment(b.startDate)); // Sort events by date
     return closestEvents.slice(0, 3); // Get the closest 3 events
 }
 
@@ -38,7 +38,7 @@ export default function Main() {
         }
     }, [selectedDate]);
 
-    const todayPlanList = [
+    const datePlanData = [
         {
             planId: 1,
             content: '학교가기',
@@ -93,7 +93,18 @@ export default function Main() {
         },
     ];
 
-    const calAchiev = (todayPlanList.filter((plan) => plan.status === 'COMPLETE').length / todayPlanList.length) * 100;
+    /*
+    서버 연결
+    const { datePlanData, loading } = DatePlanAPI({ date });
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!datePlanData) {
+        return <div>No data available</div>;
+    }
+    */
+
+    const calAchiev = (datePlanData.filter((plan) => plan.status === 'COMPLETE').length / datePlanData.length) * 100;
 
     return (
         <div>
@@ -178,7 +189,7 @@ export default function Main() {
                                         overflow: 'auto',
                                     }}
                                 >
-                                    <TodayPlanDiv />
+                                    <TodayPlanDiv type="today" date={moment(today).format('YYYY-MM-DD')} />
                                 </div>
                             </div>
                         </div>

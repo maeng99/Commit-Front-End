@@ -33,7 +33,7 @@ export default function LoginAPI(email, password) {
             var refreshToken = data.refreshToken;
 
             setCookie('accessToken', accessToken, 1);
-            setCookie('refreshToken', refreshToken, 1);
+            setCookie('refreshToken', refreshToken, 7);
 
             // 로그인이 성공하면 다음 동작을 수행합니다.
             window.location = '/main';

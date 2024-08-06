@@ -21,7 +21,7 @@ export default function Plan() {
     } = useForm();
 
     const [selectedDate, setSelectedDate] = useState<Date>(today);
-    const [text, setText] = useState(null);
+    const [text, setText] = useState('');
 
     const handleDateSelect = (selectedDate: Date) => {
         setSelectedDate(selectedDate);
@@ -323,12 +323,18 @@ export default function Plan() {
                                         </>
                                     }
                                     onClick={() => {
-                                        localStorage.clear();
+                                        // localStorage.clear();
                                         const completeDate = localStorage.getItem('completeDate');
                                         const todayDate = moment().format('YYYY-MM-DD');
 
                                         if (completeDate !== todayDate) {
-                                            if (window.confirm('정말 하루를 마무리하시겠습니까?')) {
+                                            if (
+                                                window.confirm(
+                                                    '정말 하루를 마무리하시겠습니까?' +
+                                                        '\n' +
+                                                        '(체크하지 않은 일정은 취소처리 됩니다.)'
+                                                )
+                                            ) {
                                                 setPopupVisible(true);
                                                 localStorage.setItem('completeDate', moment().format('YYYY-MM-DD'));
                                             }

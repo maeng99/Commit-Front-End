@@ -343,14 +343,13 @@ export default function Mypage() {
                                             justifyContent: 'space-between',
                                             marginLeft: '20px',
                                             marginTop: '5px',
-                                            paddingTop: '6px',
+                                            paddingTop: '10px',
                                             width: '300px',
                                             height: '150px',
                                         }}
                                     >
                                         <input
                                             type="text"
-                                            placeholder="목표 워라벨 비율을 입력해주세요"
                                             style={{
                                                 backgroundColor: isRevising ? '#EDEDED' : 'white',
                                                 fontFamily: 'Pretendard-Regular',
@@ -361,7 +360,6 @@ export default function Mypage() {
                                         ></input>
                                         <input
                                             type="text"
-                                            placeholder="목표 운동시간을 입력해주세요"
                                             style={{
                                                 backgroundColor: isRevising ? '#EDEDED' : 'white',
                                                 fontFamily: 'Pretendard-Regular',
@@ -372,7 +370,6 @@ export default function Mypage() {
                                         ></input>
                                         <input
                                             type="text"
-                                            placeholder="목표 운동시간을 입력해주세요"
                                             style={{
                                                 backgroundColor: isRevising ? '#EDEDED' : 'white',
                                                 fontFamily: 'Pretendard-Regular',
@@ -401,10 +398,9 @@ export default function Mypage() {
                                         그 외 세부 사항
                                     </div>
                                     <textarea
-                                        placeholder="그 외 세부 사항을 입력해주세요."
                                         style={{
                                             width: '650px',
-                                            height: '295px',
+                                            height: '290px',
                                             margin: '0 auto',
                                             color: 'black',
                                             backgroundColor: isRevising ? '#EDEDED' : 'white',

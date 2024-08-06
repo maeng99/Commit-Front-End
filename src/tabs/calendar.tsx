@@ -7,6 +7,7 @@ import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import BigCalendar from '../components/bigCalendar.tsx';
 import PlanData from '../database/planData.tsx';
+import AddCalendarAPI from '../api/plan/addCalendarAPI.tsx';
 import '../App.css';
 
 const events = PlanData();
@@ -44,7 +45,7 @@ export default function Calendar() {
     };
 
     const onValid = (e) => {
-        console.log(e, 'onValid');
+        AddCalendarAPI(e.StartDate, e.EndDate, e.Content, e.Category);
         window.location = '/calendar';
     };
 
@@ -328,7 +329,7 @@ export default function Calendar() {
                             <div style={{ width: '320px', height: '490px', overflow: 'auto' }}>
                                 {/*일정이 없을 때*/}
                                 {!selectedDate
-                                    ? events.filter((event) => event.date === moment(today).format('YYYY-MM-DD'))
+                                    ? events.filter((event) => event.startDate === moment(today).format('YYYY-MM-DD'))
                                           .length === 0 && (
                                           <div
                                               style={{
@@ -362,8 +363,9 @@ export default function Calendar() {
                                           </div>
                                       )
                                     : formatDate(selectedDate).yearMonthDay >= moment(today).format('YYYY-MM-DD')
-                                    ? events.filter((event) => event.date === formatDate(selectedDate).yearMonthDay)
-                                          .length === 0 && (
+                                    ? events.filter(
+                                          (event) => event.startDate === formatDate(selectedDate).yearMonthDay
+                                      ).length === 0 && (
                                           <div
                                               style={{
                                                   width: '280px',
@@ -395,8 +397,9 @@ export default function Calendar() {
                                               </div>
                                           </div>
                                       )
-                                    : events.filter((event) => event.date === formatDate(selectedDate).yearMonthDay)
-                                          .length === 0 && (
+                                    : events.filter(
+                                          (event) => event.startDate === formatDate(selectedDate).yearMonthDay
+                                      ).length === 0 && (
                                           <div
                                               style={{
                                                   width: '280px',
@@ -422,49 +425,7 @@ export default function Calendar() {
                                     ? events.map((event) =>
                                           // Use parentheses instead of curly braces for the ternary operator
                                           // Curly braces are used for block statements, which are not returned implicitly
-                                          event.date === formatDate(selectedDate).yearMonthDay ? (
-                                              <div
-                                                  key={event.id}
-                                                  style={{
-                                                      width: '280px',
-                                                      height: '80px',
-                                                      border: '1px #ddd solid',
-                                                      borderRadius: '20px',
-                                                      margin: '0 auto',
-                                                      marginBottom: '10px',
-                                                      textAlign: 'left',
-                                                      display: 'flex',
-                                                      alignItems: 'center',
-                                                  }}
-                                              >
-                                                  <div style={{ padding: '18px' }}>
-                                                      <div
-                                                          style={{
-                                                              fontFamily: 'Pretendard-SemiBold',
-                                                              fontSize: '18px',
-                                                          }}
-                                                      >
-                                                          {event.title}
-                                                      </div>
-                                                      <div
-                                                          style={{
-                                                              fontFamily: 'Pretendard-Regular',
-                                                              fontSize: '12px',
-                                                              color: '#888',
-                                                          }}
-                                                      >
-                                                          {event.date} ~ {event.end}
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          ) : (
-                                              <></>
-                                          )
-                                      )
-                                    : events.map((event) =>
-                                          // Use parentheses instead of curly braces for the ternary operator
-                                          // Curly braces are used for block statements, which are not returned implicitly
-                                          event.date === moment(today).format('YYYY-MM-DD') ? (
+                                          event.startDate === formatDate(selectedDate).yearMonthDay ? (
                                               <div
                                                   key={event.id}
                                                   style={{
@@ -496,7 +457,50 @@ export default function Calendar() {
                                                               marginTop: '5px',
                                                           }}
                                                       >
-                                                          {event.date} ~ {event.end}
+                                                          {event.startDate} ~ {event.endDate}
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          ) : (
+                                              <></>
+                                          )
+                                      )
+                                    : events.map((event) =>
+                                          // Use parentheses instead of curly braces for the ternary operator
+                                          // Curly braces are used for block statements, which are not returned implicitly
+                                          event.startDate === moment(today).format('YYYY-MM-DD') ? (
+                                              <div
+                                                  key={event.id}
+                                                  style={{
+                                                      width: '280px',
+                                                      height: '80px',
+                                                      border: '1px #ddd solid',
+                                                      borderRadius: '20px',
+                                                      margin: '0 auto',
+                                                      marginBottom: '10px',
+                                                      textAlign: 'left',
+                                                      display: 'flex',
+                                                      alignItems: 'center',
+                                                  }}
+                                              >
+                                                  <div style={{ padding: '18px' }}>
+                                                      <div
+                                                          style={{
+                                                              fontFamily: 'Pretendard-SemiBold',
+                                                              fontSize: '18px',
+                                                          }}
+                                                      >
+                                                          {event.title}
+                                                      </div>
+                                                      <div
+                                                          style={{
+                                                              fontFamily: 'Pretendard-Regular',
+                                                              fontSize: '12px',
+                                                              color: '#888',
+                                                              marginTop: '5px',
+                                                          }}
+                                                      >
+                                                          {event.startDate} ~ {event.endDate}
                                                       </div>
                                                   </div>
                                               </div>

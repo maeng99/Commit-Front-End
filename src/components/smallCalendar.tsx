@@ -218,7 +218,7 @@ const SmallCalendar: React.FC<SmallCalendarProps> = ({ onDateSelect }) => {
                     ) {
                         html.push(<StyledToday key={'today'}>Today</StyledToday>);
                     }*/
-                    if (events.find((event) => event.date === moment(date).format('YYYY-MM-DD'))) {
+                    if (events.find((event) => event.startDate === moment(date).format('YYYY-MM-DD'))) {
                         html.push(<StyledDot key={moment(date).format('YYYY-MM-DD')} />);
                     }
                     return <>{html}</>;

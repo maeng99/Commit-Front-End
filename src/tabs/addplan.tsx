@@ -171,18 +171,16 @@ export default function Addplan() {
                                         margin: '0 auto',
                                         backgroundColor: '#EDF0F5',
                                         borderRadius: '20px',
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        alignItems: 'flex-start',
+                                        textAlign: 'left',
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '16px',
                                     }}
                                 >
-                                    <div style={{ paddingLeft: '20px', paddingTop: '10px' }}>• 목표 워라벨 :</div>
-                                    <div style={{ paddingLeft: '20px', paddingTop: '10px' }}>• 목표 수면시간 : </div>
-                                    <div style={{ paddingLeft: '20px', paddingTop: '10px' }}>• 목표 운동시간 : </div>
-                                    <div style={{ paddingLeft: '20px', paddingTop: '10px' }}>•</div>
-                                    <div style={{ paddingLeft: '20px', paddingTop: '10px' }}>•</div>
-                                    <div style={{ paddingLeft: '20px', paddingTop: '10px' }}>•</div>
-                                    <div style={{ paddingLeft: '20px', paddingTop: '10px' }}>•</div>
+                                    <div style={{ padding: '20px 20px 0px' }}>• 목표 워라벨 : </div>
+                                    <div style={{ padding: '20px 20px 0px' }}>• 목표 수면시간 : </div>
+                                    <div style={{ padding: '20px 20px 0px' }}>• 목표 운동시간 : </div>
+                                    <div style={{ padding: '20px 20px 0px' }}>• 세부사항 :</div>
+                                    <div></div>
                                 </div>
                             </div>
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>

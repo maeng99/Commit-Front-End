@@ -91,6 +91,7 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                 <div
                     ref={boxRef}
                     key={index}
+                    class="addplan"
                     style={{
                         width: '470px',
                         height: '100px',
@@ -187,7 +188,7 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                                     width: '190px',
                                     height: '1px',
                                     border: 'none',
-                                    background: '#eee',
+                                    background: '#ddd',
                                 }}
                             />
                             <div
@@ -211,10 +212,8 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                                     style={{
                                         width: '55px',
                                         height: '20px',
-                                        color: 'var(--gray60, #545454)',
-                                        fontFamily: 'Pretendard',
-                                        fontSize: '12px',
-                                        fontStyle: 'normal',
+                                        color: '#444',
+                                        fontFamily: 'Pretendard-Regular',
                                         fontWeight: '400',
                                         lineHeight: 'normal',
                                     }}
@@ -236,7 +235,7 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                             width: '10px',
                             height: '15px',
                             cursor: 'pointer',
-                            padding: '50px 5px',
+                            padding: '42px 5px',
                         }}
                         onMouseEnter={(event) => {
                             event.currentTarget.parentElement.style.backgroundColor = '#EE3579';

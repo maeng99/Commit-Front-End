@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import TimeTableAPI from '../api/plan/timetableAPI.tsx';
+import TimeTableAPI from '../api/plan/timeTableAPI.tsx';
 import '../App.css';
 
 type TimeTableType = 'after' | 'before';
