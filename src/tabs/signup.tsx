@@ -25,6 +25,11 @@ export default function Signup() {
         alert('입력한 정보를 다시 확인해주세요.');
     };
 
+    // 비밀번호 유효성 검사 패턴
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <div
@@ -75,6 +80,10 @@ export default function Signup() {
                                     type="text"
                                     {...register('Email', {
                                         required: '이메일을 입력해주세요.',
+                                        pattern: {
+                                            value: emailPattern,
+                                            message: '유효한 이메일 주소를 입력해주세요.',
+                                        },
                                     })}
                                     style={{ width: '336px', height: '20px', marginTop: '3px' }}
                                 />
@@ -97,6 +106,10 @@ export default function Signup() {
                                     type="password"
                                     {...register('Password', {
                                         required: '비밀번호를 입력해주세요.',
+                                        pattern: {
+                                            value: passwordPattern,
+                                            message: '영어, 숫자, 특수문자 포함 8-12자리를 입력해주세요.',
+                                        },
                                     })}
                                     style={{ width: '336px', height: '20px', marginTop: '3px' }}
                                 />
@@ -119,7 +132,8 @@ export default function Signup() {
                                     type="password"
                                     {...register('RePassword', {
                                         required: '비밀번호를 확인해주세요.',
-                                        
+                                        validate: (value) =>
+                                            value === getValues('Password') || '비밀번호가 일치하지 않습니다.',
                                     })}
                                     style={{ width: '336px', height: '20px', marginTop: '3px' }}
                                 />

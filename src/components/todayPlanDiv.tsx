@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import DatePlanAPI from '../api/plan/datePlanAPI.tsx';
+import CompletePlanAPI from '../api/plan/completePlanAPI.tsx';
 import '../App.css';
 
 type TodayPlanType = 'today' | 'notToday';
 type TodayPlanProps = {
-    type?: TimeTableType;
+    type?: TodayPlanType;
     date: Date;
 };
 
@@ -191,7 +192,20 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
     };
 
     const onValid = (e) => {
-        console.log(e, 'onValid');
+        // form의 유효성 검사 후 실행됨
+        const formData = getValues();
+        console.log(formData, 'onValid');
+
+        // 서버로 전송할 데이터 생성
+        const postData = {
+            startTime: formData.StartTime, // 입력된 시작 시간
+            endTime: formData.EndTime, // 입력된 종료 시간
+        };
+
+        // API 호출 함수 호출
+        CompletePlanAPI(postData.planId, postData.startTime, postData.endTime);
+
+        // 팝업 숨기기
         setTimePopupVisible(false);
     };
 

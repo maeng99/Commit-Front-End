@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 import Button from '../components/button.tsx';
 import LoginAPI from '../api/user/loginAPI.tsx';
 import '../App.css';
@@ -131,13 +132,12 @@ export default function Login() {
                         </div>
                         {/* 카카오 로그인 */}
                         <div style={{ width: '330px', margin: '10px auto', textAlign: 'center' }}>
-                        <img
-                            src="../img/btn/kakao_login.png"
-                            style={{ width: '330px', height: '50px', borderRadius: '20px', cursor: 'pointer' }}
-                            alt="Kakao Login"
-                            onClick={handleLogin}
-                        />
-                        
+                            <img
+                                src="../img/btn/kakao_login.png"
+                                style={{ width: '330px', height: '50px', borderRadius: '20px', cursor: 'pointer' }}
+                                alt="Kakao Login"
+                                onClick={handleLogin}
+                            />
                         </div>
                     </form>
                 </div>

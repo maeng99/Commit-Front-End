@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+
 type TodayPlanType = 'after' | 'before';
 type TodayPlanProps = {
     type?: TimeTableType;
@@ -8,15 +9,17 @@ type TodayPlanProps = {
 };
 
 type Box = {
+    id: number;
     selectedCategory: string | null;
     isRightBoxClicked: boolean;
     content: string;
+    selectedOption: string | null;
 };
 
 export default function TodayPlanDiv(props: TodayPlanProps) {
     const [isRightBoxClicked, setIsRightBoxClicked] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState(null);
-    const [newBoxes, setNewBoxes] = useState([]);
+    const [newBoxes, setNewBoxes] = useState<Box[]>([]);
     const boxRef = useRef(null);
     const colors = {
         A: { box: '#1F48BB', text: '#1F48BB' },
@@ -44,11 +47,22 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
     };
 
     const handleAddBox = () => {
-        setNewBoxes([...newBoxes, { selectedCategory: null, isRightBoxClicked: false }]);
+        setNewBoxes([...newBoxes, { id: Date.now(), selectedCategory: null, isRightBoxClicked: false, content: '' }]);
     };
 
     const handleRemoveBox = (index: number) => {
-        setNewBoxes(newBoxes.filter((_, i) => i !== index)); // 특정 인덱스의 네모 칸 제거
+        const updatedBoxes = newBoxes.filter((_, i) => i !== index);
+        setNewBoxes(updatedBoxes);
+    };
+
+    const handleOptionChange = (index: number, option: string) => {
+        const updatedBoxes = [...newBoxes];
+        updatedBoxes[index].selectedOption = option;
+        setNewBoxes(updatedBoxes);
+    };
+
+    const isValidBox = (box) => {
+        return box.content && box.selectedCategory && box.selectedOption;
     };
 
     const todayPlanList = [
@@ -109,7 +123,7 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                         style={{
                             width: '460px',
                             height: '100px',
-                            backgroundColor: '#eee',
+                            backgroundColor: isValidBox(box) ? '#E9EFFD' : '#eee',
                             borderRadius: '5px 20px 20px 5px',
                             display: 'flex',
                             justifyContent: 'space-between',
@@ -136,7 +150,7 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                                     border: 'none',
                                     borderRadius: '10px',
                                     padding: '10px 5px',
-                                    backgroundColor: 'none',
+                                    backgroundColor: 'transparent',
                                     fontFamily: 'Pretendard-Regular',
                                     fontSize: '20px',
                                     color: '#0D2259',
@@ -209,6 +223,8 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                                     카테고리
                                 </span>
                                 <select
+                                    value={box.selectedOption || ''}
+                                    onChange={(e) => handleOptionChange(index, e.target.value)}
                                     style={{
                                         width: '55px',
                                         height: '20px',
@@ -229,6 +245,7 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                         </div>
                     </div>
                     <img
+                        //삭제버튼
                         type="submit"
                         src="../img/btn/delete2.png"
                         style={{
@@ -243,6 +260,7 @@ export default function TodayPlanDiv(props: TodayPlanProps) {
                         onMouseLeave={(event) => {
                             event.currentTarget.parentElement.style.backgroundColor = '#ccc';
                         }}
+                        onClick={() => handleRemoveBox(index)}
                     />
                 </div>
             ))}

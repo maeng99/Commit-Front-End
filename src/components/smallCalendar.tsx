@@ -4,6 +4,7 @@ import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
 import moment from 'moment';
 import PlanData from '../database/planData.tsx';
+import CalendarPlanAPI from '../api/plan/calendarPlanAPI.tsx';
 import '../App.css';
 
 type ValuePiece = Date | null;
@@ -165,8 +166,6 @@ const StyledDot = styled.div`
     transform: translateX(-50%);
 `;
 
-const events = PlanData();
-
 type DateSelectionHandler = (selectedDate: Date) => void;
 interface SmallCalendarProps {
     onDateSelect: DateSelectionHandler;
@@ -176,6 +175,7 @@ const SmallCalendar: React.FC<SmallCalendarProps> = ({ onDateSelect }) => {
     const today = new Date();
     const [date, setDate] = useState<Value>(today);
     const [activeStartDate, setActiveStartDate] = useState<Date | null>(new Date());
+    const { calendarPlanList, loading } = CalendarPlanAPI();
 
     const handleDateChange = (newDate: Value) => {
         setDate(newDate);
@@ -190,6 +190,13 @@ const SmallCalendar: React.FC<SmallCalendarProps> = ({ onDateSelect }) => {
     useEffect(() => {
         onDateSelect(date);
     }, [date]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!calendarPlanList) {
+        return <div>No data available</div>;
+    }
 
     return (
         <StyledCalendarWrapper>
@@ -218,7 +225,7 @@ const SmallCalendar: React.FC<SmallCalendarProps> = ({ onDateSelect }) => {
                     ) {
                         html.push(<StyledToday key={'today'}>Today</StyledToday>);
                     }*/
-                    if (events.find((event) => event.startDate === moment(date).format('YYYY-MM-DD'))) {
+                    if (calendarPlanList.find((event) => event.date === moment(date).format('YYYY-MM-DD'))) {
                         html.push(<StyledDot key={moment(date).format('YYYY-MM-DD')} />);
                     }
                     return <>{html}</>;

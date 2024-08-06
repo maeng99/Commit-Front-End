@@ -39,6 +39,8 @@ export default function Mypage() {
         return <div>No data available</div>;
     }
 
+    const passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,12}$/;
+
     return (
         <div>
             <Nav type="mypage" />
@@ -138,6 +140,10 @@ export default function Mypage() {
                                                 type="password"
                                                 {...register('Password', {
                                                     required: '새 비밀번호를 입력해주세요.',
+                                                    pattern: {
+                                                        value: passwordPattern,
+                                                        message: '영어, 숫자, 특수문자 포함 8-12자리를 입력해주세요.',
+                                                    },
                                                 })}
                                                 placeholder="새 비밀번호"
                                                 style={{
@@ -166,6 +172,9 @@ export default function Mypage() {
                                                 type="password"
                                                 {...register('RePassword', {
                                                     required: '새 비밀번호를 확인해주세요.',
+                                                    validate: (value) =>
+                                                        value === getValues('Password') ||
+                                                        '새 비밀번호가 일치하지 않습니다.',
                                                 })}
                                                 placeholder="새 비밀번호 확인"
                                                 style={{
@@ -348,36 +357,137 @@ export default function Mypage() {
                                             height: '150px',
                                         }}
                                     >
+                                        <div style={{ display: 'flex' }}>
+                                            {/*#EDEDED*/}
+                                            <select
+                                                style={{
+                                                    width: '55px',
+                                                    height: '30px',
+                                                    borderRadius: '4px',
+                                                    margin: '5px',
+                                                    border: '1px solid #4470F3',
+                                                    fontSize: '12px',
+                                                }}
+                                                disabled={isLocked} // 필드 잠금
+                                            >
+                                                <option disabled selected value="">
+                                                    Work
+                                                </option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                            </select>
+                                            <div
+                                                style={{
+                                                    zIndex: '10',
+                                                    color: 'black',
+                                                    marginTop: '8px',
+                                                }}
+                                            >
+                                                :
+                                            </div>
+                                            <select
+                                                style={{
+                                                    width: '58px',
+                                                    height: '30px',
+                                                    borderRadius: '4px',
+                                                    margin: '5px',
+                                                    border: '1px solid #4470F3',
+                                                    fontSize: '12px',
+                                                }}
+                                                disabled={isLocked} // 필드 잠금
+                                            >
+                                                <option disabled selected value="">
+                                                    Life
+                                                </option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                            </select>
+                                        </div>
                                         <input
-                                            type="text"
+                                            type="number"
                                             style={{
                                                 backgroundColor: isRevising ? '#EDEDED' : 'white',
                                                 fontFamily: 'Pretendard-Regular',
-                                                fontSize: '16px',
-                                                height: '15px',
+                                                height: '12px',
+                                                width: '40px',
                                             }}
                                             disabled={isLocked} // 필드 잠금
+                                            placeholder="8"
                                         ></input>
                                         <input
-                                            type="text"
+                                            type="number"
                                             style={{
                                                 backgroundColor: isRevising ? '#EDEDED' : 'white',
                                                 fontFamily: 'Pretendard-Regular',
-                                                fontSize: '16px',
-                                                height: '15px',
+                                                height: '12px',
+                                                width: '40px',
                                             }}
                                             disabled={isLocked} // 필드 잠금
+                                            placeholder="50"
                                         ></input>
-                                        <input
-                                            type="text"
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            color: 'black',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                            marginRight: '0px',
+                                            marginTop: '0px',
+                                            paddingTop: '2px',
+                                            width: '0px',
+                                            height: '150px',
+                                        }}
+                                    >
+                                        {/*#EDEDED*/}
+
+                                        <p
                                             style={{
-                                                backgroundColor: isRevising ? '#EDEDED' : 'white',
                                                 fontFamily: 'Pretendard-Regular',
                                                 fontSize: '16px',
-                                                height: '15px',
+                                                marginLeft: '130px',
+                                                width: '60px',
+                                                marginTop: '16px',
+                                                color: 'white',
                                             }}
-                                            disabled={isLocked} // 필드 잠금
-                                        ></input>
+                                        >
+                                            워라벨
+                                        </p>
+                                        <p
+                                            style={{
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '18px',
+                                                width: '60px',
+                                                marginRight: '384px',
+                                            }}
+                                        >
+                                            (시간)
+                                        </p>
+                                        <p
+                                            style={{
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '18px',
+                                                width: '60px',
+                                                marginRight: '400px',
+                                            }}
+                                        >
+                                            (분)
+                                        </p>
                                     </div>
                                 </div>
 
@@ -413,6 +523,12 @@ export default function Mypage() {
                                             fontSize: '16px',
                                         }}
                                         disabled={isLocked} // 필드 잠금
+                                        placeholder="• 중요한 일과는 오전 9시부터 11시 사이에 배치 집중력이 높은 시간대를 활용합니다.
+• 규칙적으로 식사를 합니다.
+• 점심 후 1시부터 2시까지 가벼운 업무를 배치 에너지가 낮은 시간대를 효율적 사용합니다.
+• 하루에 한 가지 주요 목표를 설정하고, 이를 중심으로 일정을 구성합니다.
+• 유연한 일정: 예상치 못한 일이  때를 대비해 하루 일정의 20%는 예비 시간으로 남겨둡니다.
+•저녁 계획: 매일 저녁 다음 날의 일정을 미리 계획하여 하루를 체계적으로 준비합니다."
                                     ></textarea>
                                 </div>
                             </div>

@@ -4,15 +4,31 @@ import moment from 'moment';
 import Button from '../components/button.tsx';
 import TimeTableDiv from '../components/timeTableDiv.tsx';
 import UserAPI from '../api/user/userAPI.tsx';
+import DateFeedbackAPI from '../api/chatGPT/dateFeedbackAPI.tsx';
 import '../App.css';
 
 export default function FeedbackPopup({ onClose }) {
     const { userData, loading } = UserAPI();
+
+    var date = moment(moment().subtract(1, 'day').toDate()).format('YYYY-MM-DD');
+    const { dateFeedbackData, dateFeedbackLoading } = DateFeedbackAPI({ date });
+    /*
+    const dateFeedbackData = {
+        analysisResult: {
+            wlBalance:
+                '사용자 일정에서 워크 & 라이프 밸런스 비율은 약 3:7로 파악됩니다. 목표인 4:6에 비해 조금 더 여유로운 생활을 보냈습니다.',
+            sleep: '사용자의 어제 수면 시간은 약 7시간 33분으로, 목표 수면 시간인 7시간을 충족하고 있습니다. 충분한 수면을 취한 것으로 보여집니다.',
+            workOut:
+                '어제 운동 시간은 27분으로, 목표 운동 시간인 1시간에 비해 부족합니다. 추가적으로 운동 시간을 확보하는 것이 좋습니다.',
+            meal: '아침 식사, 점심 식사, 저녁 식사를 모두 규칙적으로 했습니다. 다만, 아침 식사 시간이 매우 짧았습니다. 좀 더 여유롭게 아침 식사를 할 필요가 있습니다.',
+            review: '전체적으로 매우 균형 잡힌 일정을 보냈습니다. 다만, 운동 시간을 늘리고 아침 식사를 좀 더 여유롭게 즐기는 것이 좋을 것 같습니다.',
+        },
+    };*/
     if (loading) {
         return <div>Loading...</div>;
     }
     if (!userData) {
-        return <div>No data available</div>;
+        return <div>No Data exists...</div>;
     }
 
     return (
@@ -154,28 +170,25 @@ export default function FeedbackPopup({ onClose }) {
                                     >
                                         <div style={{ padding: '10px 10px 5px' }}>
                                             <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 워라밸</span>
-                                            <br />: 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸
-                                            비율이 5.7 : 4.3으로 매우 안정적입니다.
+                                            <br />: {dateFeedbackData.analysisResult.wlBalance}
                                         </div>
                                         <div style={{ padding: '10px 10px 5px' }}>
                                             <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 수면</span>
-                                            <br />: 수면 시간은 7시간으로 적절합니다. 더 나은 건강을 위해 8시간으로
-                                            늘리는 것을 고려해보세요.
+                                            <br />: {dateFeedbackData.analysisResult.sleep}
                                         </div>
                                         <div style={{ padding: '10px 10px 5px' }}>
                                             <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 운동</span>
-                                            <br />: 아침에 40분 동안 조깅을 하고 있습니다. 꾸준한 운동 습관을 유지하되,
-                                            주 1회 휴식을 추천합니다.
+                                            <br />: {dateFeedbackData.analysisResult.workOut}
                                         </div>
                                         <div style={{ padding: '10px 10px 5px' }}>
                                             <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 식사</span>
-                                            <br />: 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸
-                                            비율이 5.7 : 4.3으로 매우 안정적입니다.
+                                            <br />: {dateFeedbackData.analysisResult.meal}
                                         </div>
                                         <div style={{ padding: '10px 10px 5px' }}>
-                                            <span style={{ fontFamily: 'Pretendard-SemiBold' }}>• 여가생활</span>
-                                            <br />: 사용자는 주중 일과 생활의 균형을 잘 맞추고 있으며, 평균적인 워라밸
-                                            비율이 5.7 : 4.3으로 매우 안정적입니다.
+                                            <span style={{ fontFamily: 'Pretendard-SemiBold', color: '#4470F3' }}>
+                                                • 총평
+                                            </span>
+                                            <br />: {dateFeedbackData.analysisResult.review}
                                         </div>
                                     </div>
                                 </div>

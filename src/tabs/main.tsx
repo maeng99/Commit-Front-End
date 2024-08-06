@@ -9,24 +9,22 @@ import Nav from '../components/nav.tsx';
 import SmallCalendar from '../components/smallCalendar.tsx';
 import TimeTableDiv from '../components/timeTableDiv.tsx';
 import TodayPlanDiv from '../components/todayPlanDiv.tsx';
-import PlanData from '../database/planData.tsx';
+import CalendarPlanAPI from '../api/plan/calendarPlanAPI.tsx';
 import '../App.css';
-
-const events = PlanData();
 
 function getClosestEvents(events) {
     const today = moment(); // Get today's date
     const closestEvents = events.filter(
-        (event) => moment(event.startDate) >= today || moment(event.startDate).isSame(today, 'day')
+        (event) => moment(event.date) >= today || moment(event.date).isSame(today, 'day')
     ); // Filter future events
-    closestEvents.sort((a, b) => moment(a.startDate) - moment(b.startDate)); // Sort events by date
+    closestEvents.sort((a, b) => moment(a.date) - moment(b.date)); // Sort events by date
     return closestEvents.slice(0, 3); // Get the closest 3 events
 }
 
 export default function Main() {
     const today = new Date();
-    const closestEvents = getClosestEvents(events);
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const { calendarPlanList, loading } = CalendarPlanAPI();
 
     const handleDateSelect = (selectedDate: Date) => {
         setSelectedDate(selectedDate);
@@ -105,6 +103,15 @@ export default function Main() {
     */
 
     const calAchiev = (datePlanData.filter((plan) => plan.status === 'COMPLETE').length / datePlanData.length) * 100;
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!calendarPlanList) {
+        return <div>No data available</div>;
+    }
+
+    const closestEvents = getClosestEvents(calendarPlanList);
 
     return (
         <div>
@@ -347,7 +354,7 @@ export default function Main() {
                                                 >
                                                     {moment(event.date).format('D')}
                                                 </div>
-                                                {event.title}
+                                                {event.content}
                                             </div>
                                         ))
                                     ) : (

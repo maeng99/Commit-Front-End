@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useForm, Controller } from 'react-hook-form';
 import moment from 'moment';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import NewPlanDiv from '../components/newPlanDiv.tsx';
 import TimeTableDiv from '../components/timeTableDiv.tsx';
+import CompletePlanAPI from '../api/plan/completePlanAPI.tsx';
 import '../App.css';
 
-// 팝업 컴포넌트
 const Popup = ({ onClose }) => {
     return (
         <div className="popup-background">
@@ -43,6 +43,12 @@ const Popup = ({ onClose }) => {
 };
 
 export default function Addplan() {
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm();
     const [showPopup, setShowPopup] = useState(false);
     const selectedDate = localStorage.getItem('smallDate');
 
@@ -53,6 +59,72 @@ export default function Addplan() {
     const handleClosePopup = () => {
         setShowPopup(false);
     };
+
+    const onSubmit = async (data) => {
+        const accessToken = getCookie('accessToken');
+        const refreshToken = getCookie('refreshToken');
+
+        if (!accessToken) {
+            window.location = '/'; // Redirect to login page
+            return;
+        }
+
+        for (const box of data.boxes) {
+            try {
+                await CompletePlanAPI(accessToken, box.scheduleId, box.startTime, box.endTime);
+            } catch (error) {
+                console.error('Failed to add calendar info:', error);
+                if (refreshToken) {
+                    try {
+                        const newAccessToken = await getAccessTokenWithRefreshToken(refreshToken);
+                        await AddCalendarAPI(newAccessToken, box.scheduleId, box.startTime, box.endTime);
+                    } catch (error) {
+                        console.error('Failed to refresh access token:', error);
+                        window.location = '/'; // Redirect to login page
+                    }
+                } else {
+                    alert('ERROR');
+                    window.location = '/'; // Redirect to login page
+                }
+            }
+        }
+    };
+    function getCookie(name) {
+        var nameEQ = name + '=';
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i];
+            while (cookie.charAt(0) === ' ') {
+                cookie = cookie.substring(1, cookie.length);
+            }
+            if (cookie.indexOf(nameEQ) === 0) {
+                return cookie.substring(nameEQ.length, cookie.length);
+            }
+        }
+        return null;
+    }
+
+    function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
+        return fetch(API_SERVER_DOMAIN + 'auth/reissue', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                accessToken: accessToken,
+                refreshToken: refreshToken,
+            }),
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Failed to refresh access token');
+                }
+                return response.json();
+            })
+            .then((data) => {
+                return data.accessToken;
+            });
+    }
 
     return (
         <div>
@@ -138,7 +210,7 @@ export default function Addplan() {
                                     overflowY: 'auto',
                                 }}
                             >
-                                <NewPlanDiv />
+                                <NewPlanDiv register={register} control={control} errors={errors} />
                             </div>
                         </div>
 
@@ -184,14 +256,7 @@ export default function Addplan() {
                                 </div>
                             </div>
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
-                                <Button
-                                    type="primary"
-                                    size="large"
-                                    title="저장"
-                                    onClick={() => {
-                                        window.location = '/plan';
-                                    }}
-                                />
+                                <Button type="primary" size="large" title="저장" onClick={handleSubmit(onSubmit)} />
                             </div>
                         </div>
                     </div>

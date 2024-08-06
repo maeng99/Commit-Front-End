@@ -3,17 +3,17 @@ import React from 'react';
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
 // timeTable.tsx
-export default function CompletePlanAPI() {
+export default function CompletePlanAPI(planId, startTime, endTime) {
     var accessToken = getCookie('accessToken');
     var refreshToken = getCookie('refreshToken');
 
     if (accessToken) {
-        completePlanInfo(accessToken).catch((error) => {
+        completePlanInfo(accessToken, planId, startTime, endTime).catch((error) => {
             console.error('Failed to fetch timetable:', error);
             if (refreshToken) {
                 getAccessTokenWithRefreshToken(refreshToken)
                     .then((newAccessToken) => {
-                        completePlanInfo(accessToken).catch((error) => {
+                        completePlanInfo(accessToken, planId, startTime, endTime).catch((error) => {
                             console.error('Failed to fetch timetable:', error);
                             window.location = '/';
                         });
@@ -29,8 +29,6 @@ export default function CompletePlanAPI() {
     } else {
         window.location = '/'; // Redirect to login page
     }
-
-    return ruleSetData;
 }
 
 function getCookie(name) {
@@ -73,17 +71,22 @@ function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
 function completePlanInfo(accessToken, planId, startTime, endTime) {
     return fetch(API_SERVER_DOMAIN + `/api/plan/complete/${planId}`, {
         method: 'POST',
-        header: {
+        headers: {
+            'Content-Type': 'application/json',
             Authorization: 'Bearer ' + accessToken,
         },
-        body: {
+        body: JSON.stringify({
             startTime: startTime,
             endTime: endTime,
-        },
-    }).then((response) => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch timetable');
-        }
-        return response.json();
-    });
+        }),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch timetable');
+            }
+            return response.json();
+        })
+        .then(() => {
+            window.location.reload();
+        });
 }
