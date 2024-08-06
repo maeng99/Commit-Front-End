@@ -1,45 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
-// timeTable.tsx
-export default function TimeTableAPI(date) {
-    var accessToken = getCookie('accessToken');
-    var refreshToken = getCookie('refreshToken');
-    const timeTableData = [];
+export default function TimeTableAPI({ date }) {
+    const [timeTableData, setTimeTableData] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    if (accessToken) {
-        getTimeTableInfo(accessToken, date)
-            .then((data) => {
-                timeTableData = data.result;
-            })
-            .catch((error) => {
-                console.error('Failed to fetch timetable:', error);
-                if (refreshToken) {
-                    getAccessTokenWithRefreshToken(refreshToken)
-                        .then((newAccessToken) => {
-                            getTimeTableInfo(newAccessToken, date)
-                                .then((data) => {
-                                    timeTableData = data.result;
-                                })
-                                .catch((error) => {
-                                    console.error('Failed to fetch timetable:', error);
-                                    window.location = '/';
-                                });
-                        })
-                        .catch((error) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            var accessToken = getCookie('accessToken');
+            var refreshToken = getCookie('refreshToken');
+
+            if (accessToken) {
+                try {
+                    const data = await getTimeTableInfo(accessToken, date);
+                    setTimeTableData(data.result);
+                } catch (error) {
+                    console.error('Failed to fetch timetable:', error);
+                    if (refreshToken) {
+                        try {
+                            const newAccessToken = await getAccessTokenWithRefreshToken(refreshToken);
+                            const data = await getTimeTableInfo(newAccessToken, date);
+                            setTimeTableData(data.result);
+                        } catch (error) {
                             console.error('Failed to refresh access token:', error);
-                            window.location = '/'; // Redirect to login page
-                        });
-                } else {
-                    window.location = '/'; // Redirect to login page
+                            window.location = '/'; // 로그인 페이지로 리디렉션
+                        }
+                    } else {
+                        window.location = '/'; // 로그인 페이지로 리디렉션
+                    }
                 }
-            });
-    } else {
-        window.location = '/'; // Redirect to login page
-    }
+            } else {
+                window.location = '/'; // 로그인 페이지로 리디렉션
+            }
+            setLoading(false);
+        };
 
-    return timeTableData;
+        fetchData();
+    }, [date]);
+
+    return { timeTableData, loading };
 }
 
 function getCookie(name) {
@@ -57,14 +57,13 @@ function getCookie(name) {
     return null;
 }
 
-function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
+function getAccessTokenWithRefreshToken(refreshToken) {
     return fetch(API_SERVER_DOMAIN + 'auth/reissue', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-            accessToken: accessToken,
             refreshToken: refreshToken,
         }),
     })
@@ -79,17 +78,16 @@ function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
         });
 }
 
-function getTimeTableInfo(accessToken, date) {
-    return fetch(API_SERVER_DOMAIN + `/api/plan/timetable?date=${date}`, {
+function getTimeTableInfo(accessToken, selectedDate) {
+    return fetch(API_SERVER_DOMAIN + `/api/plan/timetable?date=${selectedDate}`, {
         method: 'GET',
-        header: {
+        headers: {
             Authorization: 'Bearer ' + accessToken,
         },
-    }).then((response) => {
-        if (!response.ok) {
-            alert(1);
+    }).then((res) => {
+        if (!res.ok) {
             throw new Error('Failed to fetch timetable');
         }
-        return response.json();
+        return res.json();
     });
 }

@@ -103,6 +103,12 @@ export default function Nav(props: NavType) {
                     onClick={() => {
                         window.location = '/';
                     }}
+                    onMouseOver={(event) => {
+                        event.target.src = `../img/nav_img/nav_logout_enabled.png`;
+                    }}
+                    onMouseOut={(event) => {
+                        event.target.src = `../img/nav_img/nav_logout_disabled.png`;
+                    }}
                 />
             </div>
         </div>

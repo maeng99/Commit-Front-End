@@ -91,7 +91,7 @@ export default function Addplan() {
                                     overflow: 'auto',
                                 }}
                             >
-                                <TimeTableDiv type="after" />
+                                <TimeTableDiv type="after" date={moment(selectedDate).format('YYYY-MM-DD')} />
                             </div>
                         </div>
 
@@ -134,7 +134,6 @@ export default function Addplan() {
                                     width: '510px',
                                     height: '525px',
                                     margin: '0 auto',
-                                    backgroundColor: '#eee',
                                     borderRadius: '20px',
                                     overflowY: 'auto',
                                 }}
@@ -170,10 +169,19 @@ export default function Addplan() {
                                         width: '280px',
                                         height: '470px',
                                         margin: '0 auto',
-                                        backgroundColor: '#eee',
+                                        backgroundColor: '#EDF0F5',
                                         borderRadius: '20px',
+                                        textAlign: 'left',
+                                        fontFamily: 'Pretendard-Regular',
+                                        fontSize: '16px',
                                     }}
-                                ></div>
+                                >
+                                    <div style={{ padding: '20px 20px 0px' }}>• 목표 워라벨 : </div>
+                                    <div style={{ padding: '20px 20px 0px' }}>• 목표 수면시간 : </div>
+                                    <div style={{ padding: '20px 20px 0px' }}>• 목표 운동시간 : </div>
+                                    <div style={{ padding: '20px 20px 0px' }}>• 세부사항 :</div>
+                                    <div></div>
+                                </div>
                             </div>
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
                                 <Button

@@ -17,9 +17,9 @@ const events = PlanData();
 function getClosestEvents(events) {
     const today = moment(); // Get today's date
     const closestEvents = events.filter(
-        (event) => moment(event.date) >= today || moment(event.date).isSame(today, 'day')
+        (event) => moment(event.startDate) >= today || moment(event.startDate).isSame(today, 'day')
     ); // Filter future events
-    closestEvents.sort((a, b) => moment(a.date) - moment(b.date)); // Sort events by date
+    closestEvents.sort((a, b) => moment(a.startDate) - moment(b.startDate)); // Sort events by date
     return closestEvents.slice(0, 3); // Get the closest 3 events
 }
 
@@ -37,6 +37,74 @@ export default function Main() {
             window.location = '/plan';
         }
     }, [selectedDate]);
+
+    const datePlanData = [
+        {
+            planId: 1,
+            content: '학교가기',
+            priority: 'A',
+            type: 'WORK',
+            date: '2024-08-04',
+            startTime: {
+                hour: 8,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            endTime: {
+                hour: 13,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            createdAt: '2024-08-04T19:23:33.296Z',
+            updatedAt: '2024-08-04T19:23:33.296Z',
+            status: null,
+            childPlan: 0,
+            userId: 0,
+            complete: true,
+            delayed: true,
+        },
+        {
+            planId: 2,
+            content: 'PC방',
+            priority: 'C',
+            type: 'LIFE',
+            date: '2024-08-04',
+            startTime: {
+                hour: 17,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            endTime: {
+                hour: 19,
+                minute: 0,
+                second: 0,
+                nano: 0,
+            },
+            createdAt: '2024-08-04T19:23:33.296Z',
+            updatedAt: '2024-08-04T19:23:33.296Z',
+            status: 'COMPLETE',
+            childPlan: 0,
+            userId: 0,
+            complete: true,
+            delayed: true,
+        },
+    ];
+
+    /*
+    서버 연결
+    const { datePlanData, loading } = DatePlanAPI({ date });
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!datePlanData) {
+        return <div>No data available</div>;
+    }
+    */
+
+    const calAchiev = (datePlanData.filter((plan) => plan.status === 'COMPLETE').length / datePlanData.length) * 100;
 
     return (
         <div>
@@ -69,7 +137,7 @@ export default function Main() {
                                 >
                                     <div
                                         style={{
-                                            width: '40%',
+                                            width: `${calAchiev}%`,
                                             height: '25px',
                                             background: 'linear-gradient(90deg, #4470F3 0%, #02A9A1 100%)',
                                             borderRadius: 100,
@@ -86,11 +154,12 @@ export default function Main() {
                                         width: '10%',
                                     }}
                                 >
-                                    <span>40</span>%
+                                    {calAchiev}%
                                 </div>
                             </div>
                             <div
                                 style={{
+                                    position: 'relative',
                                     width: '100%',
                                     height: '550px',
                                     backgroundColor: '#fff',
@@ -120,7 +189,7 @@ export default function Main() {
                                         overflow: 'auto',
                                     }}
                                 >
-                                    <TodayPlanDiv />
+                                    <TodayPlanDiv type="today" date={moment(today).format('YYYY-MM-DD')} />
                                 </div>
                             </div>
                         </div>

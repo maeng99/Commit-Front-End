@@ -3,18 +3,23 @@ import React from 'react';
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
 // timeTable.tsx
-export default function CreateRuleSetAPI(WLBalance, sleepTime, exerciseTime, detail) {
+export default function AddCalendarAPI(startDate, endDate, content, type) {
     var accessToken = getCookie('accessToken');
     var refreshToken = getCookie('refreshToken');
 
+    var startDate = startDate;
+    var endDate = endDate;
+    var content = content;
+    var type = type;
+
     if (accessToken) {
-        setRuleSetInfo(accessToken, WLBalance, sleepTime, exerciseTime, detail).catch((error) => {
-            console.error('Failed to fetch timetable:', error);
+        addCalendarInfo(accessToken, startDate, endDate, content, type).catch((error) => {
+            console.error('Failed to fetch calendar:', error);
             if (refreshToken) {
                 getAccessTokenWithRefreshToken(refreshToken)
                     .then((newAccessToken) => {
-                        setRuleSetInfo(accessToken, WLBalance, sleepTime, exerciseTime, detail).catch((error) => {
-                            console.error('Failed to fetch timetable:', error);
+                        addCalendarInfo(accessToken, startDate, endDate, content, type).catch((error) => {
+                            console.error('Failed to fetch calendar:', error);
                             window.location = '/';
                         });
                     })
@@ -29,8 +34,6 @@ export default function CreateRuleSetAPI(WLBalance, sleepTime, exerciseTime, det
     } else {
         window.location = '/'; // Redirect to login page
     }
-
-    return ruleSetData;
 }
 
 function getCookie(name) {
@@ -70,17 +73,17 @@ function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
         });
 }
 
-function setRuleSetInfo(accessToken, WLBalance, sleepTime, exerciseTime, detail) {
-    return fetch(API_SERVER_DOMAIN + '/api/user/ruleSet/create', {
+function addCalendarInfo(accessToken, startDate, endDate, content, type) {
+    return fetch(API_SERVER_DOMAIN + '/api/plan/calendar/create', {
         method: 'POST',
         header: {
             Authorization: 'Bearer ' + accessToken,
         },
         body: {
-            WLBalance: WLBalance,
-            sleepTime: sleepTime,
-            exerciseTime: exerciseTime,
-            detail: detail,
+            startDate: startDate,
+            endDate: endDate,
+            content: content,
+            type: type,
         },
     }).then((response) => {
         if (!response.ok) {

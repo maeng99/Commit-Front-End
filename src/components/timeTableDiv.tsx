@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import TimeTableAPI from '../api/plan/timetableAPI.tsx';
+import { useForm } from 'react-hook-form';
+import TimeTableAPI from '../api/plan/timeTableAPI.tsx';
 import '../App.css';
 
 type TimeTableType = 'after' | 'before';
@@ -10,124 +11,26 @@ type TimeTableProps = {
 };
 
 export default function TimeTableDiv(props: TimeTableProps) {
+    const {
+        register,
+        getValues,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
     const { type, date } = props;
     const [xy, setXY] = useState({ x: -1000, y: -1000 });
     const [data, setData] = useState(null);
-    const [isTimePopupVisible, setTimePopupVisible] = useState(true);
+    const [isTimePopupVisible, setTimePopupVisible] = useState(false);
     const [popupStyle, setPopupStyle] = useState({ position: 'fixed' });
     const popupRef = useRef(null);
 
-    const timeTableDate = {
-        fixedPlans: [
-            {
-                planId: 0,
-                startTime: {
-                    hour: 0,
-                    minute: 0,
-                    second: 0,
-                    nano: 0,
-                },
-                endTime: {
-                    hour: 0,
-                    minute: 0,
-                    second: 0,
-                    nano: 0,
-                },
-                content: 'string',
-                isFixed: true,
-                priority: 0,
-                fixed: true,
-            },
-        ],
-        plans: [
-            {
-                planId: 0,
-                startTime: {
-                    hour: 0,
-                    minute: 0,
-                    second: 0,
-                    nano: 0,
-                },
-                endTime: {
-                    hour: 0,
-                    minute: 0,
-                    second: 0,
-                    nano: 0,
-                },
-                content: 'string',
-                isFixed: true,
-                priority: 0,
-                fixed: true,
-            },
-        ],
+    const { timeTableData, loading } = TimeTableAPI({ date });
+
+    const splitTime = (timeString) => {
+        const [hour, minute, second] = timeString.split(':').map(Number);
+        return { hour, minute, second };
     };
-
-    /*
-    const timeTableList = [...timeTableData.fixedPlans, ...timeTableData.Plans].sort((a, b) => {
-        const startA = a.startTime.hour * 60 + a.startTime.minute;
-        const startB = b.startTime.hour * 60 + b.startTime.minute;
-        return startA - startB;
-    });
-    */
-    const timeTableList = [
-        {
-            planId: 0,
-            startTime: {
-                hour: 11,
-                minute: 0,
-                second: 0,
-                nano: 0,
-            },
-            endTime: {
-                hour: 12,
-                minute: 0,
-                second: 0,
-                nano: 0,
-            },
-            content: '수면시간',
-            isFixed: true,
-            priority: 0,
-            fixed: true,
-        },
-        {
-            planId: 0,
-            startTime: {
-                hour: 8,
-                minute: 0,
-                second: 0,
-                nano: 0,
-            },
-            endTime: {
-                hour: 11,
-                minute: 0,
-                second: 0,
-                nano: 0,
-            },
-            content: '아침식사',
-            isFixed: true,
-            priority: 0,
-            fixed: true,
-        },
-    ];
-
-    const handleTime = (event) => {
-        const parentRect = event.currentTarget.parentElement.parentElement.parentElement.getBoundingClientRect();
-        const clickedX = event.clientX - parentRect.left;
-        const clickedY = event.clientY - parentRect.top;
-
-        setXY({ x: clickedX, y: clickedY });
-        //setData(data);
-    };
-
-    const padZero = (num) => num.toString().padStart(2, '0');
-
-    useEffect(() => {
-        if (isTimePopupVisible) {
-            setTimePopupVisible(false);
-        } else {
-            setTimePopupVisible(true);
-        }
-    }, [xy]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -142,6 +45,65 @@ export default function TimeTableDiv(props: TimeTableProps) {
         };
     }, [popupRef]);
 
+    useEffect(() => {
+        setTimePopupVisible((prev) => !prev);
+    }, [xy]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+    if (!timeTableData) {
+        return <div>No data available</div>;
+    }
+
+    var timeTableList = [];
+    if (!timeTableData.plans) {
+        timeTableList = [...timeTableData.fixedPlans].sort((a, b) => {
+            const startA = splitTime(a.startTime).hour * 60 + splitTime(a.startTime).minute;
+            const startB = splitTime(b.startTime).hour * 60 + splitTime(a.startTime).minute;
+            return startA - startB;
+        });
+    } else {
+        timeTableList = [...timeTableData.fixedPlans, ...timeTableData.plans].sort((a, b) => {
+            const startA = splitTime(a.startTime).hour * 60 + splitTime(a.startTime).minute;
+            const startB = splitTime(b.startTime).hour * 60 + splitTime(a.startTime).minute;
+            return startA - startB;
+        });
+    }
+
+    const handleTime = (event) => {
+        const parentRect = event.currentTarget.parentElement.parentElement.parentElement.getBoundingClientRect();
+        const clickedX = event.clientX - parentRect.left;
+        const clickedY = event.clientY - parentRect.top;
+
+        setXY({ x: clickedX, y: clickedY });
+        //setData(data);
+    };
+
+    const padZero = (num) => num.toString().padStart(2, '0');
+
+    const handleMouseEnter = () => {
+        if (popupRef.current) {
+            popupRef.current.style.backgroundColor = '#4470F3';
+        }
+    };
+
+    const handleMouseLeave = () => {
+        if (popupRef.current) {
+            popupRef.current.style.backgroundColor = '#aaa';
+        }
+    };
+
+    const onValid = (e) => {
+        console.log(e, 'onValid');
+        setTimePopupVisible(false);
+    };
+
+    const onInvalid = (e) => {
+        console.log(e, 'onInvalid');
+        alert('입력한 정보를 다시 확인해주세요.');
+    };
+
     return (
         <div
             style={{
@@ -149,110 +111,110 @@ export default function TimeTableDiv(props: TimeTableProps) {
                 margin: '0 auto',
             }}
         >
-            {/*세빈이 작업 공간*/}
-            {timeTableList.map((plan) => (
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                    {isTimePopupVisible ? (
-                        <form
-                            ref={popupRef}
+            {isTimePopupVisible ? (
+                <form
+                    ref={popupRef}
+                    style={{
+                        width: '190px',
+                        height: '80px',
+                        position: 'absolute',
+                        left: `${xy.x + 20}px`,
+                        top: `${xy.y - 5}px`,
+                        backgroundColor: '#aaa',
+                        borderRadius: '10px',
+                        zIndex: '10',
+                        boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                >
+                    <div
+                        style={{
+                            width: '160px',
+                            height: '80px',
+                            backgroundColor: '#fff',
+                            borderRadius: '10px 10px 10px 0',
+                            fontFamily: 'Pretendard-Regular',
+                            fontSize: '16px',
+                            color: '#000',
+                        }}
+                    >
+                        <div
                             style={{
-                                width: '190px',
-                                height: '80px',
-                                position: 'absolute',
-                                left: `${xy.x + 20}px`,
-                                top: `${xy.y - 5}px`,
-                                backgroundColor: '#aaa',
-                                borderRadius: '10px',
-                                zIndex: '10',
-                                boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
                                 display: 'flex',
+                                justifyContent: 'center',
                                 alignItems: 'center',
                             }}
-                            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#4470F3')}
-                            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#aaa')}
                         >
-                            <div
+                            시작
+                            <input
+                                type="time"
                                 style={{
-                                    width: '160px',
-                                    height: '80px',
-                                    backgroundColor: '#fff',
-                                    borderTopLeftRadius: '10px',
-                                    borderBottomRightRadius: '10px',
-                                    borderTopRightRadius: '10px',
-                                    fontFamily: 'Pretendard-Regular',
-                                    fontSize: '16px',
-                                    color: '#000',
+                                    position: 'relative',
+                                    width: '70px',
+                                    height: '5px',
+                                    borderRadius: '4px',
+                                    margin: '5px 0 5px 15px',
+                                    border: '1px solid #4470F3',
+                                    fontSize: '12px',
                                 }}
-                            >
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    시작
-                                    <input
-                                        type="time"
-                                        style={{
-                                            position: 'relative',
-                                            width: '70px',
-                                            height: '5px',
-                                            borderRadius: '4px',
-                                            margin: '5px 0 5px 15px',
-                                            border: '1px solid #4470F3',
-                                            fontSize: '12px',
-                                        }}
-                                    ></input>
-                                </div>
-                                <hr
-                                    style={{
-                                        backgroundColor: '#ddd',
-                                        border: 'none',
-                                        height: '1px',
-                                        margin: '0',
-                                    }}
-                                />
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    종료
-                                    <input
-                                        type="time"
-                                        style={{
-                                            position: 'relative',
-                                            width: '70px',
-                                            height: '5px',
-                                            borderRadius: '4px',
-                                            margin: '5px 0 5px 15px',
-                                            border: '1px solid #4470F3',
-                                            fontSize: '12px',
-                                        }}
-                                    ></input>
-                                </div>
-                            </div>
-                            <img
-                                type="submit"
-                                src="../img/btn/next2.png"
-                                style={{
-                                    width: '10px',
-                                    height: '15px',
-                                    cursor: 'pointer',
-                                    padding: '32px 10px',
-                                }}
-                                onClick={() => {
-                                    window.location = '/main ';
-                                }}
+                                {...register('StartTime', {
+                                    required: '시작 시간을 입력해주세요.',
+                                })}
                             />
-                        </form>
-                    ) : (
-                        <></>
-                    )}
-
+                        </div>
+                        <hr
+                            style={{
+                                backgroundColor: '#ddd',
+                                border: 'none',
+                                height: '1px',
+                                margin: '0',
+                            }}
+                        />
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            종료
+                            <input
+                                type="time"
+                                style={{
+                                    position: 'relative',
+                                    width: '70px',
+                                    height: '5px',
+                                    borderRadius: '4px',
+                                    margin: '5px 0 5px 15px',
+                                    border: '1px solid #4470F3',
+                                    fontSize: '12px',
+                                }}
+                                {...register('EndTime', {
+                                    required: '종료 시간을 입력해주세요.',
+                                })}
+                            />
+                        </div>
+                    </div>
+                    <img
+                        type="submit"
+                        src="../img/btn/next2.png"
+                        style={{
+                            width: '10px',
+                            height: '15px',
+                            cursor: 'pointer',
+                            padding: '32px 10px',
+                        }}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        onClick={handleSubmit(onValid, onInvalid)}
+                    />
+                </form>
+            ) : (
+                <></>
+            )}
+            {timeTableList.map((plan) => (
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                     <div
                         style={{
                             color: '#0D2259',
@@ -264,14 +226,14 @@ export default function TimeTableDiv(props: TimeTableProps) {
                         }}
                     >
                         <span style={{ lineHeight: '1' }}>
-                            {padZero(plan.startTime.hour)}:{padZero(plan.startTime.minute)}
+                            {padZero(splitTime(plan.startTime).hour)}:{padZero(splitTime(plan.startTime).minute)}
                         </span>
                         <span>-</span>
                         <span style={{ lineHeight: '1' }}>
-                            {padZero(plan.endTime.hour)}:{padZero(plan.endTime.minute)}
+                            {padZero(splitTime(plan.endTime).hour)}:{padZero(splitTime(plan.endTime).minute)}
                         </span>
                     </div>
-                    <span
+                    <div
                         style={{
                             width: '280px',
                             height: '55px',
@@ -316,7 +278,7 @@ export default function TimeTableDiv(props: TimeTableProps) {
                         ) : (
                             <div
                                 style={{
-                                    width: '230px',
+                                    width: '200px',
                                     textAlign: 'left',
                                     overflow: 'hidden',
                                     whiteSpace: 'nowrap',
@@ -343,9 +305,9 @@ export default function TimeTableDiv(props: TimeTableProps) {
                                 }}
                             />
                         ) : (
-                            <></>
+                            <span style={{ width: '22px' }}></span>
                         )}
-                    </span>
+                    </div>
                 </div>
             ))}
             {/*세빈작업*/}

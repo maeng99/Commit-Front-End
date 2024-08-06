@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
@@ -11,7 +12,16 @@ import FeedbackPopup from '../tabs/feedbackPopup.tsx';
 import '../App.css';
 
 export default function Plan() {
-    const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const today = moment();
+    const {
+        register,
+        getValues,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
+    const [selectedDate, setSelectedDate] = useState<Date>(today);
+    const [text, setText] = useState('');
 
     const handleDateSelect = (selectedDate: Date) => {
         setSelectedDate(selectedDate);
@@ -23,6 +33,20 @@ export default function Plan() {
     const closePopup = () => {
         setPopupVisible(false);
         window.location = '/plan';
+    };
+
+    const handleChange = (event) => {
+        setText(event.target.value);
+    };
+
+    const onValid = (e) => {
+        console.log(e, 'onValid');
+        window.location = '/plan';
+    };
+
+    const onInvalid = (e) => {
+        console.log(e, 'onInvalid');
+        alert('입력한 정보를 다시 확인해주세요.');
     };
 
     return (
@@ -46,46 +70,113 @@ export default function Plan() {
                             >
                                 <SmallCalendar onDateSelect={handleDateSelect} />
                             </div>
-                            <div
-                                style={{
-                                    width: '100%',
-                                    height: '265px',
-                                    backgroundColor: '#fff',
-                                    borderRadius: '20px',
-                                    border: '1px #ddd solid',
-                                }}
-                            >
-                                <div
+                            {moment(selectedDate).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD') ? (
+                                <form
                                     style={{
-                                        width: '280px',
-                                        fontSize: '20px',
-                                        fontFamily: 'Pretendard-SemiBold',
-                                        color: '#0D2259',
-                                        margin: '0 auto',
-                                        padding: '15px 0',
-                                        textAlign: 'left',
+                                        width: '100%',
+                                        height: '265px',
+                                        backgroundColor: '#fff',
+                                        borderRadius: '20px',
+                                        border: '1px #ddd solid',
                                     }}
                                 >
-                                    이날의 기록사항
-                                </div>
-                                <textarea
-                                    placeholder="하루에 대한 짧은 감상이나 기록해야될 사항에 대해 작성해주세요."
+                                    <div
+                                        style={{
+                                            width: '280px',
+                                            fontSize: '20px',
+                                            fontFamily: 'Pretendard-SemiBold',
+                                            color: '#0D2259',
+                                            margin: '0 auto',
+                                            padding: '15px 0',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <div>이날의 기록사항</div>
+                                        <div>
+                                            <Button
+                                                type="secondary"
+                                                size="small"
+                                                title="작성완료"
+                                                onClick={handleSubmit(onValid, onInvalid)}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <textarea
+                                        placeholder="하루에 대한 짧은 감상이나 기록해야될 사항에 대해 작성해주세요."
+                                        style={{
+                                            width: '280px',
+                                            height: '195px',
+                                            margin: '0 auto',
+                                            backgroundColor: '#EDF0F5',
+                                            borderRadius: '20px',
+                                            resize: 'none',
+                                            border: 'none',
+                                            borderRadius: '20px',
+                                            padding: '15px', // 여백 추가
+                                            boxSizing: 'border-box', // 패딩을 포함한 전체 크기 설정
+                                            fontFamily: 'Pretendard-Regular',
+                                            fontSize: '15px',
+                                        }}
+                                        {...register('Content', {
+                                            required: '기록사항을 입력해주세요.',
+                                        })}
+                                        value={text}
+                                        onChange={handleChange}
+                                    />
+                                </form>
+                            ) : (
+                                <form
                                     style={{
-                                        width: '280px',
-                                        height: '195px',
-                                        margin: '0 auto',
-                                        backgroundColor: '#EDF0F5',
+                                        width: '100%',
+                                        height: '265px',
+                                        backgroundColor: '#fff',
                                         borderRadius: '20px',
-                                        resize: 'none',
-                                        border: 'none',
-                                        borderRadius: '20px',
-                                        padding: '15px', // 여백 추가
-                                        boxSizing: 'border-box', // 패딩을 포함한 전체 크기 설정
-                                        fontFamily: 'Pretendard-Regular',
-                                        fontSize: '16px',
+                                        border: '1px #ddd solid',
                                     }}
-                                ></textarea>
-                            </div>
+                                >
+                                    <div
+                                        style={{
+                                            width: '280px',
+                                            fontSize: '20px',
+                                            fontFamily: 'Pretendard-SemiBold',
+                                            color: '#0D2259',
+                                            margin: '0 auto',
+                                            padding: '15px 0',
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <div>이날의 기록사항</div>
+                                        <div></div>
+                                    </div>
+
+                                    <textarea
+                                        style={{
+                                            width: '280px',
+                                            height: '195px',
+                                            margin: '0 auto',
+                                            backgroundColor: '#EDF0F5',
+                                            borderRadius: '20px',
+                                            resize: 'none',
+                                            border: 'none',
+                                            borderRadius: '20px',
+                                            padding: '15px', // 여백 추가
+                                            boxSizing: 'border-box', // 패딩을 포함한 전체 크기 설정
+                                            fontFamily: 'Pretendard-Regular',
+                                            fontSize: '15px',
+                                        }}
+                                        {...register('Content', {
+                                            required: '기록사항을 입력해주세요.',
+                                        })}
+                                        value={text}
+                                        readOnly={true}
+                                    />
+                                </form>
+                            )}
                         </div>
 
                         <div style={{ width: '510px' }}>
@@ -127,6 +218,7 @@ export default function Plan() {
                             </div>
                             <div
                                 style={{
+                                    position: 'relative',
                                     width: '100%',
                                     height: '550px',
                                     backgroundColor: '#fff',
@@ -159,7 +251,11 @@ export default function Plan() {
                                         borderRadius: '20px',
                                     }}
                                 >
-                                    <TodayPlanDiv />
+                                    {moment(selectedDate).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD') ? (
+                                        <TodayPlanDiv type="today" />
+                                    ) : (
+                                        <TodayPlanDiv type="notToday" />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -196,7 +292,13 @@ export default function Plan() {
                                         margin: '0 auto',
                                     }}
                                 >
-                                    <TimeTableDiv type="after" />
+                                    {!selectedDate ? (
+                                        <TimeTableDiv type="after" date={moment().format('YYYY-MM-DD')} />
+                                    ) : moment(selectedDate).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD') ? (
+                                        <TimeTableDiv type="after" date={moment(selectedDate).format('YYYY-MM-DD')} />
+                                    ) : (
+                                        <TimeTableDiv type="before" date={moment(selectedDate).format('YYYY-MM-DD')} />
+                                    )}
                                 </div>
                             </div>
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
@@ -221,12 +323,18 @@ export default function Plan() {
                                         </>
                                     }
                                     onClick={() => {
-                                        localStorage.clear();
+                                        // localStorage.clear();
                                         const completeDate = localStorage.getItem('completeDate');
                                         const todayDate = moment().format('YYYY-MM-DD');
 
                                         if (completeDate !== todayDate) {
-                                            if (window.confirm('정말 하루를 마무리하시겠습니까?')) {
+                                            if (
+                                                window.confirm(
+                                                    '정말 하루를 마무리하시겠습니까?' +
+                                                        '\n' +
+                                                        '(체크하지 않은 일정은 취소처리 됩니다.)'
+                                                )
+                                            ) {
                                                 setPopupVisible(true);
                                                 localStorage.setItem('completeDate', moment().format('YYYY-MM-DD'));
                                             }

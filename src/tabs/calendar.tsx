@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 import moment from 'moment';
 import Button from '../components/button.tsx';
 import Date from '../components/date.tsx';
 import Nav from '../components/nav.tsx';
 import BigCalendar from '../components/bigCalendar.tsx';
 import PlanData from '../database/planData.tsx';
+import AddCalendarAPI from '../api/plan/addCalendarAPI.tsx';
 import '../App.css';
 
 const events = PlanData();
 
 export default function Calendar() {
+    const {
+        register,
+        getValues,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
+
     const today = new Date();
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
     const [showAddPopup, setShowAddPopup] = useState(false);
@@ -33,6 +42,16 @@ export default function Calendar() {
             window.location = '/calendar';
             setShowAddPopup(false);
         }
+    };
+
+    const onValid = (e) => {
+        AddCalendarAPI(e.StartDate, e.EndDate, e.Content, e.Category);
+        window.location = '/calendar';
+    };
+
+    const onInvalid = (e) => {
+        console.log(e, 'onInvalid');
+        alert('입력한 정보를 다시 확인해주세요.');
     };
 
     return (
@@ -115,7 +134,7 @@ export default function Calendar() {
                                 }}
                             />
                             {showAddPopup ? (
-                                <div
+                                <form
                                     style={{
                                         width: '320px',
                                         height: '220px',
@@ -135,7 +154,23 @@ export default function Calendar() {
                                             backgroundColor: '#fff',
                                             borderRadius: '10px',
                                         }}
-                                    ></div>
+                                    >
+                                        <input
+                                            type="text"
+                                            placeholder="일정 내용을 입력하세요.(최대 12자)"
+                                            style={{
+                                                width: '250px',
+                                                backgroundColor: '#fff',
+                                                height: '10px',
+                                                borderRadius: '10px',
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '15px',
+                                            }}
+                                            {...register('Content', {
+                                                required: '일정을 입력해주세요.',
+                                            })}
+                                        />
+                                    </div>
                                     <div
                                         style={{
                                             width: '280px',
@@ -143,8 +178,78 @@ export default function Calendar() {
                                             margin: '12px auto',
                                             backgroundColor: '#fff',
                                             borderRadius: '10px',
+                                            position: 'relative',
                                         }}
-                                    ></div>
+                                    >
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                top: '10px',
+                                                left: '20px',
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '14px',
+                                            }}
+                                        >
+                                            시작
+                                        </div>
+                                        <input
+                                            type="date"
+                                            style={{
+                                                position: 'absolute',
+                                                top: '-2px', // "시작" 텍스트 바로 오른쪽에 위치
+                                                left: '150px',
+                                                width: '70px',
+                                                height: '1px', // 높이를 20px로 조정
+                                                borderRadius: '4px',
+                                                margin: '5px 0 5px 15px',
+                                                border: '1px solid #4470F3',
+                                                fontSize: '12px',
+                                            }}
+                                            {...register('StartDate', {
+                                                required: '시작일을 입력해주세요.',
+                                            })}
+                                        />
+                                        <hr
+                                            style={{
+                                                position: 'absolute',
+                                                top: '25px',
+                                                left: '50%',
+                                                transform: 'translate(-50%, -50%)',
+                                                width: '250px',
+                                                height: '0.5px',
+                                                backgroundColor: '#ddd',
+                                                border: 'none',
+                                            }}
+                                        />
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                top: '45px',
+                                                left: '20px',
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '14px',
+                                            }}
+                                        >
+                                            종료
+                                        </div>
+                                        <input
+                                            type="date"
+                                            style={{
+                                                position: 'absolute',
+                                                top: '33px', // "종료" 텍스트 바로 오른쪽에 위치
+                                                left: '150px',
+                                                width: '70px',
+                                                height: '1px',
+                                                borderRadius: '4px',
+                                                margin: '5px 0 5px 15px',
+                                                border: '1px solid #4470F3',
+                                                fontSize: '12px',
+                                            }}
+                                            {...register('EndDate', {
+                                                required: '종료일을 입력해주세요.',
+                                            })}
+                                        />
+                                    </div>
                                     <div
                                         style={{
                                             width: '280px',
@@ -152,8 +257,44 @@ export default function Calendar() {
                                             margin: '12px auto',
                                             backgroundColor: '#fff',
                                             borderRadius: '10px',
+                                            position: 'relative',
                                         }}
-                                    ></div>
+                                    >
+                                        <div
+                                            style={{
+                                                position: 'absolute',
+                                                top: '10px',
+                                                left: '20px',
+                                                fontFamily: 'Pretendard-Regular',
+                                                fontSize: '14px',
+                                            }}
+                                        >
+                                            카테고리
+                                        </div>
+                                        <select
+                                            style={{
+                                                position: 'absolute',
+                                                top: '2px', // "시작" 텍스트 바로 오른쪽에 위치
+                                                left: '175px',
+                                                width: '70px',
+                                                height: '20px',
+                                                borderRadius: '4px',
+                                                margin: '5px 0 5px 15px',
+                                                border: '1px solid #4470F3',
+                                                fontSize: '12px',
+                                            }}
+                                            {...register('Category', {
+                                                required: '카테고리를 입력해주세요.',
+                                            })}
+                                        >
+                                            <option disabled selected value="">
+                                                선택
+                                            </option>
+                                            <option value="Work">Work</option>
+                                            <option value="Life">Life</option>
+                                            <option value="운동">운동</option>
+                                        </select>
+                                    </div>
                                     <div
                                         style={{
                                             width: '280px',
@@ -177,20 +318,18 @@ export default function Calendar() {
                                                 type="primary"
                                                 size="small"
                                                 title="추가"
-                                                onClick={() => {
-                                                    window.location = '/calendar';
-                                                }}
+                                                onClick={handleSubmit(onValid, onInvalid)}
                                             />
                                         </span>
                                     </div>
-                                </div>
+                                </form>
                             ) : (
                                 <></>
                             )}
                             <div style={{ width: '320px', height: '490px', overflow: 'auto' }}>
                                 {/*일정이 없을 때*/}
                                 {!selectedDate
-                                    ? events.filter((event) => event.date === moment(today).format('YYYY-MM-DD'))
+                                    ? events.filter((event) => event.startDate === moment(today).format('YYYY-MM-DD'))
                                           .length === 0 && (
                                           <div
                                               style={{
@@ -224,8 +363,9 @@ export default function Calendar() {
                                           </div>
                                       )
                                     : formatDate(selectedDate).yearMonthDay >= moment(today).format('YYYY-MM-DD')
-                                    ? events.filter((event) => event.date === formatDate(selectedDate).yearMonthDay)
-                                          .length === 0 && (
+                                    ? events.filter(
+                                          (event) => event.startDate === formatDate(selectedDate).yearMonthDay
+                                      ).length === 0 && (
                                           <div
                                               style={{
                                                   width: '280px',
@@ -257,8 +397,9 @@ export default function Calendar() {
                                               </div>
                                           </div>
                                       )
-                                    : events.filter((event) => event.date === formatDate(selectedDate).yearMonthDay)
-                                          .length === 0 && (
+                                    : events.filter(
+                                          (event) => event.startDate === formatDate(selectedDate).yearMonthDay
+                                      ).length === 0 && (
                                           <div
                                               style={{
                                                   width: '280px',
@@ -284,49 +425,7 @@ export default function Calendar() {
                                     ? events.map((event) =>
                                           // Use parentheses instead of curly braces for the ternary operator
                                           // Curly braces are used for block statements, which are not returned implicitly
-                                          event.date === formatDate(selectedDate).yearMonthDay ? (
-                                              <div
-                                                  key={event.id}
-                                                  style={{
-                                                      width: '280px',
-                                                      height: '80px',
-                                                      border: '1px #ddd solid',
-                                                      borderRadius: '20px',
-                                                      margin: '0 auto',
-                                                      marginBottom: '10px',
-                                                      textAlign: 'left',
-                                                      display: 'flex',
-                                                      alignItems: 'center',
-                                                  }}
-                                              >
-                                                  <div style={{ padding: '18px' }}>
-                                                      <div
-                                                          style={{
-                                                              fontFamily: 'Pretendard-SemiBold',
-                                                              fontSize: '18px',
-                                                          }}
-                                                      >
-                                                          {event.title}
-                                                      </div>
-                                                      <div
-                                                          style={{
-                                                              fontFamily: 'Pretendard-Regular',
-                                                              fontSize: '12px',
-                                                              color: '#888',
-                                                          }}
-                                                      >
-                                                          {event.date} ~ {event.end}
-                                                      </div>
-                                                  </div>
-                                              </div>
-                                          ) : (
-                                              <></>
-                                          )
-                                      )
-                                    : events.map((event) =>
-                                          // Use parentheses instead of curly braces for the ternary operator
-                                          // Curly braces are used for block statements, which are not returned implicitly
-                                          event.date === moment(today).format('YYYY-MM-DD') ? (
+                                          event.startDate === formatDate(selectedDate).yearMonthDay ? (
                                               <div
                                                   key={event.id}
                                                   style={{
@@ -358,7 +457,50 @@ export default function Calendar() {
                                                               marginTop: '5px',
                                                           }}
                                                       >
-                                                          {event.date} ~ {event.end}
+                                                          {event.startDate} ~ {event.endDate}
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          ) : (
+                                              <></>
+                                          )
+                                      )
+                                    : events.map((event) =>
+                                          // Use parentheses instead of curly braces for the ternary operator
+                                          // Curly braces are used for block statements, which are not returned implicitly
+                                          event.startDate === moment(today).format('YYYY-MM-DD') ? (
+                                              <div
+                                                  key={event.id}
+                                                  style={{
+                                                      width: '280px',
+                                                      height: '80px',
+                                                      border: '1px #ddd solid',
+                                                      borderRadius: '20px',
+                                                      margin: '0 auto',
+                                                      marginBottom: '10px',
+                                                      textAlign: 'left',
+                                                      display: 'flex',
+                                                      alignItems: 'center',
+                                                  }}
+                                              >
+                                                  <div style={{ padding: '18px' }}>
+                                                      <div
+                                                          style={{
+                                                              fontFamily: 'Pretendard-SemiBold',
+                                                              fontSize: '18px',
+                                                          }}
+                                                      >
+                                                          {event.title}
+                                                      </div>
+                                                      <div
+                                                          style={{
+                                                              fontFamily: 'Pretendard-Regular',
+                                                              fontSize: '12px',
+                                                              color: '#888',
+                                                              marginTop: '5px',
+                                                          }}
+                                                      >
+                                                          {event.startDate} ~ {event.endDate}
                                                       </div>
                                                   </div>
                                               </div>

@@ -4,6 +4,7 @@ import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
 import moment from 'moment';
 import PlanData from '../database/planData.tsx';
+import MonthPlanAPI from '../api/plan/monthPlanAPI.tsx';
 import '../App.css';
 
 type ValuePiece = Date | null;
@@ -217,7 +218,9 @@ const BigCalendar: React.FC<BigCalendarProps> = ({ onDateSelect }) => {
                 onActiveStartDateChange={({ activeStartDate }) => setActiveStartDate(activeStartDate)}
                 // 오늘 날짜에 'Today' 텍스트 삽입하고 출석한 날짜에 점 표시를 위한 설정
                 tileContent={({ date, view }) => {
-                    const eventsOnDate = events.filter((event) => event.date === moment(date).format('YYYY-MM-DD'));
+                    const eventsOnDate = events.filter(
+                        (event) => event.startDate === moment(date).format('YYYY-MM-DD')
+                    );
                     if (eventsOnDate.length > 0) {
                         return (
                             <div>

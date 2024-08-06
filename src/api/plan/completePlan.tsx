@@ -3,17 +3,17 @@ import React from 'react';
 var API_SERVER_DOMAIN = 'https://api.lion-commit.shop';
 
 // timeTable.tsx
-export default function CreateRuleSetAPI(WLBalance, sleepTime, exerciseTime, detail) {
+export default function CompletePlanAPI() {
     var accessToken = getCookie('accessToken');
     var refreshToken = getCookie('refreshToken');
 
     if (accessToken) {
-        setRuleSetInfo(accessToken, WLBalance, sleepTime, exerciseTime, detail).catch((error) => {
+        completePlanInfo(accessToken).catch((error) => {
             console.error('Failed to fetch timetable:', error);
             if (refreshToken) {
                 getAccessTokenWithRefreshToken(refreshToken)
                     .then((newAccessToken) => {
-                        setRuleSetInfo(accessToken, WLBalance, sleepTime, exerciseTime, detail).catch((error) => {
+                        completePlanInfo(accessToken).catch((error) => {
                             console.error('Failed to fetch timetable:', error);
                             window.location = '/';
                         });
@@ -70,17 +70,15 @@ function getAccessTokenWithRefreshToken(accessToken, refreshToken) {
         });
 }
 
-function setRuleSetInfo(accessToken, WLBalance, sleepTime, exerciseTime, detail) {
-    return fetch(API_SERVER_DOMAIN + '/api/user/ruleSet/create', {
+function completePlanInfo(accessToken, planId, startTime, endTime) {
+    return fetch(API_SERVER_DOMAIN + `/api/plan/complete/${planId}`, {
         method: 'POST',
         header: {
             Authorization: 'Bearer ' + accessToken,
         },
         body: {
-            WLBalance: WLBalance,
-            sleepTime: sleepTime,
-            exerciseTime: exerciseTime,
-            detail: detail,
+            startTime: startTime,
+            endTime: endTime,
         },
     }).then((response) => {
         if (!response.ok) {
