@@ -2,8 +2,8 @@
 
 # 📆[Top8 본선 진출] 멋사 대학 12기 중앙 해커톤-Commit: 현대인들을 위한 맞춤형 AI 일상 플래너 (작심삼일팀)📆
 - "멋쟁이사자처럼 대학 12기 중앙 해커톤" Top8 본선 진출
-    - "멋쟁이사자처럼 ‘건강관리 서비스 개발’ 해커톤 성료… 전국에서 1500명 학생 참가" (https://www.newswire.co.kr/newsRead.php?no=994864)
-    - "[멋사 대학] 12기 중앙 해커톤 본선 발표_상명대학교(서울)_3팀_commit" (https://www.youtube.com/watch?v=ZGmCeFzy-Zo&t=163s)
+    - "멋쟁이사자처럼 ‘건강관리 서비스 개발’ 해커톤 성료… 전국에서 1500명 학생 참가"<br />(https://www.newswire.co.kr/newsRead.php?no=994864)
+    - "[멋사 대학] 12기 중앙 해커톤 본선 발표_상명대학교(서울)_3팀_commit"<br />(https://www.youtube.com/watch?v=ZGmCeFzy-Zo&t=163s)
 <div align="center">
   <img src="https://github.com/user-attachments/assets/9f941a4b-d1cd-40fa-8fc9-55958dd767e5" width="800px"/>
 </div>
