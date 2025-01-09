@@ -1,6 +1,6 @@
 <img src="https://github.com/user-attachments/assets/eed9ebec-e85f-411f-8034-f3181b662517" width="100%"/>
 
-# 📆[Top8 본선 진출] 멋사 대학 12기 중앙 해커톤-Commit: 현대인들을 위한 맞춤형 AI 일상 플래너 (작심삼일팀)📆
+# 📆[Top8 본선 진출] 멋사 대학 12기 중앙 해커톤 - "Commit": 현대인들을 위한 맞춤형 AI 일상 플래너 (작심삼일팀)📆
 - "멋쟁이사자처럼 대학 12기 중앙 해커톤" Top8 본선 진출
     - "멋쟁이사자처럼 ‘건강관리 서비스 개발’ 해커톤 성료… 전국에서 1500명 학생 참가"<br />(https://www.newswire.co.kr/newsRead.php?no=994864)
     - "[멋사 대학] 12기 중앙 해커톤 본선 발표_상명대학교(서울)_3팀_commit"<br />(https://www.youtube.com/watch?v=ZGmCeFzy-Zo&t=163s)
@@ -11,11 +11,14 @@
 <br/>
 
 ## 1. Project Overview
-- **프로젝트 이름: Commit**
+- 프로젝트 이름: **"Commit"**
 - 프로젝트 설명: 현대인들을 위한 맞춤형 AI 일상 플래너
+- 프로젝트 기간: 2024.07. ~ 2024.08. (1개월)
+- 해커톤 본선: 2024.08.06 ~ 2024.08.07 (1박2일)
 <br/>
 
 ## 2. Team Members
+Team: **"작심삼일팀"**
 | 김동현 | 백종우 | 맹의현 | 안세빈 | 유세리 | 윤현수 |
 |:------:|:------:|:------:|:------:|:------:|:------:|
 | PM/BE | BE | FE | FE | FE | Design |
@@ -127,6 +130,4 @@
 <br/>
 
 ## 6. 발표 PDF
-- 프로젝트 자세히 알아보기
-
-[📄 Commit_PDF](https://github.com/maeng99/Commit-Front-End/blob/main/%EC%83%81%EB%AA%85%EB%8C%80%ED%95%99%EA%B5%90(%EC%84%9C%EC%9A%B8)_3%ED%8C%80_commit.pdf)
+- 프로젝트 자세히 알아보기<br />[📄 Commit_PDF](https://github.com/maeng99/Commit-Front-End/blob/main/%EC%83%81%EB%AA%85%EB%8C%80%ED%95%99%EA%B5%90(%EC%84%9C%EC%9A%B8)_3%ED%8C%80_commit.pdf)
